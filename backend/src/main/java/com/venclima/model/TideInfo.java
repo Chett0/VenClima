@@ -1,9 +1,6 @@
 package com.venclima.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -16,34 +13,30 @@ public class TideInfo {
     private LocalDateTime date;
     private double level;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Station station;
+
     public TideInfo() {
         super();
     }
-    public TideInfo(long id, LocalDateTime date, double level) {
+    public TideInfo(long id, LocalDateTime date, double level, Station station) {
         this.id = id;
         this.date = date;
         this.level = level;
+        this.station = station;
     }
 
 
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
+    public LocalDateTime getDate() { return date; }
+    public void setDate(LocalDateTime date) { this.date = date; }
 
-    public double getLevel() {
-        return level;
-    }
-    public void setLevel(double level) {
-        this.level = level;
-    }
+    public double getLevel() { return level; }
+    public void setLevel(double level) { this.level = level; }
+
+    public Station getStation() { return station; }
+    public void setStation(Station station) { this.station = station; }
+
 }
