@@ -1,9 +1,9 @@
 package com.venclima.repository;
 
-import com.venclima.model.TideInfo;
+import com.venclima.model.Tide;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TideInfoRepository extends JpaRepository<TideInfo, Long> {
+public interface TideRepository extends JpaRepository<Tide, Long> {
 }

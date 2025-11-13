@@ -1,9 +1,8 @@
 package com.venclima.controller;
 
 import com.venclima.dto.StationDTO;
-import com.venclima.dto.TideDTO;
+import com.venclima.model.Station;
 import com.venclima.service.StationService;
-import com.venclima.service.TideService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,19 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/tides")
-public class TideController {
+@RequestMapping("api/stations")
+public class StationController {
 
-    TideService tideService;
+    StationService stationService;
 
-    public TideController(TideService tideService) {
-        this.tideService = tideService;
+    public StationController(StationService stationService) {
+        this.stationService = stationService;
     }
 
     @GetMapping
-    public ResponseEntity<List<TideDTO>> getStation() {
-        List<TideDTO> tides = tideService.getAllTides();
-        return ResponseEntity.ok(tides);
+    public ResponseEntity<List<StationDTO>> getStation() {
+        List<StationDTO> stations = stationService.getAllStations();
+        return ResponseEntity.ok(stations);
     }
 
 }

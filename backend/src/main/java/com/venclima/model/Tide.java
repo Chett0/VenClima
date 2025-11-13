@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class TideInfo {
+public class Tide {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,10 +16,10 @@ public class TideInfo {
     @ManyToOne(fetch = FetchType.LAZY)
     private Station station;
 
-    public TideInfo() {
+    public Tide() {
         super();
     }
-    public TideInfo(long id, LocalDateTime date, double level, Station station) {
+    public Tide(long id, LocalDateTime date, double level, Station station) {
         this.id = id;
         this.date = date;
         this.level = level;

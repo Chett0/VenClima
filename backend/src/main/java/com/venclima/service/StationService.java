@@ -1,10 +1,13 @@
 package com.venclima.service;
 
+import com.venclima.dto.StationDTO;
+import com.venclima.dto.StationMapper;
 import com.venclima.model.Station;
-import com.venclima.model.TideInfo;
 import com.venclima.repository.StationRepository;
-import com.venclima.repository.TideInfoRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StationService {
@@ -17,6 +20,13 @@ public class StationService {
 
     public void addStation(Station station) {
         stationRepository.save(station);
+    }
+
+    public List<StationDTO> getAllStations() {
+        return stationRepository.findAll()
+                .stream()
+                .map(StationMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
 }
