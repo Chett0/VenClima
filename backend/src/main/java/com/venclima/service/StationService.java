@@ -7,6 +7,7 @@ import com.venclima.repository.StationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +28,10 @@ public class StationService {
                 .stream()
                 .map(StationMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<Station> getStationById(long id) {
+        return stationRepository.findById(id);
     }
 
 }
