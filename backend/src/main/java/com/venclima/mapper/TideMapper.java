@@ -1,10 +1,13 @@
-package com.venclima.dto;
+package com.venclima.mapper;
 
+import com.venclima.dto.TideDTO;
 import com.venclima.model.Tide;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TideMapper {
 
-    public static TideDTO toDTO(Tide tide){
+    public TideDTO toDTO(Tide tide){
         TideDTO dto = new TideDTO();
         dto.setId(tide.getId());
         dto.setDate(tide.getDate());
@@ -13,7 +16,7 @@ public class TideMapper {
         return dto;
     }
 
-    public static Tide toEntity(TideDTO dto){
+    public Tide toEntity(TideDTO dto){
         Tide tide = new Tide();
         tide.setId(dto.getId());
         tide.setDate(dto.getDate());

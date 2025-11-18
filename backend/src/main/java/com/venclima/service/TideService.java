@@ -1,7 +1,7 @@
 package com.venclima.service;
 
 import com.venclima.dto.TideDTO;
-import com.venclima.dto.TideMapper;
+import com.venclima.mapper.TideMapper;
 import com.venclima.model.Station;
 import com.venclima.model.Tide;
 import com.venclima.repository.StationRepository;
@@ -25,10 +25,12 @@ public class TideService {
     private final TideRepository tideRepository;
     private final DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final StationRepository stationRepository;
+    private final TideMapper tideMapper;
 
-    public TideService(TideRepository tideInfoRepository, StationRepository stationRepository) {
+    public TideService(TideRepository tideInfoRepository, StationRepository stationRepository, TideMapper tideMapper) {
         this.tideRepository = tideInfoRepository;
         this.stationRepository = stationRepository;
+        this.tideMapper = tideMapper;
     }
 
     public void addTideInfo(Tide tide) {
@@ -38,7 +40,15 @@ public class TideService {
     public List<TideDTO> getAllTides() {
         return tideRepository.findAll()
                 .stream()
-                .map(TideMapper::toDTO)
+                .map(tideMapper::toDTO)
+                .sorted(Comparator.comparing(TideDTO::getStationId))
+                .collect(Collectors.toList());
+    }
+
+    public List<TideDTO> getTidesByStationId(int stationId) {
+        return tideRepository.findAll()
+                .stream()
+                .map(tideMapper::toDTO)
                 .sorted(Comparator.comparing(TideDTO::getStationId))
                 .collect(Collectors.toList());
     }

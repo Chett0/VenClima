@@ -1,7 +1,7 @@
 package com.venclima.service;
 
 import com.venclima.dto.StationDTO;
-import com.venclima.dto.StationMapper;
+import com.venclima.mapper.StationMapper;
 import com.venclima.model.Station;
 import com.venclima.repository.StationRepository;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,11 @@ import java.util.stream.Collectors;
 public class StationService {
 
     private final StationRepository stationRepository;
+    private final StationMapper stationMapper;
 
-    public StationService(StationRepository stationRepository) {
+    public StationService(StationRepository stationRepository, StationMapper stationMapper) {
         this.stationRepository = stationRepository;
+        this.stationMapper = stationMapper;
     }
 
     public void addStation(Station station) {
@@ -26,12 +28,13 @@ public class StationService {
     public List<StationDTO> getAllStations() {
         return stationRepository.findAll()
                 .stream()
-                .map(StationMapper::toDTO)
+                .map(stationMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public Optional<Station> getStationById(long id) {
-        return stationRepository.findById(id);
-    }
+//    public Optional<Station> getStationById(long id) {
+//        //return stationRepository.findById(id);
+//
+//    }
 
 }

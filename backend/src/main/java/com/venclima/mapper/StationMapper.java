@@ -1,10 +1,13 @@
-package com.venclima.dto;
+package com.venclima.mapper;
 
+import com.venclima.dto.StationDTO;
 import com.venclima.model.Station;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StationMapper {
 
-    public static StationDTO toDTO(Station station) {
+    public StationDTO toDTO(Station station) {
         StationDTO dto = new StationDTO();
         dto.setId(station.getId());
         dto.setName(station.getName());
@@ -14,7 +17,7 @@ public class StationMapper {
         return dto;
     }
 
-    public static Station toEntity(StationDTO dto) {
+    public Station toEntity(StationDTO dto) {
         Station station = new Station();
         station.setId(dto.getId());
         station.setName(dto.getName());
