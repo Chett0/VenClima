@@ -1,9 +1,13 @@
 package com.venclima.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
-
+@Getter
+@Setter
+@NoArgsConstructor
 public class DataStation {
 
     @JsonProperty("ID_stazione")
@@ -26,27 +30,5 @@ public class DataStation {
 
     @JsonProperty("valore")
     private String valore;
-
-    // Getter e Setter
-    public String getIdStazione() { return idStazione; }
-    public void setIdStazione(String idStazione) { this.idStazione = idStazione; }
-
-    public String getStazione() { return stazione; }
-    public void setStazione(String stazione) { this.stazione = stazione; }
-
-    public String getLatDDN() { return latDDN; }
-    public void setLatDDN(String latDDN) { this.latDDN = latDDN; }
-
-    public String getLonDDE() { return lonDDE; }
-    public void setLonDDE(String lonDDE) { this.lonDDE = lonDDE; }
-
-    public String getNomeAbbr() { return nomeAbbr; }
-    public void setNomeAbbr(String nomeAbbr) { this.nomeAbbr = nomeAbbr; }
-
-    public String getData() { return data; }
-    public void setData(String data) { this.data = data; }
-
-    public String getValore() { return valore; }
-    public void setValore(String valore) { this.valore = valore; }
 
 }

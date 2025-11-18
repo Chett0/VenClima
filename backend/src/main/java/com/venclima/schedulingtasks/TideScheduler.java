@@ -23,7 +23,7 @@ public class TideScheduler {
     private final RestTemplate restTemplate = new RestTemplate();
     private final String urlRealTimeData = "https://dati.venezia.it/sites/default/files/dataset/opendata/livello.json";
     private final DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private Map<Integer, String> stationLinkName;
+    private final Map<Integer, String> stationLinkName;
 
     public TideScheduler(TideService tideInfoService, StationService stationService) {
         this.tideService = tideInfoService;
@@ -50,7 +50,7 @@ public class TideScheduler {
         if(data != null) {
             for (DataStation dataStation : data) {
 
-                int stationId = Integer.parseInt(dataStation.getIdStazione());
+                Integer stationId = Integer.parseInt(dataStation.getIdStazione());
 
                 String linkName = stationLinkName.get(stationId);
                 if(linkName == null) {
