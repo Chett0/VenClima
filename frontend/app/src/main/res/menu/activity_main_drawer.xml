@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--This file contain the link to the other pages/fragment present on the lateral menu -->ù
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/TideForecastFragment"
+                android:title="@string/menu_tide_forecast" />
+            <item
+                android:id="@+id/HistoricalTideForecastFragment"
+                android:title="@string/menu_tide_historical" />
+            <item
+                android:id="@+id/CriticsZoneFragment"
+                android:title="@string/menu_critics_zone_map" />
+            <item
+                android:id="@+id/BehaviourFragment"
+                android:title="@string/menu_behavior" />
+            <item
+                android:id="@+id/OptionFragment"
+                android:title="@string/menu_options" />
+        </group>
+</menu>

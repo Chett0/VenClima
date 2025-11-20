@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.venclima.databinding.FragmentFirstBinding;
+import com.example.venclima.databinding.TideForecastBinding;
 
-public class FirstFragment extends Fragment {
+public class TideForecastFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
+    private TideForecastBinding binding;
 
     @Override
     public View onCreateView(
@@ -21,7 +22,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = TideForecastBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -36,5 +37,4 @@ public class FirstFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 }
