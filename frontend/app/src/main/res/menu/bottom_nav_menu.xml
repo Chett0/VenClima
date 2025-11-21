@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    DEPRECATED: legacy bottom navigation menu kept for reference.
+    If your team confirms this is not used, you can safely delete this file.
+-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item

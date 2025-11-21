@@ -4,13 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.venclima.databinding.FragmentEmergencyBinding;
-
+/**
+ * DEPRECATED: Legacy Emergency fragment. The original implementation is
+ * commented below for reference. Remove this file once the team agrees
+ * it is no longer needed.
+ */
 public class EmergencyFragment extends Fragment {
+
+    /*
     private FragmentEmergencyBinding binding;
 
     @Override
@@ -24,4 +30,12 @@ public class EmergencyFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+    */
+
+    // Minimal placeholder to keep references valid during transition.
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return new FrameLayout(inflater.getContext());
+    }
+
 }
