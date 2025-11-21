@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
     <color name="azzurro">#2196F3</color>
     <color name="bottom_nav_unselected">#D4000000</color>
     <color name="card_border">#FFDCEAF5</color>
@@ -10,4 +9,46 @@
     <color name="status_active_bg">#FFFFECEB</color>
     <color name="status_active_text">#B00020</color>
     <color name="status_inactive_text">#FF4F5B66</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary -->
+    <color name="primary">#1E88E5</color>            <!-- Blue 600 -->
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="primaryContainer">#BBDEFB</color>   <!-- Blue 100 -->
+    <color name="onPrimaryContainer">#0D47A1</color> <!-- Blue 900 -->
+
+    <!-- Secondary -->
+    <color name="secondary">#42A5F5</color>          <!-- Blue 400 -->
+    <color name="onSecondary">#FFFFFF</color>
+    <color name="secondaryContainer">#BBDEFB</color> <!-- Blue 100 -->
+    <color name="onSecondaryContainer">#1565C0</color><!-- Blue 800 -->
+
+    <!-- Tertiary -->
+    <color name="tertiary">#448AFF</color>           <!-- Blue A200 -->
+    <color name="onTertiary">#FFFFFF</color>
+    <color name="tertiaryContainer">#82B1FF</color>  <!-- Blue A100 -->
+    <color name="onTertiaryContainer">#0D47A1</color>
+
+    <!-- Background & Surface -->
+    <color name="background">#E3F2FD</color>         <!-- Blue 50 -->
+    <color name="onBackground">#0D47A1</color>       <!-- Blue 900 -->
+
+    <color name="surface">#FFFFFF</color>
+    <color name="onSurface">#0D47A1</color>
+
+    <color name="surfaceVariant">#BBDEFB</color>     <!-- Blue 100 -->
+    <color name="onSurfaceVariant">#1976D2</color>   <!-- Blue 700 -->
+
+    <!-- Outline -->
+    <color name="outline">#90CAF9</color>            <!-- Blue 200 -->
+    <color name="outlineVariant">#64B5F6</color>     <!-- Blue 300 -->
+
+    <!-- Error (Material defaults) -->
+    <color name="error">#B3261E</color>
+    <color name="onError">#FFFFFF</color>
+    <color name="errorContainer">#F9DEDC</color>
+    <color name="onErrorContainer">#410E0B</color>
+
 </resources>
