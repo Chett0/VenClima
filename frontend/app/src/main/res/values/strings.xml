@@ -20,7 +20,6 @@
 
 
     <!-- string for option.xml-->
-    <string name="option_title">Impostazioni utente</string>
     <string name="option_username">Nome utente: Caricamento…</string>
     <string name="option_email">Email: Caricamento…</string>
     <string name="option_notification">Desideri ricevere notifiche sul livello della marea?</string>
@@ -38,5 +37,5 @@
     <string name="menu_behavior">Come comportarsi</string>
     <string name="menu_options">Impostazioni</string>
 
-    
+
 </resources>
