@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">VenClima</string>
+    <string name="title_forecast">Previsioni</string>
+    <string name="title_mose">MOSE</string>
+    <string name="title_charts">Grafici</string>
+    <string name="title_emergency">Emergenza</string>
+    <string name="title_settings">Impostazioni</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

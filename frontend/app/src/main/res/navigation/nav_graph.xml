@@ -3,26 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/navigation_forecast">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.venclima.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/navigation_forecast"
+        android:name="com.example.venclima.ForecastFragment"
+        android:label="@string/title_forecast"
+        tools:layout="@layout/fragment_forecast" />
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.venclima.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/navigation_mose"
+        android:name="com.example.venclima.MoseFragment"
+        android:label="@string/title_mose"
+        tools:layout="@layout/fragment_mose" />
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+    <fragment
+        android:id="@+id/navigation_charts"
+        android:name="com.example.venclima.ChartsFragment"
+        android:label="@string/title_charts"
+        tools:layout="@layout/fragment_charts" />
+
+    <fragment
+        android:id="@+id/navigation_emergency"
+        android:name="com.example.venclima.EmergencyFragment"
+        android:label="@string/title_emergency"
+        tools:layout="@layout/fragment_emergency" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.venclima.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

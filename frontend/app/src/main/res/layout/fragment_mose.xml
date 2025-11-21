@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_mose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sistema MOSE"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/sub_mose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Modulo Sperimentale Elettromeccanico"
+            android:textSize="13sp"
+            android:textColor="@color/bottom_nav_unselected"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Stato Attuale - NON ATTIVO -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="12dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_border">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_calm_sea"
+                    android:tint="@color/azzurro"
+                    android:background="@drawable/bg_icon_circle"
+                    android:padding="8dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stato Attuale"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sistema in standby"
+                        android:textSize="13sp"
+                        android:textColor="@color/bottom_nav_unselected"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NON ATTIVO"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_status_pill_inactive"
+                    android:textColor="@color/status_inactive_text"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Stato Attuale - ATTIVO (mostrato per test) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="12dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_border">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_alert"
+                    android:tint="@color/status_active_text"
+                    android:background="@drawable/bg_icon_circle"
+                    android:padding="8dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stato Attuale"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sistema pronto per attivazione"
+                        android:textSize="13sp"
+                        android:textColor="@color/bottom_nav_unselected"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ATTIVO"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_status_pill_active"
+                    android:textColor="@color/status_active_text"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Informazioni dettagliate su MOSE (sezioni espandibili) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            android:layout_marginBottom="24dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_border">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cos'è il MOSE"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/overview_mose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Il MOSE (MOdulo Sperimentale Elettromeccanico) è un sistema integrato di difesa formato da schiere di paratoie mobili a scomparsa, installate alle bocche di porto lagunari di Lido, Malamocco e Chioggia, capaci di isolare temporaneamente la laguna di Venezia dal mare Adriatico durante gli eventi di alta marea."
+                    android:textSize="13sp"
+                    android:textColor="@color/bottom_nav_unselected"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Section: Come funziona -->
+                <LinearLayout
+                    android:id="@+id/header_how"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Come funziona"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_how"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_how"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Le paratoie mobili sono normalmente sommerse e piene d'acqua. Quando viene prevista un'alta marea, viene immessa aria compressa nelle paratoie che, svuotandosi dell'acqua, si sollevano ruotando attorno ad una cerniera fissata al fondale. Una volta sollevate, le paratoie formano una barriera che separa la laguna dal mare, impedendo all'acqua alta di entrare."
+                    android:textSize="13sp"
+                    android:textColor="@color/bottom_nav_unselected"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Section: Quando viene attivato -->
+                <LinearLayout
+                    android:id="@+id/header_when"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Quando viene attivato"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_when"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_when"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Il MOSE viene attivato quando è prevista una marea superiore a 110 cm sul livello medio del mare. La decisione di attivare il sistema viene presa dal Centro Previsioni e Segnalazioni Maree del Comune di Venezia, basandosi sulle previsioni meteo-marine. L'attivazione richiede circa 4-5 ore di preavviso e il sistema può rimanere sollevato per diverse ore a seconda dell'evento."
+                    android:textSize="13sp"
+                    android:textColor="@color/bottom_nav_unselected"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Section: Dati tecnici -->
+                <LinearLayout
+                    android:id="@+id/header_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Dati tecnici"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_data"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 78 paratoie mobili divise tra le 3 bocche di porto\n• Dimensioni paratoie: fino a 30 metri di larghezza, 20 di altezza\n• Peso: circa 300 tonnellate per paratoia\n• Profondità installazione: tra 10 e 30 metri\n• Tempo di sollevamento: 30 minuti circa\n• Capacità: difesa fino a 3 metri di marea"
+                    android:textSize="13sp"
+                    android:textColor="@color/bottom_nav_unselected"
+                    android:lineSpacingExtra="2dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

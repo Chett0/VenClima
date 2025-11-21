@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="azzurro">#2196F3</color>
+    <color name="bottom_nav_unselected">#D4000000</color>
+    <color name="card_border">#FFDCEAF5</color>
+    <color name="icon_bg">#FFEAF5FF</color>
+    <color name="status_inactive_bg">#FFF3F6F9</color>
+    <color name="status_active_bg">#FFFFECEB</color>
+    <color name="status_active_text">#B00020</color>
+    <color name="status_inactive_text">#FF4F5B66</color>
 </resources>
