@@ -3,35 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_forecast">
+    app:startDestination="@id/TideForecastFragment"> <!--First fragment that you see when the application opens-->
 
     <fragment
-        android:id="@+id/navigation_forecast"
-        android:name="com.example.venclima.ForecastFragment"
-        android:label="@string/title_forecast"
-        tools:layout="@layout/fragment_forecast" />
+        android:id="@+id/TideForecastFragment"
+        android:name="com.example.venclima.TideForecastFragment"
+        android:label="@string/tide_forecast_fragment"
+        tools:layout="@layout/tide_forecast">
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_mose"
-        android:name="com.example.venclima.MoseFragment"
-        android:label="@string/title_mose"
-        tools:layout="@layout/fragment_mose" />
+        android:id="@+id/HistoricalTideForecastFragment"
+        android:name="com.example.venclima.HistoricalTideForecast"
+        android:label="@string/historical_fragment"
+        tools:layout="@layout/historical_tide_forecast">
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_charts"
-        android:name="com.example.venclima.ChartsFragment"
-        android:label="@string/title_charts"
-        tools:layout="@layout/fragment_charts" />
+        android:id="@+id/CriticsZoneFragment"
+        android:name="com.example.venclima.CriticsZoneFragment"
+        android:label="@string/critics_zone_fragment"
+        tools:layout="@layout/critics_zone">
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_emergency"
-        android:name="com.example.venclima.EmergencyFragment"
-        android:label="@string/title_emergency"
-        tools:layout="@layout/fragment_emergency" />
+        android:id="@+id/BehaviourFragment"
+        android:name="com.example.venclima.BehaviourFragment"
+        android:label="@string/behaviour_fragment"
+        tools:layout="@layout/behaviour">
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.example.venclima.SettingsFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:id="@+id/OptionFragment"
+        android:name="com.example.venclima.OptionsFragment"
+        android:label="@string/options_fragment"
+        tools:layout="@layout/options">
+    </fragment>
+
+
+
 </navigation>

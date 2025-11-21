@@ -33,35 +33,27 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-
         appBarConfiguration = new AppBarConfiguration.Builder(
-            R.id.navigation_forecast,
-            R.id.navigation_mose,
-            R.id.navigation_charts,
-            R.id.navigation_emergency,
-            R.id.navigation_settings
-        ).build();
+                R.id.TideForecastFragment,
+                R.id.HistoricalTideForecastFragment,
+                R.id.CriticsZoneFragment,
+                R.id.BehaviourFragment,
+                R.id.OptionFragment
+                )
+                .setOpenableLayout(binding.drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
 
-        NavigationUI.setupWithNavController(binding.bottomNav, navController);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
