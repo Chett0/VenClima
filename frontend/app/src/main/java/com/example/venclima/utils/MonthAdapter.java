@@ -14,12 +14,18 @@ import java.util.List;
 
 public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
 
+    public interface OnMonthClickListener {
+        void onMonthClicked(int position);
+    }
+
     private final List<String> months;
     private final LayoutInflater inflater;
+    private final OnMonthClickListener listener;
 
-    public MonthAdapter(Context context, List<String> months) {
+    public MonthAdapter(Context context, List<String> months, OnMonthClickListener listener) {
         this.months = months;
         this.inflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,6 +40,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
         String month = months.get(position);
         holder.text.setText(month);
         holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onMonthClicked(position);
         });
     }
 

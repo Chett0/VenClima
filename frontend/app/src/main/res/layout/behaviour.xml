@@ -1,12 +1,600 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Questa è la pagina del comportamento"
-        />
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Come comportarsi"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="12dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_border">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!-- Section A: Prima dell'acqua alta -->
+                <LinearLayout
+                    android:id="@+id/header_before"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="1) Prima dell’acqua alta"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_before"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_before"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Suggerimenti per la preparazione preventiva:\n\n• Sollevare mobili, dispositivi elettrici e oggetti di valore.\n• Installare paratie o sistemi di protezione.\n• Verificare il corretto funzionamento delle pompe di sollevamento domestiche.\n• Preparare un kit di emergenza (stivali, torce, batterie, documenti).\n• Monitorare notifiche e previsioni via app.\n• Evitare di lasciare veicoli in zone a rischio."
+                    android:textSize="14sp"
+                    android:textColor="@color/bottom_nav_unselected"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Section B: Durante l'acqua alta -->
+                <LinearLayout
+                    android:id="@+id/header_during"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="2) Durante l’acqua alta"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_during"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_during"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comportamenti per ridurre i rischi:\n\n• Evitare di camminare in acque profonde o in zone non illuminate.\n• Fare attenzione ai cavi elettrici, tombini aperti o ostacoli non visibili.\n• Usare solo passerelle autorizzate.\n• Non forzare porte o accessi con forte pressione dell’acqua.\n• Limitare l’uso di veicoli e mezzi privati.\n• Indossare stivali alti o protezioni impermeabili."
+                    android:textSize="14sp"
+                    android:textColor="@color/bottom_nav_unselected"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Section C: Dopo l'acqua alta -->
+                <LinearLayout
+                    android:id="@+id/header_after"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="3) Dopo l’acqua alta"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_after"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_after"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Linee guida per il rientro alla normalità:\n\n• Evitare l’accensione di apparecchi elettrici finché non sono asciutti e verificati.\n• Pulire e disinfettare locali e superfici contaminate da acqua salmastra.\n• Smaltire correttamente eventuali beni danneggiati.\n• Segnalare danni strutturali agli uffici competenti.\n• Annotare eventuali danni per richieste assicurative."
+                    android:textSize="14sp"
+                    android:textColor="@color/bottom_nav_unselected"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        
+        <!-- Contatti utili  -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="24dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_border">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contatti utili"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_nue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Numero unico di emergenza (NUE)"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_nue"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_nue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="112 – numero unico di emergenza nazionale"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_vigili"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Vigili del Fuoco"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_vigili"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_vigili"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="115 (numero nazionale)"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_ambulance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Emergenza sanitaria (ambulanza)"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_ambulance"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_ambulance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="118"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_polizia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Polizia di Stato"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_polizia"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_polizia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="113 (pronto intervento)"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_guardia_costiera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Guardia Costiera / Capitaneria di Porto di Venezia"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_guardia_costiera"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_guardia_costiera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Telefono: 041 240 5711\nPEC: dm.venezia@pec.mit.gov.it\nEmail: venezia@guardiacostiera.it"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_guardia_finanza"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Guardia di Finanza – Comando Provinciale Venezia"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_guardia_finanza"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_guardia_finanza"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Telefono centrale: 041 931 411\nPEC: ve0550000p@pec.gdf.it"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_comune_centralino"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Comune di Venezia – Centralino / Informazioni generali"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_comune_centralino"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_comune_centralino"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="041 041"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_protezione"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Comune di Venezia – Protezione Civile"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_protezione"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_protezione"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sala operativa Protezione Civile: 041 2746800\nEmail: protezionecivile@comune.venezia.it"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_polizia_locale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Polizia Locale di Venezia (Municipale)"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_polizia_locale"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_polizia_locale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Centrale operativa 041 2747070 · Comando 041 2747277 · Numero verde info sanzioni 800 058 001"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_mobilita_terrestre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Mobilità e Trasporti – Comune di Venezia (Terrestre)"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_mobilita_terrestre"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_mobilita_terrestre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email: mobilita@comune.venezia.it · PEC: mobilitatrasporti@pec.comune.venezia.it · Call center: 041 041"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/header_mobilita_acquei"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Mobilità e Trasporti – Comune di Venezia (Acquei)"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/chev_mobilita_acquei"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_expand_more"
+                        android:rotation="0" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_mobilita_acquei"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ufficio Spazi Acquei: 041 2748750\nEmail: spazi.acquei@comune.venezia.it, trasporti.acquei@comune.venezia.it, gondola@comune.venezia.it"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="6dp" />
+
+                
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

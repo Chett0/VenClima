@@ -27,6 +27,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/MoseFragment"
+        android:name="com.example.venclima.MoseFragment"
+        android:label="@string/title_mose"
+        tools:layout="@layout/fragment_mose" />
+
+    <fragment
         android:id="@+id/BehaviourFragment"
         android:name="com.example.venclima.BehaviourFragment"
         android:label="@string/behaviour_fragment"

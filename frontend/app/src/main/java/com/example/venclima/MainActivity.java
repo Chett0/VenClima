@@ -38,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.TideForecastFragment,
-                R.id.HistoricalTideForecastFragment,
-                R.id.CriticsZoneFragment,
-                R.id.BehaviourFragment,
-                R.id.OptionFragment
+            R.id.HistoricalTideForecastFragment,
+            R.id.CriticsZoneFragment,
+            R.id.MoseFragment,
+            R.id.BehaviourFragment,
+            R.id.OptionFragment
                 )
                 .setOpenableLayout(binding.drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

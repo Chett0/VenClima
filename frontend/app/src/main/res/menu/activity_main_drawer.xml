@@ -13,6 +13,9 @@
                 android:id="@+id/CriticsZoneFragment"
                 android:title="@string/menu_critics_zone_map" />
             <item
+                android:id="@+id/MoseFragment"
+                android:title="@string/title_mose" />
+            <item
                 android:id="@+id/BehaviourFragment"
                 android:title="@string/menu_behavior" />
             <item

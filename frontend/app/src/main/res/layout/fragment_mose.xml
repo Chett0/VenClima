@@ -29,13 +29,13 @@
             android:textColor="@color/bottom_nav_unselected"
             android:layout_marginBottom="12dp" />
 
-        <!-- Stato Attuale - NON ATTIVO -->
+        <!-- Stato Attuale - NON ATTIVO (enlarged) -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="16dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/card_border">
 
@@ -43,38 +43,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="24dp">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/ic_calm_sea"
                     android:tint="@color/azzurro"
                     android:background="@drawable/bg_icon_circle"
-                    android:padding="8dp" />
+                    android:padding="12dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginStart="12dp">
+                    android:layout_marginStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Stato Attuale"
                         android:textStyle="bold"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sistema in standby"
-                        android:textSize="13sp"
+                        android:textSize="16sp"
                         android:textColor="@color/bottom_nav_unselected"
-                        android:layout_marginTop="4dp" />
+                        android:layout_marginTop="6dp" />
 
                 </LinearLayout>
 
@@ -82,15 +82,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NON ATTIVO"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/bg_status_pill_inactive"
                     android:textColor="@color/status_inactive_text"
                     android:textStyle="bold"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -100,9 +100,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="16dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/card_border">
 
@@ -110,38 +110,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="24dp">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/ic_alert"
                     android:tint="@color/status_active_text"
                     android:background="@drawable/bg_icon_circle"
-                    android:padding="8dp" />
+                    android:padding="12dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginStart="12dp">
+                    android:layout_marginStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Stato Attuale"
                         android:textStyle="bold"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sistema pronto per attivazione"
-                        android:textSize="13sp"
+                        android:textSize="16sp"
                         android:textColor="@color/bottom_nav_unselected"
-                        android:layout_marginTop="4dp" />
+                        android:layout_marginTop="6dp" />
 
                 </LinearLayout>
 
@@ -149,15 +149,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ATTIVO"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/bg_status_pill_active"
                     android:textColor="@color/status_active_text"
                     android:textStyle="bold"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -183,7 +183,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Cos'è il MOSE"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
+                    
                     android:textSize="16sp"
                     android:layout_marginBottom="8dp" />
 
@@ -212,6 +214,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="Come funziona"
+                        android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="15sp" />
 
@@ -250,6 +253,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="Quando viene attivato"
+                        android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="15sp" />
 
@@ -288,6 +292,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="Dati tecnici"
+                        android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="15sp" />
 
