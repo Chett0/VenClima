@@ -49,7 +49,7 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@drawable/ic_calm_sea"
-                    android:tint="@color/azzurro"
+                    app:tint="@color/azzurro"
                     android:background="@drawable/bg_icon_circle"
                     android:padding="12dp" />
 
@@ -116,7 +116,7 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@drawable/ic_alert"
-                    android:tint="@color/status_active_text"
+                    app:tint="@color/status_active_text"
                     android:background="@drawable/bg_icon_circle"
                     android:padding="12dp" />
 
