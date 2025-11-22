@@ -44,6 +44,14 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "notifications",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "station_id")
+    )
+    private List<Station> stations;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,6 +82,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    
+
+
 
 }

@@ -58,8 +58,8 @@ public class TideService {
         List<Station> stations = stationRepository.findAll();
 
         for (Station station : stations) {
-            if (!station.name_link.isEmpty()) {
-                Document doc = Jsoup.connect(String.format("https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/%s.html", station.name_link)).get();
+            if (!station.getName_link().isEmpty()) {
+                Document doc = Jsoup.connect(String.format("https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/%s.html", station.getName_link())).get();
                 Element table = doc.select("table").first();
                 if (table == null)
                     return;
