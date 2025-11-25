@@ -31,7 +31,7 @@ public class StationController {
     }
 
     @GetMapping("/{stationId}/tides")
-    public ResponseEntity<List<TideDTO>> getStation(@PathVariable String stationId) {
+    public ResponseEntity<List<TideDTO>> getTidesByStationId(@PathVariable String stationId) {
         List<TideDTO> tides = tideService.getTidesByStationId(Integer.parseInt(stationId));
         return ResponseEntity.ok(tides);
     }

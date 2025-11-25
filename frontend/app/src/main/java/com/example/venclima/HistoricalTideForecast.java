@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.venclima.databinding.HistoricalTideForecastBinding;
+import com.example.venclima.MonthAdapter;
+import com.example.venclima.PdfUtils;
 
 import java.util.Arrays;
 import java.util.List;
