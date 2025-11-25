@@ -46,6 +46,13 @@
         tools:layout="@layout/options">
     </fragment>
 
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.venclima.LoginFragmnet"
+        android:label="Loging"
+        tools:layout="@layout/login">
+    </fragment>
+
 
 
 </navigation>

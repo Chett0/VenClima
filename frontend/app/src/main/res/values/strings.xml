@@ -16,7 +16,40 @@
         Meno testo
     </string>
 
-    <!--string option for nav_graph.xml-->
+    <!-- strings for behavior.xml -->
+    <string name="b_title">Come comportarsi</string>
+    <string name="b_opt1">1) Prima dell’acqua alta</string>
+    <string name="b_opt1_text">Suggerimenti per la preparazione preventiva:\n\n• Sollevare mobili, dispositivi elettrici e oggetti di valore.\n• Installare paratie o sistemi di protezione.\n• Verificare il corretto funzionamento delle pompe di sollevamento domestiche.\n• Preparare un kit di emergenza (stivali, torce, batterie, documenti).\n• Monitorare notifiche e previsioni via app.\n• Evitare di lasciare veicoli in zone a rischio.</string>
+    <string name="b_opt2">2) Durante l’acqua alta</string>
+    <string name="b_opt2_text">Comportamenti per ridurre i rischi:\n\n• Evitare di camminare in acque profonde o in zone non illuminate.\n• Fare attenzione ai cavi elettrici, tombini aperti o ostacoli non visibili.\n• Usare solo passerelle autorizzate.\n• Non forzare porte o accessi con forte pressione dell’acqua.\n• Limitare l’uso di veicoli e mezzi privati.\n• Indossare stivali alti o protezioni impermeabili.</string>
+    <string name="b_opt3">3) Dopo l’acqua alta</string>
+    <string name="b_opt3_text">Linee guida per il rientro alla normalità:\n\n• Evitare l’accensione di apparecchi elettrici finché non sono asciutti e verificati.\n• Pulire e disinfettare locali e superfici contaminate da acqua salmastra.\n• Smaltire correttamente eventuali beni danneggiati.\n• Segnalare danni strutturali agli uffici competenti.\n• Annotare eventuali danni per richieste assicurative.</string>
+
+    <string name="contacts">Contatti utili</string>
+    <string name="eme_contact">Numero unico di emergenza (NUE)</string>
+    <string name="eme_number">112 – numero unico di emergenza nazionale</string>
+    <string name="firefighter">Vigili del Fuoco</string>
+    <string name="firefighter_n">115 (numero nazionale)</string>
+    <string name="pronto_soccorso">Emergenza sanitaria (ambulanza)</string>
+    <string name="pronto_soccorso_n">118</string>
+    <string name="police">Polizia di Stato</string>
+    <string name="police_n">113 (pronto intervento)</string>
+    <string name="coast_guard">Guardia Costiera / Capitaneria di Porto di Venezia</string>
+    <string name="coast_guard_n">Telefono: 041 240 5711\nPEC: dm.venezia@pec.mit.gov.it\nEmail: venezia@guardiacostiera.it</string>
+    <string name="finance">Guardia di Finanza – Comando Provinciale Venezia</string>
+    <string name="finance_n">Telefono centrale: 041 931 411\nPEC: ve0550000p@pec.gdf.it</string>
+    <string name="municipality">Comune di Venezia – Centralino / Informazioni generali</string>
+    <string name="municipality_n">041 041</string>
+    <string name="civil">Comune di Venezia – Protezione Civile</string>
+    <string name="civil_n">Sala operativa Protezione Civile: 041 2746800\nEmail: protezionecivile@comune.venezia.it</string>
+    <string name="lpolice">Polizia Locale di Venezia (Municipale)</string>
+    <string name="lpolice_n">Centrale operativa 041 2747070 · Comando 041 2747277 · Numero verde info sanzioni 800 058 001</string>
+    <string name="mobility">Mobilità e Trasporti – Comune di Venezia (Terrestre)</string>
+    <string name="mobility_n">Email: mobilita@comune.venezia.it · PEC: mobilitatrasporti@pec.comune.venezia.it · Call center: 041 041</string>
+    <string name="mobility_w">Mobilità e Trasporti – Comune di Venezia (Acquei)</string>
+    <string name="mobility_w_number">Ufficio Spazi Acquei: 041 2748750\nEmail: spazi.acquei@comune.venezia.it, trasporti.acquei@comune.venezia.it, gondola@comune.venezia.it</string>
+
+    <!--string for nav_graph.xml-->
     <string name="tide_forecast_fragment">Previsioni maree</string>
     <string name="historical_fragment">Storico maree</string>
     <string name="critics_zone_fragment">Mappa zone critiche</string>
@@ -41,6 +74,5 @@
     <string name="menu_critics_zone_map">Mappa zone critiche</string>
     <string name="menu_behavior">Come comportarsi</string>
     <string name="menu_options">Impostazioni</string>
-
 
 </resources>

@@ -22,7 +22,7 @@
         <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
 
         <!-- Background / Surface -->
-        <item name="android:colorBackground">@color/background</item>
+        <item name="android:colorBackground">@color/white</item>
         <item name="colorOnBackground">@color/onBackground</item>
 
         <item name="colorSurface">@color/surface</item>

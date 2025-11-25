@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Come comportarsi"
+            android:text="@string/b_title"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -48,7 +48,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="1) Prima dell’acqua alta"
+                        android:text="@string/b_opt1"
                         android:textStyle="bold"
                         android:textSize="16sp" />
 
@@ -65,7 +65,7 @@
                     android:id="@+id/content_before"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Suggerimenti per la preparazione preventiva:\n\n• Sollevare mobili, dispositivi elettrici e oggetti di valore.\n• Installare paratie o sistemi di protezione.\n• Verificare il corretto funzionamento delle pompe di sollevamento domestiche.\n• Preparare un kit di emergenza (stivali, torce, batterie, documenti).\n• Monitorare notifiche e previsioni via app.\n• Evitare di lasciare veicoli in zone a rischio."
+                    android:text="@string/b_opt1_text"
                     android:textSize="14sp"
                     android:textColor="@color/bottom_nav_unselected"
                     android:visibility="gone"
@@ -86,7 +86,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="2) Durante l’acqua alta"
+                        android:text="@string/b_opt2"
                         android:textStyle="bold"
                         android:textSize="16sp" />
 
@@ -103,7 +103,7 @@
                     android:id="@+id/content_during"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Comportamenti per ridurre i rischi:\n\n• Evitare di camminare in acque profonde o in zone non illuminate.\n• Fare attenzione ai cavi elettrici, tombini aperti o ostacoli non visibili.\n• Usare solo passerelle autorizzate.\n• Non forzare porte o accessi con forte pressione dell’acqua.\n• Limitare l’uso di veicoli e mezzi privati.\n• Indossare stivali alti o protezioni impermeabili."
+                    android:text="@string/b_opt2_text"
                     android:textSize="14sp"
                     android:textColor="@color/bottom_nav_unselected"
                     android:visibility="gone"
@@ -124,7 +124,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="3) Dopo l’acqua alta"
+                        android:text="@string/b_opt3"
                         android:textStyle="bold"
                         android:textSize="16sp" />
 
@@ -141,7 +141,7 @@
                     android:id="@+id/content_after"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Linee guida per il rientro alla normalità:\n\n• Evitare l’accensione di apparecchi elettrici finché non sono asciutti e verificati.\n• Pulire e disinfettare locali e superfici contaminate da acqua salmastra.\n• Smaltire correttamente eventuali beni danneggiati.\n• Segnalare danni strutturali agli uffici competenti.\n• Annotare eventuali danni per richieste assicurative."
+                    android:text="@string/b_opt3_text"
                     android:textSize="14sp"
                     android:textColor="@color/bottom_nav_unselected"
                     android:visibility="gone" />
@@ -169,7 +169,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Contatti utili"
+                    android:text="@string/contacts"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:layout_marginBottom="8dp" />
@@ -188,7 +188,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Numero unico di emergenza (NUE)"
+                        android:text="@string/eme_contact"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -205,7 +205,7 @@
                     android:id="@+id/content_nue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="112 – numero unico di emergenza nazionale"
+                    android:text="@string/eme_number"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -226,7 +226,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Vigili del Fuoco"
+                        android:text="@string/firefighter"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -243,7 +243,7 @@
                     android:id="@+id/content_vigili"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="115 (numero nazionale)"
+                    android:text="@string/firefighter_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -264,7 +264,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Emergenza sanitaria (ambulanza)"
+                        android:text="@string/pronto_soccorso"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -281,7 +281,7 @@
                     android:id="@+id/content_ambulance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="118"
+                    android:text="@string/pronto_soccorso_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -302,7 +302,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Polizia di Stato"
+                        android:text="@string/police"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -319,7 +319,7 @@
                     android:id="@+id/content_polizia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="113 (pronto intervento)"
+                    android:text="@string/police_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -340,7 +340,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Guardia Costiera / Capitaneria di Porto di Venezia"
+                        android:text="@string/coast_guard"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -357,7 +357,7 @@
                     android:id="@+id/content_guardia_costiera"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Telefono: 041 240 5711\nPEC: dm.venezia@pec.mit.gov.it\nEmail: venezia@guardiacostiera.it"
+                    android:text="@string/coast_guard_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -378,7 +378,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Guardia di Finanza – Comando Provinciale Venezia"
+                        android:text="@string/finance"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -395,7 +395,7 @@
                     android:id="@+id/content_guardia_finanza"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Telefono centrale: 041 931 411\nPEC: ve0550000p@pec.gdf.it"
+                    android:text="@string/finance_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -416,7 +416,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Comune di Venezia – Centralino / Informazioni generali"
+                        android:text="@string/municipality"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -433,7 +433,7 @@
                     android:id="@+id/content_comune_centralino"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="041 041"
+                    android:text="@string/municipality_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -454,7 +454,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Comune di Venezia – Protezione Civile"
+                        android:text="@string/civil"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -471,7 +471,7 @@
                     android:id="@+id/content_protezione"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sala operativa Protezione Civile: 041 2746800\nEmail: protezionecivile@comune.venezia.it"
+                    android:text="@string/civil_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -492,7 +492,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Polizia Locale di Venezia (Municipale)"
+                        android:text="@string/lpolice"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -509,7 +509,7 @@
                     android:id="@+id/content_polizia_locale"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Centrale operativa 041 2747070 · Comando 041 2747277 · Numero verde info sanzioni 800 058 001"
+                    android:text="@string/lpolice_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -530,7 +530,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Mobilità e Trasporti – Comune di Venezia (Terrestre)"
+                        android:text="@string/mobility"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -547,7 +547,7 @@
                     android:id="@+id/content_mobilita_terrestre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Email: mobilita@comune.venezia.it · PEC: mobilitatrasporti@pec.comune.venezia.it · Call center: 041 041"
+                    android:text="@string/mobility_n"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="8dp" />
@@ -568,7 +568,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Mobilità e Trasporti – Comune di Venezia (Acquei)"
+                        android:text="@string/mobility_w"
                         android:textStyle="bold"
                         android:textSize="14sp" />
 
@@ -585,7 +585,7 @@
                     android:id="@+id/content_mobilita_acquei"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ufficio Spazi Acquei: 041 2748750\nEmail: spazi.acquei@comune.venezia.it, trasporti.acquei@comune.venezia.it, gondola@comune.venezia.it"
+                    android:text="@string/mobility_w_number"
                     android:textSize="14sp"
                     android:visibility="gone"
                     android:layout_marginBottom="6dp" />

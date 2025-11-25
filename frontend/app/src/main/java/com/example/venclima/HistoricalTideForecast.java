@@ -14,6 +14,8 @@ import com.example.venclima.databinding.HistoricalTideForecastBinding;
 
 import java.util.Arrays;
 import java.util.List;
+import com.example.venclima.MonthAdapter;
+import com.example.venclima.PdfUtils;
 
 public class HistoricalTideForecast extends Fragment {
 

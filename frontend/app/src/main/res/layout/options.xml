@@ -1,72 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <LinearLayout
+    <View
+        android:id="@+id/topBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.33"
+        android:background="@drawable/options_drawable"/>
 
-        <TextView
-            android:id="@+id/textView9"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/white"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/option_email" />
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/white">
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/option_username" />
-
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:text="@string/option_notification" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="320dp"
+            <!-- Profilo dell'utente -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/option_radio_1" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="12dp">
 
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="320dp"
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/bg_icon_circle"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mario Rossi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Impostazioni utente -->
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/option_radio_2" />
+                android:text="Impostazioni utente"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingVertical="8dp"/>
 
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="320dp"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/option_radio_3" />
-        </RadioGroup>
+                android:id="@+id/textView7"
+                android:text="Email: example@gmail.com"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"/>
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="159dp"
-            android:layout_height="wrap_content"
-            android:text="@string/option_button_loguot" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                android:text="Nome utente: Mario Rossi"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"/>
 
-        <Spinner
-            android:id="@+id/language_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:prompt="@string/option_spinner"
-            />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Effettua logout"
+                /><!--Cambia in base al fatto di essere loggati o meno -->
 
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="12dp"/>
 
-    </LinearLayout>
+            <!-- Notifiche -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Impostazioni Notifiche"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingVertical="8dp"/>
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Abilita le notifiche"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView9"
+                android:text="Riceverai: notifiche push"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="12dp"/>
+
+            <!-- Altre impostazioni -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Altre impostazioni"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingVertical="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cambia lingua"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Politiche sulla privacy"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
