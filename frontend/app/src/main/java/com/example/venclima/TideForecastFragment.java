@@ -8,15 +8,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.venclima.databinding.FragmentFirstBinding;
 import com.example.venclima.databinding.TideForecastBinding;
+import com.example.venclima.models.RealTimeTide;
+import com.example.venclima.utils.CarouselAdapter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TideForecastFragment extends Fragment {
@@ -68,6 +73,23 @@ public class TideForecastFragment extends Fragment {
         lineChart.setData(lineData);
         lineChart.getDescription().setText("Grafico per livello delle maree");
         lineChart.invalidate();
+
+        ViewPager2 viewPager = binding.viewPager;
+        WormDotsIndicator dotsIndicator = binding.dotsIndicator;
+
+        List<RealTimeTide> pages = Arrays.asList(
+                new RealTimeTide("S. Geremia", 12),
+                new RealTimeTide("Piattaforma Acqua Alta Siap", 14),
+                new RealTimeTide("Diga nord Malamocco", 16),
+                new RealTimeTide("Diga sud Chioggia", 45),
+                new RealTimeTide("Diga sud Lido", 78),
+                new RealTimeTide("Fusina", 16)
+        );
+
+        CarouselAdapter adapter = new CarouselAdapter(pages);
+        viewPager.setAdapter(adapter);
+
+        dotsIndicator.attachTo(viewPager);
 
 
         return binding.getRoot();

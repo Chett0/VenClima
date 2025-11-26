@@ -1,4 +1,4 @@
-package responses;
+package com.venclima.responses;
 
 import lombok.*;
 
