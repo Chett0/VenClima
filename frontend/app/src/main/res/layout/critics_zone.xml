@@ -5,16 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Questa è la pagina delle zone critiche" />
-
-    <ImageView
-        android:id="@+id/imageViewMap"
+    <org.maplibre.android.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="Mappa statica"/>
+        android:layout_height="540dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

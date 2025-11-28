@@ -47,5 +47,6 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("org.maplibre.gl:android-sdk:11.13.5")
     implementation("com.tbuonomo:dotsindicator:4.3")
 }
