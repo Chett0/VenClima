@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/islands")
 public class IslandController {
 
-    private IslandService islandService;
+    private final IslandService islandService;
 
     public IslandController(IslandService islandService) {
         this.islandService = islandService;
