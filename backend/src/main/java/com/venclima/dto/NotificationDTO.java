@@ -13,6 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class NotificationDTO {
 
-    private List<Integer> stationIds;
+    private List<Integer> islandsIds;
 
 }

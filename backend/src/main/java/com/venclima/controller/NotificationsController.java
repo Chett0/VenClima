@@ -2,6 +2,7 @@ package com.venclima.controller;
 
 import com.venclima.dto.NotificationDTO;
 import com.venclima.service.NotificationService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +20,10 @@ public class NotificationsController {
     }
 
     @PostMapping
-    public void addNotification(@RequestBody NotificationDTO stationIds) {
+    public ResponseEntity<String> addNotification(@RequestBody NotificationDTO islandsIds) {
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        this.notificationService.addNotification(userEmail, stationIds);
-        return;
+        this.notificationService.addNotification(userEmail, islandsIds);
+        return ResponseEntity.ok("");
     }
 
 }

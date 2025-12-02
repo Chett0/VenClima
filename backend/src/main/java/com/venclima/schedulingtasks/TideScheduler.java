@@ -5,6 +5,7 @@ import com.venclima.model.Station;
 import com.venclima.model.Tide;
 import com.venclima.service.StationService;
 import com.venclima.service.TideService;
+import org.locationtech.jts.geom.Coordinate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -60,10 +61,9 @@ public class TideScheduler {
                 Station station = new Station(
                         stationId,
                         dataStation.getStazione(),
-                        Double.parseDouble(dataStation.getLatDDN()),
-                        Double.parseDouble(dataStation.getLonDDE()),
                         dataStation.getNomeAbbr(),
-                        linkName
+                        linkName,
+                        new Coordinate(Double.parseDouble(dataStation.getLatDDN()), Double.parseDouble(dataStation.getLonDDE()))
                 );
 
                 stationService.addStation(station);

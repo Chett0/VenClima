@@ -1,8 +1,6 @@
 package com.venclima.controller;
 
-import com.venclima.dto.StationDTO;
 import com.venclima.dto.TideDTO;
-import com.venclima.service.StationService;
 import com.venclima.service.TideService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

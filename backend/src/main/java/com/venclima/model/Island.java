@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Polygon;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "islands")
@@ -37,5 +39,8 @@ public class Island {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Station station;
+
+    @ManyToMany(mappedBy = "islands")
+    private List<User> users;
 
 }

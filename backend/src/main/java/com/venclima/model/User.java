@@ -10,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -48,9 +47,9 @@ public class User implements UserDetails {
     @JoinTable(
             name = "notifications",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "station_id")
+            inverseJoinColumns = @JoinColumn(name = "island_id")
     )
-    private List<Station> stations;
+    private List<Island> islands;
 
 
     @Override
@@ -82,7 +81,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
 
 }

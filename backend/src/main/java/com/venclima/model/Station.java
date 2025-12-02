@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.locationtech.jts.geom.Coordinate;
 
 import java.util.List;
 
@@ -16,24 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 public class Station {
 
-    public Station(Integer id, String name, double latitude, double longitude, String name_abbreviation, String name_link) {
-        this.id = id;
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.name_abbreviation = name_abbreviation;
-        this.name_link = name_link;
-    }
-
     @Id
     private Integer id;
     private String name;
-    private double latitude;
-    private double longitude;
+//    private double latitude;
+//    private double longitude;
     private String name_abbreviation;
     private String name_link;
-
-    @ManyToMany(mappedBy = "stations")
-    private List<User> users;
+    Coordinate coordinate;
 
 }

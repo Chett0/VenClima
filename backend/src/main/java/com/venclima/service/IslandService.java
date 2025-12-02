@@ -55,7 +55,7 @@ public class IslandService {
         double minDistance = Double.MAX_VALUE;
         double currDistance;
         for(Station station : stations) {
-            currDistance = distance(station.getLatitude(), station.getLongitude(), coordinates.x, coordinates.y);
+            currDistance = distance(station.getCoordinate().x, station.getCoordinate().y, coordinates.x, coordinates.y);
             if(currDistance < minDistance) {
                 minDistance = currDistance;
                 nearestStation = station;
