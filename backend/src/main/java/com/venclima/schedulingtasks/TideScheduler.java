@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class TideScheduler {
@@ -66,16 +67,19 @@ public class TideScheduler {
                         new Coordinate(Double.parseDouble(dataStation.getLatDDN()), Double.parseDouble(dataStation.getLonDDE()))
                 );
 
-                stationService.addStation(station);
-
+                Station savedStation = stationService.addStation(station);
                 LocalDateTime dateTime = LocalDateTime.parse(dataStation.getData(), dataFormatter);
+                Optional<Tide> existingTide = tideService.getTideByStationIdAndDate(stationId, dateTime);
 
-                Tide tide = new Tide();
-                tide.setDate(dateTime);
-                tide.setLevel(Double.parseDouble(dataStation.getValore().replaceAll("[^0-9.]", "")));
-                tide.setStation(station);
+                if(existingTide.isEmpty()) {
 
-                tideService.addTideInfo(tide);
+                    Tide tide = new Tide();
+                    tide.setDate(dateTime);
+                    tide.setLevel(Double.parseDouble(dataStation.getValore().replaceAll("[^0-9.]", "")));
+                    tide.setStation(savedStation);
+
+                    tideService.addTideInfo(tide);
+                }
             }
         }
     }

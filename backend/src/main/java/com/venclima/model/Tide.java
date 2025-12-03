@@ -9,7 +9,12 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tides")
+@Table(
+        name = "tides",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"date", "station_id"})
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,5 +29,7 @@ public class Tide {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Station station;
+
+
 
 }

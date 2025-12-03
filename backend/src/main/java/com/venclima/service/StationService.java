@@ -21,8 +21,8 @@ public class StationService {
         this.stationMapper = stationMapper;
     }
 
-    public void addStation(Station station) {
-        stationRepository.save(station);
+    public Station addStation(Station station) {
+        return stationRepository.save(station);
     }
 
     public List<StationDTO> getAllStations() {
