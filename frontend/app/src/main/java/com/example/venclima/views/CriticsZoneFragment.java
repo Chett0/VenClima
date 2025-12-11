@@ -1,4 +1,5 @@
 package com.example.venclima.views;
+import com.example.venclima.R;
 import com.example.venclima.databinding.CriticsZoneBinding;
 
 import android.os.Bundle;
