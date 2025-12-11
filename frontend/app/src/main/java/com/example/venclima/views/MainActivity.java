@@ -1,12 +1,10 @@
-package com.example.venclima;
+package com.example.venclima.views;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.venclima.R;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
@@ -16,8 +14,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.venclima.databinding.ActivityMainBinding;
 
+import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,16 +36,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.TideForecastFragment,
-            R.id.HistoricalTideForecastFragment,
-            R.id.CriticsZoneFragment,
-            R.id.MoseFragment,
-            R.id.BehaviourFragment,
-            R.id.OptionFragment
-                )
+                R.id.HistoricalTideForecastFragment,
+                R.id.CriticsZoneFragment,
+                R.id.MoseFragment,
+                R.id.BehaviourFragment,
+                R.id.OptionFragment
+        )
                 .setOpenableLayout(binding.drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
 
     }
 

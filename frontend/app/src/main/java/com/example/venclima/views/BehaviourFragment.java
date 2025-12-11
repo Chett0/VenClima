@@ -1,4 +1,4 @@
-package com.example.venclima;
+package com.example.venclima.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

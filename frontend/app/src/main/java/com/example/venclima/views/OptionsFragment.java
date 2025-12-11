@@ -1,4 +1,4 @@
-package com.example.venclima;
+package com.example.venclima.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,13 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.venclima.databinding.FragmentFirstBinding;
+import com.example.venclima.databinding.OptionsBinding;
 
-public class FirstFragment extends Fragment {
+public class OptionsFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
+    private OptionsBinding binding;
 
     @Override
     public View onCreateView(
@@ -21,7 +20,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = OptionsBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }

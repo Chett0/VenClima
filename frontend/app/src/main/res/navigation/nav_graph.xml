@@ -7,52 +7,50 @@
 
     <fragment
         android:id="@+id/TideForecastFragment"
-        android:name="com.example.venclima.TideForecastFragment"
+        android:name="com.example.venclima.views.TideForecastFragment"
         android:label="@string/tide_forecast_fragment"
         tools:layout="@layout/tide_forecast">
     </fragment>
 
     <fragment
         android:id="@+id/HistoricalTideForecastFragment"
-        android:name="com.example.venclima.HistoricalTideForecast"
+        android:name="com.example.venclima.views.HistoricalTideForecast"
         android:label="@string/historical_fragment"
         tools:layout="@layout/historical_tide_forecast">
     </fragment>
 
     <fragment
         android:id="@+id/CriticsZoneFragment"
-        android:name="com.example.venclima.CriticsZoneFragment"
+        android:name="com.example.venclima.views.CriticsZoneFragment"
         android:label="@string/critics_zone_fragment"
         tools:layout="@layout/critics_zone">
     </fragment>
 
     <fragment
         android:id="@+id/MoseFragment"
-        android:name="com.example.venclima.MoseFragment"
+        android:name="com.example.venclima.views.MoseFragment"
         android:label="@string/title_mose"
         tools:layout="@layout/fragment_mose" />
 
     <fragment
         android:id="@+id/BehaviourFragment"
-        android:name="com.example.venclima.BehaviourFragment"
+        android:name="com.example.venclima.views.BehaviourFragment"
         android:label="@string/behaviour_fragment"
         tools:layout="@layout/behaviour">
     </fragment>
 
     <fragment
         android:id="@+id/OptionFragment"
-        android:name="com.example.venclima.OptionsFragment"
+        android:name="com.example.venclima.views.OptionsFragment"
         android:label="@string/options_fragment"
         tools:layout="@layout/options">
     </fragment>
 
     <fragment
         android:id="@+id/LoginFragment"
-        android:name="com.example.venclima.LoginFragmnet"
-        android:label="Loging"
+        android:name="com.example.venclima.views.LoginFragment"
+        android:label="Login"
         tools:layout="@layout/login">
     </fragment>
-
-
 
 </navigation>

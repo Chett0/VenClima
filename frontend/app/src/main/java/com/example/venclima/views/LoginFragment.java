@@ -1,4 +1,4 @@
-package com.example.venclima;
+package com.example.venclima.views;
 
 import android.os.Bundle;
 
@@ -10,14 +10,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.venclima.databinding.LoginBinding;
-import com.example.venclima.databinding.TideForecastBinding;
+import com.example.venclima.viewModels.LoginViewModel;
 
 
-public class LoginFragmnet extends Fragment {
+public class LoginFragment extends Fragment {
 
     private LoginBinding binding;
+    private LoginViewModel viewModel;
 
-    public LoginFragmnet() {
+    public LoginFragment() {
         // Required empty public constructor
     }
 
@@ -33,21 +34,11 @@ public class LoginFragmnet extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         binding = LoginBinding.inflate(inflater,container,false);
-
-        Button logButton = binding.loginBtn;
-        logButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //una volta premuto il bottono login, si ottiene ci che c'è scritto sul form con le seguenti variabili
-                //binding.emailInput.getText()
-                //binding.passwordInput.getText()
-                //aggiungere qui le api(?)
-            }
-        });
-
-
+        viewModel = new LoginViewModel();
+        binding.setLoginViewModel(viewModel);
+        binding.executePendingBindings();
 
         return binding.getRoot();
     }

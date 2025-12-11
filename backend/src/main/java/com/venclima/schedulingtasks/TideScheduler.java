@@ -64,7 +64,7 @@ public class TideScheduler {
                         dataStation.getStazione(),
                         dataStation.getNomeAbbr(),
                         linkName,
-                        new Coordinate(Double.parseDouble(dataStation.getLatDDN()), Double.parseDouble(dataStation.getLonDDE()))
+                        new Coordinate(Double.parseDouble(dataStation.getLonDDE()), Double.parseDouble(dataStation.getLatDDN()))
                 );
 
                 Station savedStation = stationService.addStation(station);

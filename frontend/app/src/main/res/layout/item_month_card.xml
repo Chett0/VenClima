@@ -26,7 +26,7 @@
             android:src="@drawable/ic_forecast"
             android:background="@drawable/bg_icon_circle"
             android:padding="10dp"
-            android:tint="@color/azzurro" />
+            app:tint="@color/azzurro" />
 
         <LinearLayout
             android:layout_width="0dp"

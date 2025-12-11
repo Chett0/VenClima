@@ -1,4 +1,4 @@
-package com.example.venclima;
+package com.example.venclima.views;
 import com.example.venclima.databinding.CriticsZoneBinding;
 
 import android.graphics.Color;

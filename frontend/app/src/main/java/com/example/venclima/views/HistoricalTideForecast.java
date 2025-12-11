@@ -1,4 +1,4 @@
-package com.example.venclima;
+package com.example.venclima.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,14 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.venclima.R;
 import com.example.venclima.databinding.HistoricalTideForecastBinding;
-import com.example.venclima.MonthAdapter;
-import com.example.venclima.PdfUtils;
+import com.example.venclima.utils.MonthAdapter;
+import com.example.venclima.utils.PdfUtils;
 
 import java.util.Arrays;
 import java.util.List;
-import com.example.venclima.MonthAdapter;
-import com.example.venclima.PdfUtils;
 
 public class HistoricalTideForecast extends Fragment {
 

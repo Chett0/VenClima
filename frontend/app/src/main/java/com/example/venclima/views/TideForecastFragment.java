@@ -1,4 +1,4 @@
-package com.example.venclima;
+package com.example.venclima.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.venclima.databinding.FragmentFirstBinding;
 import com.example.venclima.databinding.TideForecastBinding;
 import com.example.venclima.models.RealTimeTide;
 import com.example.venclima.utils.CarouselAdapter;
@@ -27,6 +25,11 @@ import java.util.List;
 public class TideForecastFragment extends Fragment {
 
     private TideForecastBinding binding;
+
+    public TideForecastFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public View onCreateView(

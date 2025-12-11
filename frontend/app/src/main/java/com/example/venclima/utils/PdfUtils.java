@@ -1,4 +1,4 @@
-package com.example.venclima;
+package com.example.venclima.utils;
 
 import android.content.Context;
 import android.net.Uri;

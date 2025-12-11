@@ -1,11 +1,12 @@
-package com.example.venclima;
+package com.example.venclima.utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
- 
+import com.example.venclima.R;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

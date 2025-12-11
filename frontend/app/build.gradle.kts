@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.venclima"
-        minSdk = 27
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -32,6 +32,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    dataBinding {
+        enable = true
+    }
 }
 
 dependencies {
@@ -49,4 +53,7 @@ dependencies {
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("org.maplibre.gl:android-sdk:11.13.5")
     implementation("com.tbuonomo:dotsindicator:4.3")
+    implementation ("com.google.code.gson:gson:2.9.1")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 }
