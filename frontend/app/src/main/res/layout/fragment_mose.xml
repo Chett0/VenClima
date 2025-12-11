@@ -81,16 +81,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NON ATTIVO"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/bg_status_pill_inactive"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="10dp"
+                    android:text="NON ATTIVO"
                     android:textColor="@color/status_inactive_text"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -185,7 +185,7 @@
                     android:text="Cos'è il MOSE"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    
+
                     android:textSize="16sp"
                     android:layout_marginBottom="8dp" />
 

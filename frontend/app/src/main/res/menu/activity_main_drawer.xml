@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--This file contain the link to the other pages/fragment present on the lateral menu -->ù
+<!--This file contain the link to the other pages/fragment present on the lateral menu -->
         <group android:checkableBehavior="single">
             <item
                 android:id="@+id/TideForecastFragment"
@@ -25,6 +25,11 @@
             <item
                 android:id="@+id/LoginFragment"
                 android:title="Login"/>
+
+            <item
+                android:id="@+id/RegistrationFragment"
+                android:title="Registrati"/>
+
 
         </group>
 </menu>

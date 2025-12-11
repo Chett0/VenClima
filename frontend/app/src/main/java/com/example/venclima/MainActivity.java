@@ -2,11 +2,8 @@ package com.example.venclima;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
@@ -17,7 +14,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.venclima.databinding.ActivityMainBinding;
 
 import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 .setOpenableLayout(binding.drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-
     }
 
     @Override

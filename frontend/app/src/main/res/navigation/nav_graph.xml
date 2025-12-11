@@ -5,6 +5,8 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/TideForecastFragment"> <!--First fragment that you see when the application opens-->
 
+    <!--Fixxare i name-->
+
     <fragment
         android:id="@+id/TideForecastFragment"
         android:name="com.example.venclima.TideForecastFragment"
@@ -48,11 +50,17 @@
 
     <fragment
         android:id="@+id/LoginFragment"
-        android:name="com.example.venclima.LoginFragmnet"
-        android:label="Loging"
+        android:name="com.example.venclima.LoginFragment"
+        android:label="Login"
         tools:layout="@layout/login">
     </fragment>
 
+    <fragment
+        android:id="@+id/RegistrationFragment"
+        android:name="com.example.venclima.RegistrationFragment"
+        android:label="Registrazione"
+        tools:layout="@layout/registration">
+    </fragment>
 
 
 </navigation>

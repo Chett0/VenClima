@@ -9,45 +9,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.venclima.databinding.LoginBinding;
-import com.example.venclima.databinding.TideForecastBinding;
+import com.example.venclima.databinding.RegistrationBinding;
 
 
-public class LoginFragmnet extends Fragment {
+public class RegistrationFragment extends Fragment {
 
-    private LoginBinding binding;
+    private RegistrationBinding binding;
 
-    public LoginFragmnet() {
+    public RegistrationFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //QUI CONTROLLARE CHE L'UTENTE NON SIA GIA' LOGGATO (?)
-        //o forse fare in modo che non si possa accedere a questa pagina se si è loggati
-        //in controllo da qualche parte va fatto
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = LoginBinding.inflate(inflater,container,false);
+        binding = RegistrationBinding.inflate(inflater,container,false);
 
-        Button logButton = binding.loginBtn;
-        logButton.setOnClickListener(new View.OnClickListener() {
+        Button regButton = binding.registrationBtn;
+        regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //una volta premuto il bottono login, si ottiene ci che c'è scritto sul form con le seguenti variabili
+                //una volta premuto il bottono registratio, si ottiene ci che c'è scritto sul form con le seguenti variabili
                 //binding.emailInput.getText()
                 //binding.passwordInput.getText()
                 //aggiungere qui le api(?)
             }
         });
-
-
 
         return binding.getRoot();
     }
