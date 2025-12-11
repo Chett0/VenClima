@@ -6,6 +6,7 @@ import com.example.venclima.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 .setOpenableLayout(binding.drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
     }
 
     @Override

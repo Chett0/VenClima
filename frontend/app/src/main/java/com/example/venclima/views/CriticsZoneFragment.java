@@ -1,7 +1,6 @@
 package com.example.venclima.views;
 import com.example.venclima.databinding.CriticsZoneBinding;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +11,17 @@ import androidx.fragment.app.Fragment;
 import org.maplibre.android.geometry.LatLng;
 import org.maplibre.android.MapLibre;
 import org.maplibre.android.camera.CameraPosition;
+import org.maplibre.android.geometry.LatLngBounds;
 import org.maplibre.android.maps.MapView;
-import org.maplibre.android.style.layers.FillLayer;
+
 import org.maplibre.android.style.layers.PropertyFactory;
+import org.maplibre.android.style.layers.SymbolLayer;
 import org.maplibre.android.style.sources.GeoJsonSource;
+import org.maplibre.android.utils.BitmapUtils;
 import org.maplibre.geojson.Feature;
 import org.maplibre.geojson.FeatureCollection;
 import org.maplibre.geojson.Point;
-import org.maplibre.geojson.Polygon;
+
 
 
 public class CriticsZoneFragment extends Fragment {
@@ -41,10 +43,11 @@ public class CriticsZoneFragment extends Fragment {
             {45.2325, 12.280556},
             {45.223619, 12.280425},
             {45.408889, 12.261389},
-            {45.430556, 12.336664}
+            {45.430556, 12.336664},
+            {45.44252, 12.32603},
+            {45.445278, 12.336111}
     };
 
-    double delta = 0.002;
 
 
     @Override
@@ -71,7 +74,7 @@ public class CriticsZoneFragment extends Fragment {
 
                     //limita a mappa solo ad un determinato territorio -- da mettere il commento
 
-                    /*
+
                     LatLngBounds bounds = new LatLngBounds.Builder()
                             .include(new LatLng(45.45786, 12.29712))  // nord-ovest
                             .include(new LatLng(45.41893, 12.36959))  // sud-est
@@ -80,37 +83,44 @@ public class CriticsZoneFragment extends Fragment {
 
                     map.setMinZoomPreference(11.5);
                     map.setMaxZoomPreference(16.0);
-                    */
 
                     //serve per la creazione di rettangoli attorno i punti del sensore
                     for (int i = 0; i < points.length; i++) {
+
                         double lat = points[i][0];
                         double lng = points[i][1];
 
-                        Polygon polygon = Polygon.fromLngLats(java.util.Arrays.asList(
-                                java.util.Arrays.asList(
-                                        Point.fromLngLat(lng - delta, lat - delta),
-                                        Point.fromLngLat(lng + delta, lat - delta),
-                                        Point.fromLngLat(lng + delta, lat + delta),
-                                        Point.fromLngLat(lng - delta, lat + delta),
-                                        Point.fromLngLat(lng - delta, lat - delta)
-                                )
-                        ));
+                        // 1) Crea il Point
+                        Point point = Point.fromLngLat(lng, lat);
 
-                        Feature feature = Feature.fromGeometry(polygon);
+                        // 2) Feature
+                        Feature feature = Feature.fromGeometry(point);
+
+                        // 3) FeatureCollection
                         FeatureCollection featureCollection = FeatureCollection.fromFeature(feature);
 
-                        GeoJsonSource source = new GeoJsonSource("stazione-source-" + (i+1), featureCollection);
+                        // 4) Source
+                        GeoJsonSource source = new GeoJsonSource("marker-source-" + i, featureCollection);
                         style.addSource(source);
 
-                        FillLayer layer = new FillLayer("stazione-layer-" + (i+1), "stazione-source-" + (i+1));
-                        layer.setProperties(
-                                PropertyFactory.fillColor(Color.GREEN),
-                                PropertyFactory.fillOpacity(0.5f)
+                        // 5) Aggiungi un’icona da drawable (MapLibre accetta Bitmap)
+                        style.addImage(
+                                "marker-icon",
+                                BitmapUtils.getBitmapFromDrawable(
+                                        getResources().getDrawable(R.drawable.map_marker)
+                                )
                         );
+
+                        // 6) SymbolLayer = marker
+                        SymbolLayer layer = new SymbolLayer("marker-layer-" + i, "marker-source-" + i);
+                        layer.setProperties(
+                                PropertyFactory.iconImage("marker-icon"),
+                                PropertyFactory.iconSize(1.0f),
+                                PropertyFactory.iconAllowOverlap(true)
+                        );
+
                         style.addLayer(layer);
                     }
-
 
                 });
 

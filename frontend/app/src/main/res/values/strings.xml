@@ -74,5 +74,7 @@
     <string name="menu_critics_zone_map">Mappa zone critiche</string>
     <string name="menu_behavior">Come comportarsi</string>
     <string name="menu_options">Impostazioni</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

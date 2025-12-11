@@ -26,5 +26,10 @@
                 android:id="@+id/LoginFragment"
                 android:title="Login"/>
 
+            <item
+                android:id="@+id/RegistrationFragment"
+                android:title="Registrati"/>
+
+
         </group>
 </menu>
