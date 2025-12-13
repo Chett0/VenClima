@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="RegistrationViewModel"
+            type="com.example.venclima.viewModels.RegistrationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/registration_container"
@@ -35,7 +43,8 @@
             android:textSize="18sp"
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:text="@={RegistrationViewModel.email}"/>
 
         <EditText
             android:id="@+id/firstname_input"
@@ -46,7 +55,8 @@
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
             android:inputType="text"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:text="@={RegistrationViewModel.name}"/>
 
         <EditText
             android:id="@+id/lastname_input"
@@ -57,7 +67,8 @@
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
             android:inputType="text"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:text="@={RegistrationViewModel.surname}"/>
 
         <EditText
             android:id="@+id/password_input"
@@ -68,7 +79,8 @@
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
             android:inputType="textPassword"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:text="@={RegistrationViewModel.password}"/>
 
         <EditText
             android:id="@+id/conf_password_input"
@@ -79,7 +91,8 @@
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
             android:inputType="textPassword"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:text="@={RegistrationViewModel.confirmPassword}"/>
 
         <Button
             android:id="@+id/registration_btn"
@@ -90,8 +103,11 @@
             android:textColor="@color/white"
             android:padding="16dp"
             android:layout_marginTop="32dp"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:onClick="@{() -> RegistrationViewModel.onRegistrationButtonClicked()}"/>
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

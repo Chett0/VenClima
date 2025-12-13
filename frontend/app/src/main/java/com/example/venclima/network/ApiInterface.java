@@ -1,5 +1,6 @@
 package com.example.venclima.network;
 
+import com.example.venclima.models.RegisterUser;
 import com.example.venclima.models.User;
 
 import okhttp3.ResponseBody;
@@ -13,10 +14,10 @@ public interface ApiInterface {
     Call<ResponseBody> postTides();
 
     @POST("/api/auth/login")
-    Call<ResponseBody> login(@Body User user);
+    Call<ResponseBody> login();
 
     @POST("/api/auth/signup")
-    Call<ResponseBody> signup(@Body User user);
+    Call<Void> signup(@Body RegisterUser user);
 
 
 

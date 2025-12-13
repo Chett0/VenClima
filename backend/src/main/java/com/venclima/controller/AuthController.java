@@ -7,10 +7,7 @@ import com.venclima.model.User;
 import com.venclima.service.AuthService;
 import com.venclima.service.JWTService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.venclima.responses.LoginResponse;
 
 @RestController
@@ -27,8 +24,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterUserDTO user) {
-        UserDTO userDTO = authService.registerUser(user);
-        return ResponseEntity.ok(userDTO);
+        try {
+            UserDTO userDTO = authService.registerUser(user);
+            return ResponseEntity.ok(userDTO);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/login")
@@ -41,5 +42,4 @@ public class AuthController {
 
         return ResponseEntity.ok(loginResponse);
     }
-
 }

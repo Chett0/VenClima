@@ -31,9 +31,9 @@ public class AuthService {
         if(userRepository.existsByEmail(registerUserDTO.getEmail())) {
             throw new IllegalArgumentException("Email already in use");
         }
-            User user = userMapper.toEntity(registerUserDTO);
-            userRepository.save(user);
-            return userMapper.toDTO(user);
+        User user = userMapper.toEntity(registerUserDTO);
+        userRepository.save(user);
+        return userMapper.toDTO(user);
     }
 
     public User authenticate(LoginUserDTO input) {
