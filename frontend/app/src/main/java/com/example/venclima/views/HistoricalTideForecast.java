@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.venclima.R;
 import com.example.venclima.databinding.HistoricalTideForecastBinding;
-import com.example.venclima.utils.MonthAdapter;
+import com.example.venclima.adapters.MonthAdapter;
 import com.example.venclima.utils.PdfUtils;
 
 import java.util.Arrays;

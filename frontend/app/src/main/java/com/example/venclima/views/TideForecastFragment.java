@@ -7,11 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.venclima.databinding.TideForecastBinding;
 import com.example.venclima.models.RealTimeTide;
-import com.example.venclima.utils.CarouselAdapter;
+import com.example.venclima.adapters.TidesAdapter;
+import com.example.venclima.models.Tide;
+import com.example.venclima.viewModels.TideForecastViewModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -26,10 +31,11 @@ public class TideForecastFragment extends Fragment {
 
     private TideForecastBinding binding;
 
+    private TideForecastViewModel viewModel;
+
     public TideForecastFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(
@@ -39,6 +45,20 @@ public class TideForecastFragment extends Fragment {
 
         binding = TideForecastBinding.inflate(inflater, container, false);
 
+        ViewPager2 viewPager = binding.viewPager;
+        WormDotsIndicator dotsIndicator = binding.dotsIndicator;
+        TidesAdapter adapter = new TidesAdapter();
+
+        viewPager.setAdapter(adapter);
+        dotsIndicator.attachTo(viewPager);
+
+        viewModel = new ViewModelProvider(this).get(TideForecastViewModel.class);
+        binding.setTideForecastViewModel(viewModel);
+        binding.executePendingBindings();
+
+        viewModel.getStations().observe(getViewLifecycleOwner(), adapter::setStations);
+        viewModel.getRealTimeTides().observe(getViewLifecycleOwner(), adapter::setRealTimeTides);
+
         //dopo aver fatto l'inflate posso usare tale variabile per prendermi gli "oggetti" del xml
         LineChart lineChart = binding.LineChart;
 
@@ -46,29 +66,6 @@ public class TideForecastFragment extends Fragment {
         List<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, 45));
-        entries.add(new Entry(1, 48));
-        entries.add(new Entry(2, 52));
-        entries.add(new Entry(3, 60));
-        entries.add(new Entry(4, 72));   // picco alta marea
-        entries.add(new Entry(5, 78));
-        entries.add(new Entry(6, 70));
-        entries.add(new Entry(7, 62));
-        entries.add(new Entry(8, 55));
-        entries.add(new Entry(9, 47));
-        entries.add(new Entry(10, 40));
-        entries.add(new Entry(11, 35));
-        entries.add(new Entry(12, 30));  // bassa marea
-        entries.add(new Entry(13, 32));
-        entries.add(new Entry(14, 38));
-        entries.add(new Entry(15, 45));
-        entries.add(new Entry(16, 53));
-        entries.add(new Entry(17, 61));
-        entries.add(new Entry(18, 68));
-        entries.add(new Entry(19, 74));
-        entries.add(new Entry(20, 80));  // picco serale
-        entries.add(new Entry(21, 76));
-        entries.add(new Entry(22, 65));
-        entries.add(new Entry(23, 55));
 
         LineDataSet lineDataSet = new LineDataSet(entries, "Livello marea");
         LineData lineData = new LineData(lineDataSet);
@@ -76,24 +73,6 @@ public class TideForecastFragment extends Fragment {
         lineChart.setData(lineData);
         lineChart.getDescription().setText("Grafico per livello delle maree");
         lineChart.invalidate();
-
-        ViewPager2 viewPager = binding.viewPager;
-        WormDotsIndicator dotsIndicator = binding.dotsIndicator;
-
-        List<RealTimeTide> pages = Arrays.asList(
-                new RealTimeTide("S. Geremia", 12),
-                new RealTimeTide("Piattaforma Acqua Alta Siap", 14),
-                new RealTimeTide("Diga nord Malamocco", 16),
-                new RealTimeTide("Diga sud Chioggia", 45),
-                new RealTimeTide("Diga sud Lido", 78),
-                new RealTimeTide("Fusina", 16)
-        );
-
-        CarouselAdapter adapter = new CarouselAdapter(pages);
-        viewPager.setAdapter(adapter);
-
-        dotsIndicator.attachTo(viewPager);
-
 
         return binding.getRoot();
     }

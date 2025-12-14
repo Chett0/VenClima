@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.locationtech.jts.geom.Coordinate;
 
-import java.util.List;
-
 @Entity
 @Table(name = "station")
 @Getter
@@ -20,8 +18,6 @@ public class Station {
     @Id
     private Integer id;
     private String name;
-//    private double latitude;
-//    private double longitude;
     private String name_abbreviation;
     private String name_link;
     Coordinate coordinate;

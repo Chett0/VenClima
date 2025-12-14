@@ -26,8 +26,12 @@ public class StationController {
 
     @GetMapping
     public ResponseEntity<List<StationDTO>> getStation() {
-        List<StationDTO> stations = stationService.getAllStations();
-        return ResponseEntity.ok(stations);
+        try {
+            List<StationDTO> stations = stationService.getAllStations();
+            return ResponseEntity.ok(stations);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/{stationId}/tides")

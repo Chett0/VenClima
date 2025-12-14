@@ -55,6 +55,13 @@ public class TideService {
                 .collect(Collectors.toList());
     }
 
+    public List<TideDTO> getDailyTides() {
+        return tideRepository.findDailyTides()
+                .stream()
+                .map(tideMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     public Optional<Tide> getTideByStationIdAndDate(Integer stationId, LocalDateTime date) {
         return this.tideRepository.findByStation_IdAndDate(stationId, date);
     }

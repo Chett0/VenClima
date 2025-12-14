@@ -1,4 +1,4 @@
-package com.example.venclima.utils;
+package com.example.venclima.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

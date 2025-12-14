@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.locationtech.jts.geom.Coordinate;
 
 @Getter
 @Setter
@@ -13,8 +14,7 @@ public class StationDTO {
 
     private Integer id;
     private String name;
-    private double latitude;
-    private double longitude;
-    private String name_abbreviation;
+    private String nameAbbreviation;
+    private Coordinate coordinate;
 
 }

@@ -19,9 +19,23 @@ public class TideController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TideDTO>> getStation() {
-        List<TideDTO> tides = tideService.getAllTides();
-        return ResponseEntity.ok(tides);
+    public ResponseEntity<List<TideDTO>> getTides() {
+        try {
+            List<TideDTO> tides = tideService.getAllTides();
+            return ResponseEntity.ok(tides);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/day")
+    public ResponseEntity<List<TideDTO>> getDailyTides() {
+        try {
+            List<TideDTO> tides = tideService.getDailyTides();
+            return ResponseEntity.ok(tides);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping

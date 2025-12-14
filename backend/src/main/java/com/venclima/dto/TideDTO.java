@@ -12,6 +12,6 @@ public class TideDTO {
     private Integer id;
     private LocalDateTime date;
     private double level;
-    private long stationId;
+    private Integer stationId;
 
 }
