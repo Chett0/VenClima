@@ -1,15 +1,14 @@
 package com.venclima.service;
 
+import com.venclima.dto.IslandDTO;
+import com.venclima.mapper.IslandMapper;
 import com.venclima.model.Island;
 import com.venclima.model.IslandInitializer;
 import com.venclima.model.Station;
 import com.venclima.repository.IslandRepository;
 import com.venclima.repository.StationRepository;
 import jakarta.annotation.PostConstruct;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.LinearRing;
-import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.json.*;
 
@@ -28,10 +28,12 @@ public class IslandService {
     private final StationRepository stationRepository;
     private final IslandRepository islandRepository;
     private final static GeometryFactory gf = new GeometryFactory();
+    private final IslandMapper islandMapper;
 
-    public IslandService(StationRepository stationRepository, IslandRepository islandRepository) {
+    public IslandService(StationRepository stationRepository, IslandRepository islandRepository, IslandMapper islandMapper) {
         this.stationRepository = stationRepository;
         this.islandRepository = islandRepository;
+        this.islandMapper = islandMapper;
     }
 
     private static double distance(double lat1, double lon1, double lat2, double lon2) {
@@ -155,6 +157,22 @@ public class IslandService {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public List<IslandDTO> getIslands() {
+        return islandRepository.findAll()
+                .stream()
+                .map(islandMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<IslandDTO> getIslandByCoordinate(double latitude, double longitude) {
+        Point point = gf.createPoint(new Coordinate(longitude, latitude));
+        return islandRepository.findAll()
+                .stream()
+                .filter(i -> i.getArea().contains(point))
+                .findFirst()
+                .map(islandMapper::toDTO);
     }
 
 }
