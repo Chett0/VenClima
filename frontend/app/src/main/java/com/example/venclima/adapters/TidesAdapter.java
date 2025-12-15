@@ -24,6 +24,7 @@ public class TidesAdapter extends RecyclerView.Adapter<TidesAdapter.ViewHolder> 
 
     public void setTides(List<Tide> tides) {
         this.tides = tides;
+        this.setRealTimeTides(tides.subList(0, stations.size() - 1));
         notifyDataSetChanged();
     }
 

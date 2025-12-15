@@ -1,13 +1,12 @@
 package com.example.venclima.viewModels;
 
-import android.util.Log;
-
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.example.venclima.BR;
 import com.example.venclima.models.User;
 import com.example.venclima.network.RetrofitInstance;
+import com.example.venclima.network.repositories.AuthRepository;
 
 public class LoginViewModel extends BaseObservable {
 
@@ -41,7 +40,7 @@ public class LoginViewModel extends BaseObservable {
     public void onLoginButtonClicked() {
         if(!isValid())
             return;
-        RetrofitInstance.getApiInterface().login();
+        AuthRepository.login(this.user);
     }
 
     public boolean isValid(){

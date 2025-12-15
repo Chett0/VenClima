@@ -6,6 +6,8 @@ import androidx.databinding.Bindable;
 import com.example.venclima.BR;
 import com.example.venclima.models.RegisterUser;
 import com.example.venclima.network.RetrofitInstance;
+import com.example.venclima.network.repositories.AuthRepository;
+import com.example.venclima.network.services.AuthService;
 
 import org.maplibre.android.log.Logger;
 
@@ -77,18 +79,7 @@ public class RegistrationViewModel extends BaseObservable {
     public void onRegistrationButtonClicked() {
         if(!isValid())
             return;
-        Logger.i("RegistrationViewModel", "Registrating ...");
-        RetrofitInstance.getApiInterface().signup(this.user).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Logger.i("RegistrationViewModel", "Registration successful");
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Logger.e("RegistrationViewModel", t.toString());
-            }
-        });
+        AuthRepository.registerUser(this.user);
     }
 
     public boolean isValid() {

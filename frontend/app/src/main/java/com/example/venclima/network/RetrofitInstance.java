@@ -1,8 +1,9 @@
 package com.example.venclima.network;
 
 import com.example.venclima.BuildConfig;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.example.venclima.network.services.AuthService;
+import com.example.venclima.network.services.StationService;
+import com.example.venclima.network.services.TideService;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -11,14 +12,9 @@ public class RetrofitInstance {
 
     private static final String BASE_URL = BuildConfig.API_BASE_URL;
     private static Retrofit retrofit;
-    private static Gson gson;
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
-
-            gson = new GsonBuilder()
-                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                    .create();
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -28,8 +24,21 @@ public class RetrofitInstance {
         return retrofit;
     }
 
-    public static ApiInterface getApiInterface() {
-        return getRetrofitInstance().create(ApiInterface.class);
+//    public static ApiInterface getApiInterface() {
+//        return getRetrofitInstance().create(ApiInterface.class);
+//    }
+
+    public static TideService getTideService() {
+        return getRetrofitInstance().create(TideService.class);
     }
+
+    public static AuthService getAuthService() {
+        return getRetrofitInstance().create(AuthService.class);
+    }
+
+    public static StationService getStationService() {
+        return getRetrofitInstance().create(StationService.class);
+    }
+
 
 }

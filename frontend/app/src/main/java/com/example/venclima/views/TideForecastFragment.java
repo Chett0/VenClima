@@ -57,6 +57,7 @@ public class TideForecastFragment extends Fragment {
         binding.executePendingBindings();
 
         viewModel.getStations().observe(getViewLifecycleOwner(), adapter::setStations);
+        viewModel.getDailyTides().observe(getViewLifecycleOwner(), adapter::setTides);
         viewModel.getRealTimeTides().observe(getViewLifecycleOwner(), adapter::setRealTimeTides);
 
         //dopo aver fatto l'inflate posso usare tale variabile per prendermi gli "oggetti" del xml
