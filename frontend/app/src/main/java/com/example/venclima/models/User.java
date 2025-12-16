@@ -5,6 +5,8 @@ public class User {
     private String email;
     private String password;
 
+    private String fcmToken;
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;
@@ -26,6 +28,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
     }
 
 }

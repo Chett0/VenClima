@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface IslandRepository extends JpaRepository<Island, Integer> {
     Optional<Island> findByName(String name);
-
 }

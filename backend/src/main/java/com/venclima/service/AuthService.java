@@ -4,7 +4,9 @@ import com.venclima.dto.LoginUserDTO;
 import com.venclima.dto.RegisterUserDTO;
 import com.venclima.dto.UserDTO;
 import com.venclima.mapper.UserMapper;
+import com.venclima.model.Token;
 import com.venclima.model.User;
+import com.venclima.repository.TokenRepository;
 import com.venclima.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,15 +18,18 @@ public class AuthService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
+    private final TokenRepository tokenRepository;
 
     public AuthService(
             UserRepository userRepository,
             UserMapper userMapper,
-            AuthenticationManager authenticationManager
+            AuthenticationManager authenticationManager,
+            TokenRepository tokenRepository
     ) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.authenticationManager = authenticationManager;
+        this.tokenRepository = tokenRepository;
     }
 
     public UserDTO registerUser(RegisterUserDTO registerUserDTO) {
@@ -33,6 +38,8 @@ public class AuthService {
         }
         User user = userMapper.toEntity(registerUserDTO);
         userRepository.save(user);
+        saveToken(registerUserDTO.getFcmToken(), user);
+
         return userMapper.toDTO(user);
     }
 
@@ -44,8 +51,15 @@ public class AuthService {
                 )
         );
 
-        return userRepository.findByEmail(input.getEmail())
+        User user = userRepository.findByEmail(input.getEmail())
                 .orElseThrow();
+        saveToken(input.getFcmToken(), user);
+
+        return user;
+    }
+
+    private void saveToken(String token, User user) {
+        tokenRepository.save(new Token(token, user));
     }
 
 }
