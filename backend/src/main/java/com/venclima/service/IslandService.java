@@ -80,6 +80,7 @@ public class IslandService {
         island.setDistrict(islandInitializer.getDistrict());
         island.setArea(createPolygon(islandInitializer.getCoordinates()));
         island.setStation(nearestStation(stations, islandInitializer.getCoordinates()[0]));
+        island.setLastNotified(null);
 
         Optional<Island> existingIsland = islandRepository.findByName(island.getName());
         if(existingIsland.isPresent()) {

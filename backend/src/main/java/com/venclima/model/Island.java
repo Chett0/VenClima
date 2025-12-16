@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.locationtech.jts.geom.Polygon;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -31,7 +32,10 @@ public class Island {
     @Column(nullable = false)
     private Integer maxLevel;
 
+    @Column(nullable = false)
     private String district;
+
+    private LocalDateTime lastNotified;
 
     //@Type(value = "jts_geometry")
     private Polygon area;

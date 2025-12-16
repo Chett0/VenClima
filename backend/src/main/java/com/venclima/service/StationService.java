@@ -7,6 +7,7 @@ import com.venclima.repository.StationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,9 +32,8 @@ public class StationService {
                 .collect(Collectors.toList());
     }
 
-//    public Optional<Station> getStationById(long id) {
-//        //return stationRepository.findById(id);
-//
-//    }
+    public Optional<Station> getStationById(Integer id) {
+        return stationRepository.findById(id);
+    }
 
 }

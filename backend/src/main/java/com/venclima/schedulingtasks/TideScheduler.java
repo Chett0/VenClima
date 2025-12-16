@@ -59,15 +59,21 @@ public class TideScheduler {
                     linkName = "";
                 }
 
-                Station station = new Station(
-                        stationId,
-                        dataStation.getStazione(),
-                        dataStation.getNomeAbbr(),
-                        linkName,
-                        new Coordinate(Double.parseDouble(dataStation.getLonDDE()), Double.parseDouble(dataStation.getLatDDN()))
-                );
+                Optional<Station> existingStation = stationService.getStationById(stationId);
+                Station savedStation;
+                if(existingStation.isEmpty()) {
+                    Station station = new Station(
+                            stationId,
+                            dataStation.getStazione(),
+                            dataStation.getNomeAbbr(),
+                            linkName,
+                            new Coordinate(Double.parseDouble(dataStation.getLonDDE()), Double.parseDouble(dataStation.getLatDDN()))
+                    );
+                    savedStation = stationService.addStation(station);
+                }
+                else
+                    savedStation = existingStation.get();
 
-                Station savedStation = stationService.addStation(station);
                 LocalDateTime dateTime = LocalDateTime.parse(dataStation.getData(), dataFormatter);
                 Optional<Tide> existingTide = tideService.getTideByStationIdAndDate(stationId, dateTime);
 
