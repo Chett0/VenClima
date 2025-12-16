@@ -1,8 +1,12 @@
 package com.venclima.schedulingtasks;
 
-import com.venclima.model.DataStation;
-import com.venclima.model.Station;
-import com.venclima.model.Tide;
+import com.venclima.config.FireBaseMessagingConfiguration;
+import com.venclima.dto.IslandDTO;
+import com.venclima.model.*;
+import com.venclima.repository.IslandRepository;
+import com.venclima.repository.TokenRepository;
+import com.venclima.service.FireBaseMessaggingService;
+import com.venclima.service.IslandService;
 import com.venclima.service.StationService;
 import com.venclima.service.TideService;
 import org.locationtech.jts.geom.Coordinate;
@@ -10,26 +14,41 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class TideScheduler {
 
     private final TideService tideService;
     private final StationService stationService;
+    private final IslandRepository islandRepository;
+    private final FireBaseMessaggingService fireBaseMessaggingService;
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final String urlRealTimeData = "https://dati.venezia.it/sites/default/files/dataset/opendata/livello.json";
     private final DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final Map<Integer, String> stationLinkName;
 
-    public TideScheduler(TideService tideInfoService, StationService stationService) {
+    private final List<Island> islands;
+    private final TokenRepository tokenRepository;
+
+    public TideScheduler(
+            TideService tideInfoService,
+            StationService stationService,
+            IslandRepository islandRepository,
+            TokenRepository tokenRepository,
+            FireBaseMessaggingService fireBaseMessagingService
+    ) {
         this.tideService = tideInfoService;
         this.stationService = stationService;
+        this.islandRepository = islandRepository;
+        this.tokenRepository = tokenRepository;
+        this.fireBaseMessaggingService = fireBaseMessagingService;
+
+        this.islands = islandRepository.findAll();
 
         this.stationLinkName = new HashMap<>();
         stationLinkName.put(1001, "");
@@ -76,6 +95,7 @@ public class TideScheduler {
 
                 LocalDateTime dateTime = LocalDateTime.parse(dataStation.getData(), dataFormatter);
                 Optional<Tide> existingTide = tideService.getTideByStationIdAndDate(stationId, dateTime);
+                Tide savedTide;
 
                 if(existingTide.isEmpty()) {
 
@@ -84,8 +104,36 @@ public class TideScheduler {
                     tide.setLevel(Double.parseDouble(dataStation.getValore().replaceAll("[^0-9.]", "")));
                     tide.setStation(savedStation);
 
-                    tideService.addTideInfo(tide);
+                    savedTide = tideService.addTideInfo(tide);
                 }
+                else
+                    savedTide = existingTide.get();
+
+                List<Island> criticIslands = this.islands.stream()
+                                                        .filter(i -> i.getId().equals(savedStation.getId())
+                                                            && i.getMaxLevel() <= savedTide.getLevel()
+                                                            && Duration.between(LocalDateTime.now(), i.getLastNotified()).toHours() > 3)
+                                                        .toList();
+
+                List<User> usersToNotify = new ArrayList<>();
+                for (Island island : criticIslands) {
+                    island.setLastNotified(LocalDateTime.now());
+                    usersToNotify.addAll(island.getUsers());
+                }
+
+                List<Token> tokensToNotify = new ArrayList<>();
+                for (User user : usersToNotify) {
+                    tokensToNotify.addAll(tokenRepository.findAllByUser(user));
+                }
+
+                for(Token token : tokensToNotify) {
+                    this.fireBaseMessaggingService.sendPushNotificationService(new NotificationRequest(
+                            "Allerta",
+                            "Marea alta",
+                            token.getToken()
+                    ));
+                }
+
             }
         }
     }

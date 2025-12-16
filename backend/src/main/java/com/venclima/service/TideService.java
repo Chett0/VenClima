@@ -35,8 +35,8 @@ public class TideService {
         this.tideMapper = tideMapper;
     }
 
-    public void addTideInfo(Tide tide) {
-        tideRepository.save(tide);
+    public Tide addTideInfo(Tide tide) {
+        return tideRepository.save(tide);
     }
 
     public List<TideDTO> getAllTides() {
