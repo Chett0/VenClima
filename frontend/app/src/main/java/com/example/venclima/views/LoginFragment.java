@@ -11,6 +11,11 @@ import android.widget.Button;
 
 import com.example.venclima.databinding.LoginBinding;
 import com.example.venclima.viewModels.LoginViewModel;
+import com.example.venclima.network.repositories.AuthCallback;
+import android.widget.Toast;
+import androidx.navigation.NavOptions;
+import androidx.navigation.fragment.NavHostFragment;
+import com.example.venclima.R;
 
 
 public class LoginFragment extends Fragment {
@@ -37,6 +42,38 @@ public class LoginFragment extends Fragment {
 
         binding = LoginBinding.inflate(inflater,container,false);
         viewModel = new LoginViewModel();
+        //email from signup
+        if (getArguments() != null && getArguments().containsKey("email")) {
+            String prefill = getArguments().getString("email");
+            if (prefill != null && !prefill.isEmpty()) {
+                viewModel.setEmail(prefill);
+            }
+        }
+        viewModel.setAuthCallback(new AuthCallback() {
+            @Override
+            public void onSuccess(String message) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> {
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                        NavOptions navOptions = new NavOptions.Builder()
+                                .setPopUpTo(R.id.LoginFragment, true)
+                                .build();
+                        NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.TideForecastFragment, null, navOptions);
+                        //Hide Login/Reg
+                        if (getActivity() instanceof com.example.venclima.views.MainActivity) {
+                            ((com.example.venclima.views.MainActivity) getActivity()).updateDrawerMenu();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Errore: " + message, Toast.LENGTH_LONG).show());
+                }
+            }
+        });
         binding.setLoginViewModel(viewModel);
         binding.executePendingBindings();
 

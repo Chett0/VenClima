@@ -90,8 +90,9 @@
                 android:paddingVertical="8dp"/>
 
             <Button
+                android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Effettua logout"
                 /><!--Cambia in base al fatto di essere loggati o meno -->
 
