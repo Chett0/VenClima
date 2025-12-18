@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.example.venclima.models.RegisterUser;
 import com.example.venclima.models.User;
 import com.example.venclima.network.RetrofitInstance;
+import com.example.venclima.network.TokenManager;
 import com.example.venclima.notifications.FirebaseNotificationService;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
@@ -16,36 +17,62 @@ import retrofit2.Response;
 
 public class AuthRepository {
 
-    public static void registerUser(RegisterUser user) {
+    public static void registerUser(RegisterUser user, AuthCallback callback) {
 
         user.setFcmToken(FirebaseNotificationService.getToken());
 
         RetrofitInstance.getAuthService().signup(user).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                Logger.i("RegistrationViewModel", "Registration successful");
+                Logger.i("RegistrationViewModel", "Registration response: " + response.code());
+                if (response.isSuccessful()) {
+                    if (callback != null) callback.onSuccess("Registrazione avvenuta con successo");
+                } else {
+                    String err = "Errore registrazione: " + response.code();
+                    try {
+                        if (response.errorBody() != null) err = response.errorBody().string();
+                    } catch (Exception ignored) {}
+                    if (callback != null) callback.onError(err);
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 Logger.e("RegistrationViewModel", t.toString());
+                if (callback != null) callback.onError(t.getMessage());
             }
         });
     }
 
-    public static void login(User user) {
+    public static void login(User user, AuthCallback callback) {
 
         user.setFcmToken(FirebaseNotificationService.getToken());
 
-        RetrofitInstance.getAuthService().login(user).enqueue(new Callback<Void>() {
+        RetrofitInstance.getAuthService().login(user).enqueue(new Callback<com.example.venclima.models.LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                Logger.i("RegistrationViewModel", "Login successful");
+            public void onResponse(@NonNull Call<com.example.venclima.models.LoginResponse> call, @NonNull Response<com.example.venclima.models.LoginResponse> response) {
+                Logger.i("RegistrationViewModel", "Login response: " + response.code());
+                if (response.isSuccessful() && response.body() != null) {
+                    com.example.venclima.models.LoginResponse body = response.body();
+                    try {
+                        TokenManager.getInstance().saveToken(body.getToken(), body.getExpiresIn());
+                    } catch (Exception e) {
+                        Logger.e("AuthRepository", "TokenManager not initialized: " + e.getMessage());
+                    }
+                    if (callback != null) callback.onSuccess("Login effettuato con successo");
+                } else {
+                    String err = "Errore login: " + response.code();
+                    try {
+                        if (response.errorBody() != null) err = response.errorBody().string();
+                    } catch (Exception ignored) {}
+                    if (callback != null) callback.onError(err);
+                }
             }
 
             @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<com.example.venclima.models.LoginResponse> call, @NonNull Throwable t) {
                 Logger.e("RegistrationViewModel", t.toString());
+                if (callback != null) callback.onError(t.getMessage());
             }
         });
     }
