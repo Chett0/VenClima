@@ -17,11 +17,15 @@ import org.springframework.web.client.RestTemplate;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class TideScheduler {
 
+    private static final Logger logger = LoggerFactory.getLogger(TideScheduler.class);
     private final TideService tideService;
     private final StationService stationService;
     private final IslandRepository islandRepository;
@@ -93,7 +97,20 @@ public class TideScheduler {
                 else
                     savedStation = existingStation.get();
 
-                LocalDateTime dateTime = LocalDateTime.parse(dataStation.getData(), dataFormatter);
+                String dataStr = dataStation.getData();
+                if (dataStr == null || dataStr.isBlank()) {
+                    logger.warn("Skipping station {} because data is null or blank", stationId);
+                    continue;
+                }
+
+                LocalDateTime dateTime;
+                try {
+                    dateTime = LocalDateTime.parse(dataStr, dataFormatter);
+                } catch (DateTimeParseException e) {
+                    logger.warn("Skipping station {} due to invalid date format: {}", stationId, dataStr);
+                    continue;
+                }
+
                 Optional<Tide> existingTide = tideService.getTideByStationIdAndDate(stationId, dateTime);
                 Tide savedTide;
 
