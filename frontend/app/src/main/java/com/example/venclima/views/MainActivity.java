@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (menu.findItem(R.id.LoginFragment) != null)
             menu.findItem(R.id.LoginFragment).setVisible(!loggedIn);
-        if (menu.findItem(R.id.RegistrationFragment) != null)
-            menu.findItem(R.id.RegistrationFragment).setVisible(!loggedIn);
     }
 
 

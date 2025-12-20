@@ -19,13 +19,14 @@ import retrofit2.Response;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.HashMap;
+import java.util.Map;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.venclima.R;
 
 public class OptionsFragment extends Fragment {
 
     private OptionsBinding binding;
-
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
@@ -39,70 +40,85 @@ public class OptionsFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final TextView nameTv = binding.textView3;
+        final TextView emailTv = binding.textView7;
+        final TextView userTv = binding.textView8;
+        final Button btn = binding.btnLogout;
 
-        boolean loggedIn = false;
-        try {
-            String token = TokenManager.getInstance().getToken();
-            loggedIn = token != null && !TokenManager.getInstance().isTokenExpired();
-        } catch (Exception ignored) {}
+        showProvisionalView(nameTv, emailTv, userTv, btn);
 
-        TextView nameTv = binding.textView3;
-        TextView emailTv = binding.textView7;
-        TextView userTv = binding.textView8;
-        Button btn = binding.btnLogout;
-
-        if (!loggedIn) {
-            nameTv.setText("Ospite");
-            emailTv.setText("Email: non disponibile");
-            userTv.setText("Nome utente: non disponibile");
-            btn.setText("Accedi");
-            btn.setOnClickListener(v -> {
-                NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.LoginFragment);
-            });
-        } else {
-            AuthService authService = RetrofitInstance.getAuthService();
-            authService.me().enqueue(new Callback<UserDTO>() {
-                @Override
-                public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        UserDTO u = response.body();
-                        nameTv.setText(u.getName() + " " + u.getSurname());
-                        emailTv.setText("Email: " + u.getEmail());
-                        userTv.setText("Nome utente: " + u.getName() + " " + u.getSurname());
-                        btn.setText("Effettua logout");
-                        btn.setOnClickListener(v -> {
-                            // perform logout then navigate to login
-                            try { TokenManager.getInstance().clearToken(); } catch (Exception ignored) {}
-                            Toast.makeText(getActivity(), "Logout effettuato", Toast.LENGTH_SHORT).show();
-                            nameTv.setText("Ospite");
-                            emailTv.setText("Email: non disponibile");
-                            userTv.setText("Nome utente: non disponibile");
-                            btn.setText("Accedi");
-                            // update drawer menu visibility in Activity
-                            if (getActivity() instanceof com.example.venclima.views.MainActivity) {
-                                ((com.example.venclima.views.MainActivity) getActivity()).updateDrawerMenu();
-                            }
-                            NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.LoginFragment);
-                        });
-                    } else {
-                        nameTv.setText("Ospite");
-                        emailTv.setText("Email: non disponibile");
-                        userTv.setText("Nome utente: non disponibile");
-                        btn.setText("Accedi");
-                        btn.setOnClickListener(v -> NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.LoginFragment));
-                    }
+        // Always call /me so the server can return 200 or 401
+        AuthService authService = RetrofitInstance.getAuthService();
+        authService.me().enqueue(new Callback<UserDTO>() {
+            @Override
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    showUserView(response.body(), nameTv, emailTv, userTv, btn);
+                } else {
+                    showProvisionalView(nameTv, emailTv, userTv, btn);
                 }
+            }
 
-                @Override
-                public void onFailure(Call<UserDTO> call, Throwable t) {
-                    nameTv.setText("Ospite");
-                    emailTv.setText("Email: non disponibile");
-                    userTv.setText("Nome utente: non disponibile");
-                    btn.setText("Accedi");
-                    btn.setOnClickListener(v -> NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.LoginFragment));
+            @Override
+            public void onFailure(Call<UserDTO> call, Throwable t) {
+                showProvisionalView(nameTv, emailTv, userTv, btn);
+            }
+        });
+    }
+
+    private void showProvisionalView(TextView nameTv, TextView emailTv, TextView userTv, Button btn) {
+        nameTv.setText("Ospite");
+        emailTv.setText("Email: non disponibile");
+        userTv.setText("Nome utente: non disponibile");
+        btn.setText("Accedi");
+        btn.setOnClickListener(v -> NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.LoginFragment));
+    }
+
+    private void showUserView(UserDTO u, TextView nameTv, TextView emailTv, TextView userTv, Button btn) {
+        nameTv.setText(u.getName() + " " + u.getSurname());
+        emailTv.setText("Email: " + u.getEmail());
+        userTv.setText("Nome utente: " + u.getName() + " " + u.getSurname());
+        btn.setText("Effettua logout");
+        btn.setOnClickListener(v -> {
+            String refresh = null;
+            try { refresh = TokenManager.getInstance().getRefreshToken(); } catch (Exception ignored) {}
+            performLogout(refresh, nameTv, emailTv, userTv, btn);
+        });
+    }
+
+    private void performLogout(String refresh, TextView nameTv, TextView emailTv, TextView userTv, Button btn) {
+        Map<String, String> body = new HashMap<>();
+        if (refresh != null) body.put("refreshToken", refresh);
+
+        RetrofitInstance.getAuthService().logout(body).enqueue(new Callback<java.util.Map<String, String>>() {
+            @Override
+            public void onResponse(Call<java.util.Map<String, String>> call, Response<java.util.Map<String, String>> response) {
+                try { TokenManager.getInstance().notifyTokenExpired(); } catch (Exception ignored) {}
+                Toast.makeText(getActivity(), "Logout effettuato", Toast.LENGTH_SHORT).show();
+                showProvisionalView(nameTv, emailTv, userTv, btn);
+                if (getActivity() instanceof com.example.venclima.views.MainActivity) {
+                    ((com.example.venclima.views.MainActivity) getActivity()).updateDrawerMenu();
                 }
-            });
-        }
+                androidx.navigation.NavOptions navOptions = new androidx.navigation.NavOptions.Builder()
+                        .setPopUpTo(R.id.nav_graph, true)
+                        .build();
+                NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.LoginFragment, null, navOptions);
+            }
+
+            @Override
+            public void onFailure(Call<java.util.Map<String, String>> call, Throwable t) {
+                try { TokenManager.getInstance().notifyTokenExpired(); } catch (Exception ignored) {}
+                Toast.makeText(getActivity(), "Logout effettuato", Toast.LENGTH_SHORT).show();
+                showProvisionalView(nameTv, emailTv, userTv, btn);
+                if (getActivity() instanceof com.example.venclima.views.MainActivity) {
+                    ((com.example.venclima.views.MainActivity) getActivity()).updateDrawerMenu();
+                }
+                androidx.navigation.NavOptions navOptions = new androidx.navigation.NavOptions.Builder()
+                        .setPopUpTo(R.id.nav_graph, true)
+                        .build();
+                NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.LoginFragment, null, navOptions);
+            }
+        });
     }
 
     @Override

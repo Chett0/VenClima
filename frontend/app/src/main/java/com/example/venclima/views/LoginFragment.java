@@ -3,6 +3,7 @@ package com.example.venclima.views;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         //QUI CONTROLLARE CHE L'UTENTE NON SIA GIA' LOGGATO (?)
         //o forse fare in modo che non si possa accedere a questa pagina se si è loggati
         //in controllo da qualche parte va fatto
@@ -77,6 +79,23 @@ public class LoginFragment extends Fragment {
         binding.setLoginViewModel(viewModel);
         binding.executePendingBindings();
 
+        // to registration
+        View goRegister = binding.getRoot().findViewById(com.example.venclima.R.id.go_to_register_text);
+        if (goRegister != null) {
+            goRegister.setOnClickListener(v -> NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.RegistrationFragment));
+        }
+
         return binding.getRoot();
+    }
+
+
+    // to tides
+    @Override
+    public boolean onOptionsItemSelected(@NonNull android.view.MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.TideForecastFragment);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
