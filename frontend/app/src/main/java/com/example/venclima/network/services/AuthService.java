@@ -13,10 +13,13 @@ public interface AuthService {
     @POST("/api/auth/login")
     Call<com.example.venclima.models.LoginResponse> login(@Body User user);
     @POST("api/auth/signup")
-    Call<Void> signup(@Body RegisterUser user);
+    Call<com.example.venclima.models.LoginResponse> signup(@Body RegisterUser user);
 
     @GET("/api/auth/me")
     Call<com.example.venclima.models.UserDTO> me();
+
+    @POST("/api/auth/logout")
+    Call<java.util.Map<String, String>> logout(@Body java.util.Map<String, String> body);
 
 
 }

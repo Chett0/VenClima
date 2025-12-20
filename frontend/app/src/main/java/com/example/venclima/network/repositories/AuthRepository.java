@@ -21,11 +21,20 @@ public class AuthRepository {
 
         user.setFcmToken(FirebaseNotificationService.getToken());
 
-        RetrofitInstance.getAuthService().signup(user).enqueue(new Callback<Void>() {
+        RetrofitInstance.getAuthService().signup(user).enqueue(new Callback<com.example.venclima.models.LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+            public void onResponse(@NonNull Call<com.example.venclima.models.LoginResponse> call, @NonNull Response<com.example.venclima.models.LoginResponse> response) {
                 Logger.i("RegistrationViewModel", "Registration response: " + response.code());
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
+                    com.example.venclima.models.LoginResponse body = response.body();
+                    try {
+                        TokenManager.getInstance().saveToken(body.getToken(), body.getExpiresIn());
+                        if (body.getRefreshToken() != null) {
+                            TokenManager.getInstance().saveRefreshToken(body.getRefreshToken(), body.getRefreshExpiresIn());
+                        }
+                    } catch (Exception e) {
+                        Logger.e("AuthRepository", "TokenManager not initialized: " + e.getMessage());
+                    }
                     if (callback != null) callback.onSuccess("Registrazione avvenuta con successo");
                 } else {
                     String err = "Errore registrazione: " + response.code();
@@ -37,7 +46,7 @@ public class AuthRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<com.example.venclima.models.LoginResponse> call, @NonNull Throwable t) {
                 Logger.e("RegistrationViewModel", t.toString());
                 if (callback != null) callback.onError(t.getMessage());
             }
@@ -56,6 +65,9 @@ public class AuthRepository {
                     com.example.venclima.models.LoginResponse body = response.body();
                     try {
                         TokenManager.getInstance().saveToken(body.getToken(), body.getExpiresIn());
+                        if (body.getRefreshToken() != null) {
+                            TokenManager.getInstance().saveRefreshToken(body.getRefreshToken(), body.getRefreshExpiresIn());
+                        }
                     } catch (Exception e) {
                         Logger.e("AuthRepository", "TokenManager not initialized: " + e.getMessage());
                     }
