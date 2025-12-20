@@ -38,8 +38,9 @@ public class RetrofitInstance {
         OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(new LoggingInterceptor())
             .addInterceptor(new AuthInterceptor())
+            .addInterceptor(new LoggingInterceptor())
+            .authenticator(new TokenAuthenticator())
             .build();
 
         retrofit = new Retrofit.Builder()

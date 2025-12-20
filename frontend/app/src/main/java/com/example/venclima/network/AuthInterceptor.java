@@ -22,10 +22,26 @@ public class AuthInterceptor implements Interceptor {
             return chain.proceed(original);
         }
 
-        Request request = original.newBuilder()
-                .header("Authorization", "Bearer " + token)
-                .method(original.method(), original.body())
-                .build();
+        // check expired or near-expired (< 30 sec) tokens
+        boolean expired = false;
+        try {
+            expired = TokenManager.getInstance().isTokenExpired();
+        } catch (IllegalStateException ignored) {
+        }
+
+        if (expired) {
+            try {
+                boolean refreshed = TokenService.ensureFreshToken();
+                if (refreshed) {
+                    try { token = TokenManager.getInstance().getToken(); } catch (Exception ignored) {}
+                }
+            } catch (Exception e) {
+            }
+        }
+
+        Request.Builder rb = original.newBuilder().method(original.method(), original.body());
+        if (token != null && !token.isEmpty()) rb.header("Authorization", "Bearer " + token);
+        Request request = rb.build();
 
         return chain.proceed(request);
     }
