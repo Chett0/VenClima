@@ -3,7 +3,10 @@ package com.venclima.service;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
+import com.venclima.config.FireBaseMessagingConfiguration;
 import com.venclima.model.NotificationRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,19 +15,23 @@ import java.util.Map;
 @Service
 public class FireBaseMessaggingService {
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(FireBaseMessaggingService.class);
+
     public String sendPushNotificationService(NotificationRequest request) {
-        Map<String, String> firebaseMessageBody = new HashMap<>();
-        firebaseMessageBody.put("title", request.getTitle());
-        firebaseMessageBody.put("body", request.getBody());
         try {
             Message message = Message
                     .builder()
                     .setToken(request.getToken())
-                    .putAllData(firebaseMessageBody)
+                    .putData("title", request.getTitle())
+                    .putData("body", request.getBody())
                     .build();
 
-            return FirebaseMessaging.getInstance().send(message);
+            String result = FirebaseMessaging.getInstance().send(message);
+            logger.info(result);
+            return result;
         } catch (FirebaseMessagingException e) {
+            logger.error("Firebase error sending: {}", request.toString(), e);
             return "Firebase error sending";
         }
     }

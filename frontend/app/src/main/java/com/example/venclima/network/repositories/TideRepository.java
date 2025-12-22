@@ -8,6 +8,7 @@ import com.example.venclima.models.Tide;
 import com.example.venclima.network.RetrofitInstance;
 
 import java.util.List;
+import org.maplibre.android.log.Logger;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,10 +24,12 @@ public class TideRepository {
             @Override
             public void onResponse(@NonNull Call<List<Tide>> call, @NonNull Response<List<Tide>> response) {
                 dailyTides.setValue(response.body());
+                Logger.i("TideRepository", "Tides loaded");
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Tide>> call, @NonNull Throwable t) {
+                Logger.e("TideRepository", t.toString());
                 return;
             }
         });

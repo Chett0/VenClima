@@ -43,7 +43,7 @@ public class Island {
     @ManyToOne(fetch = FetchType.LAZY)
     private Station station;
 
-    @ManyToMany(mappedBy = "islands")
+    @ManyToMany(mappedBy = "islands", fetch = FetchType.EAGER)
     private List<User> users;
 
 }

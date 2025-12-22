@@ -32,7 +32,6 @@ public class RegistrationViewModel extends BaseObservable {
 
     public void setEmail(String email) {
         this.user.setEmail(email);
-        this.user.setEmail(email);
         notifyPropertyChanged(BR.email);
     }
 

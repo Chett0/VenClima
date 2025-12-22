@@ -59,7 +59,8 @@ public class AuthService {
     }
 
     private void saveToken(String token, User user) {
-        tokenRepository.save(new Token(token, user));
+        if(token != null)
+            tokenRepository.save(new Token(token, user));
     }
 
 }
