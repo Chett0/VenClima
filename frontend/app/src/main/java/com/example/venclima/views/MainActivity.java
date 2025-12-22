@@ -17,6 +17,7 @@ import com.example.venclima.databinding.ActivityMainBinding;
 
 import android.util.Log;
 import android.view.Menu;
+import com.example.venclima.network.TokenManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 .setOpenableLayout(binding.drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        updateDrawerMenu();
     }
 
     @Override
@@ -53,6 +55,18 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void updateDrawerMenu() {
+        Menu menu = binding.navView.getMenu();
+        boolean loggedIn = false;
+        try {
+            String token = TokenManager.getInstance().getToken();
+            loggedIn = token != null && !TokenManager.getInstance().isTokenExpired();
+        } catch (Exception ignored) {}
+
+        if (menu.findItem(R.id.LoginFragment) != null)
+            menu.findItem(R.id.LoginFragment).setVisible(!loggedIn);
     }
 
 

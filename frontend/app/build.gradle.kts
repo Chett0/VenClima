@@ -11,7 +11,15 @@ val apiBaseUrl: String = localProperties.getProperty("API_BASE_URL") ?: ""
 
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services")
+}
+
+// Apply Google Services plugin only if `google-services.json` is present.
+// The file is usually excluded from VCS and provided by the developer.
+val googleServicesFile = file("google-services.json")
+if (googleServicesFile.exists()) {
+    apply(plugin = "com.google.gms.google-services")
+} else {
+    logger.lifecycle("Skipping com.google.gms.google-services plugin: google-services.json not found in project 'app'.")
 }
 
 android {
@@ -78,4 +86,5 @@ dependencies {
     implementation("org.locationtech.jts:jts-core:1.19.0")
     implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
     implementation("com.google.firebase:firebase-messaging")
+    implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
 }

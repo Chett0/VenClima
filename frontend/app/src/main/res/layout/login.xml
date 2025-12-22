@@ -70,6 +70,15 @@
             android:textSize="18sp"
             android:onClick="@{() -> LoginViewModel.onLoginButtonClicked()}"/>
 
+        <TextView
+            android:id="@+id/go_to_register_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Non hai un account? Registrati"
+            android:textColor="@color/primary"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"/>
     </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,6 +6,7 @@ import androidx.databinding.Bindable;
 import com.example.venclima.BR;
 import com.example.venclima.models.RegisterUser;
 import com.example.venclima.network.RetrofitInstance;
+import com.example.venclima.network.repositories.AuthCallback;
 import com.example.venclima.network.repositories.AuthRepository;
 import com.example.venclima.network.services.AuthService;
 
@@ -19,6 +20,7 @@ public class RegistrationViewModel extends BaseObservable {
 
     private RegisterUser user;
     private String confirmPassword;
+    private AuthCallback authCallback;
 
 
     public RegistrationViewModel() {
@@ -78,7 +80,11 @@ public class RegistrationViewModel extends BaseObservable {
     public void onRegistrationButtonClicked() {
         if(!isValid())
             return;
-        AuthRepository.registerUser(this.user);
+        AuthRepository.registerUser(this.user, authCallback);
+    }
+
+    public void setAuthCallback(AuthCallback callback) {
+        this.authCallback = callback;
     }
 
     public boolean isValid() {

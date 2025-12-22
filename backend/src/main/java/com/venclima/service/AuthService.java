@@ -59,8 +59,21 @@ public class AuthService {
     }
 
     private void saveToken(String token, User user) {
-        if(token != null)
-            tokenRepository.save(new Token(token, user));
+        if (token == null || token.isBlank()) {
+            return;
+        }
+        tokenRepository.save(new Token(token, user));
+    }
+
+    public UserDTO getUserDTOByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return userMapper.toDTO(user);
+    }
+
+
+    public User getUserForToken(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
 }
