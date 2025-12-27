@@ -103,7 +103,7 @@ public class TideScheduler {
 
                         Tide tide = new Tide();
                         tide.setDate(dateTime);
-                        tide.setLevel(Double.parseDouble(dataStation.getValore().replaceAll("[^0-9.]", "")));
+                        tide.setLevel(dataStation.getValore() != null ? Double.parseDouble(dataStation.getValore().replaceAll("[^0-9.]", "")) : -1);
                         tide.setStation(savedStation);
 
                         savedTide = tideService.addTideInfo(tide);
