@@ -74,6 +74,9 @@ public class TideScheduler {
             if(data != null) {
                 for (DataStation dataStation : data) {
 
+                    if(dataStation.getStazione().equals("Venezia Misericordia"))
+                        continue;
+
                     Integer stationId = Integer.parseInt(dataStation.getIdStazione());
 
                     String linkName = stationLinkName.get(stationId);
@@ -104,6 +107,7 @@ public class TideScheduler {
                         Tide tide = new Tide();
                         tide.setDate(dateTime);
                         tide.setLevel(dataStation.getValore() != null ? Double.parseDouble(dataStation.getValore().replaceAll("[^0-9.]", "")) : -1);
+                        //tide.setLevel(10000);
                         tide.setStation(savedStation);
 
                         savedTide = tideService.addTideInfo(tide);
