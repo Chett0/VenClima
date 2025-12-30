@@ -12,13 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/b_title"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -34,6 +27,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/b_title"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
 
                 <!-- Section A: Prima dell'acqua alta -->
                 <LinearLayout
@@ -52,7 +54,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/b_opt1"
                         android:textStyle="bold"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp"
+                        android:textColor="@color/black"/>
 
                     <ImageView
                         android:id="@+id/chev_before"
@@ -91,7 +94,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/b_opt2"
                         android:textStyle="bold"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_during"
@@ -130,7 +134,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/b_opt3"
                         android:textStyle="bold"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_after"
@@ -177,6 +182,7 @@
                     android:text="@string/contacts"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:textColor="@color/black"
                     android:layout_marginBottom="8dp" />
 
                 <LinearLayout
@@ -195,7 +201,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/eme_contact"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_nue"
@@ -214,6 +221,7 @@
                     android:text="@string/eme_number"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -234,7 +242,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/firefighter"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_vigili"
@@ -253,6 +262,7 @@
                     android:text="@string/firefighter_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -273,7 +283,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/pronto_soccorso"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_ambulance"
@@ -292,6 +303,7 @@
                     android:text="@string/pronto_soccorso_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -312,7 +324,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/police"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_polizia"
@@ -331,6 +344,7 @@
                     android:text="@string/police_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -351,7 +365,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/coast_guard"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_guardia_costiera"
@@ -370,6 +385,7 @@
                     android:text="@string/coast_guard_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -390,7 +406,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/finance"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_guardia_finanza"
@@ -409,6 +426,7 @@
                     android:text="@string/finance_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -429,7 +447,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/municipality"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_comune_centralino"
@@ -448,6 +467,7 @@
                     android:text="@string/municipality_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -468,7 +488,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/civil"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_protezione"
@@ -487,6 +508,7 @@
                     android:text="@string/civil_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -507,7 +529,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/lpolice"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_polizia_locale"
@@ -526,6 +549,7 @@
                     android:text="@string/lpolice_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -546,7 +570,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/mobility"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_mobilita_terrestre"
@@ -565,6 +590,7 @@
                     android:text="@string/mobility_n"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="8dp" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/card_border" android:layout_marginBottom="8dp" />
@@ -585,7 +611,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/mobility_w"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/chev_mobilita_acquei"
@@ -604,6 +631,7 @@
                     android:text="@string/mobility_w_number"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:textIsSelectable="true"
                     android:layout_marginBottom="6dp" />
 
                 
