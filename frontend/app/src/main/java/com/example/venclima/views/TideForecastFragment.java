@@ -17,10 +17,6 @@ import com.example.venclima.models.RealTimeTide;
 import com.example.venclima.adapters.TidesAdapter;
 import com.example.venclima.models.Tide;
 import com.example.venclima.viewModels.TideForecastViewModel;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.util.ArrayList;
@@ -57,23 +53,7 @@ public class TideForecastFragment extends Fragment {
         binding.executePendingBindings();
 
         viewModel.getStations().observe(getViewLifecycleOwner(), adapter::setStations);
-        viewModel.getDailyTides().observe(getViewLifecycleOwner(), adapter::setTides);
-        viewModel.getRealTimeTides().observe(getViewLifecycleOwner(), adapter::setRealTimeTides);
-
-        //dopo aver fatto l'inflate posso usare tale variabile per prendermi gli "oggetti" del xml
-        LineChart lineChart = binding.LineChart;
-
-        //random data for populate chart  --> fix this to get data from backend
-        List<Entry> entries = new ArrayList<Entry>();
-
-        entries.add(new Entry(0, 45));
-
-        LineDataSet lineDataSet = new LineDataSet(entries, "Livello marea");
-        LineData lineData = new LineData(lineDataSet);
-
-        lineChart.setData(lineData);
-        lineChart.getDescription().setText("Grafico per livello delle maree");
-        lineChart.invalidate();
+        viewModel.getStationTides().observe(getViewLifecycleOwner(), map -> adapter.setStationTides(map));
 
         return binding.getRoot();
     }

@@ -18,6 +18,7 @@ public class TideForecastViewModel extends ViewModel {
     private MutableLiveData<List<Tide>> dailyTides = new MutableLiveData<>();
     private MutableLiveData<List<Tide>> realTimeTides = new MutableLiveData<>();
     private MutableLiveData<List<Station>> stations = new MutableLiveData<>();
+    private MutableLiveData<java.util.Map<Integer, List<Tide>>> stationTides = new MutableLiveData<>();
 
     public TideForecastViewModel() {
         this.loadStations();
@@ -26,6 +27,10 @@ public class TideForecastViewModel extends ViewModel {
 
     public LiveData<List<Tide>> getDailyTides() {
         return dailyTides;
+    }
+
+    public LiveData<java.util.Map<Integer, List<Tide>>> getStationTides() {
+        return stationTides;
     }
 
     public LiveData<List<Tide>> getRealTimeTides() {
@@ -47,7 +52,8 @@ public class TideForecastViewModel extends ViewModel {
 //    }
 
     public void loadTides() {
-         this.setDailyTides(TideRepository.getDailyTides());
+            this.setDailyTides(TideRepository.getDailyTides());
+            this.stationTides = TideRepository.getDailyTidesMap();
     }
 
     public void loadStations() {
