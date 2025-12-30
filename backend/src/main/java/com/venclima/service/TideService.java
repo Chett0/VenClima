@@ -10,6 +10,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class TideService {
+
+    private static final Logger logger = LoggerFactory.getLogger(TideService.class);
 
     private final TideRepository tideRepository;
     private final DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -67,20 +71,27 @@ public class TideService {
     }
 
     public void setDailyTides() throws IOException {
-
+        int inserted = 0;
         List<Station> stations = stationRepository.findAll();
 
         for (Station station : stations) {
             if (!station.getName_link().isEmpty()) {
                 Document doc = Jsoup.connect(String.format("https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/%s.html", station.getName_link())).get();
                 Element table = doc.select("table").first();
-                if (table == null)
-                    return;
+                if (table == null) {
+                    logger.warn("setDailyTides: no table found for station {}", station.getId());
+                    continue;
+                }
 
                 Elements rows = table.select("tbody tr");
 
                 for (Element row : rows) {
                     Elements cols = row.select("td");
+
+                    if (cols.size() < 2) {
+                        logger.warn("setDailyTides: unexpected row format for station {}: {}", station.getId(), row.text());
+                        continue;
+                    }
 
                     String datetime = cols.get(0).text();
                     String level = cols.get(1).text();
@@ -91,17 +102,32 @@ public class TideService {
                     if(existingTide.isEmpty()) {
 
                         Tide tide = new Tide();
-                        tide.setDate(LocalDateTime.parse(datetime, dataFormatter));
-                        tide.setLevel(Double.parseDouble(level));
+                        tide.setDate(dateTime);
+
+                        double levelValue = -1;
+                        String cleaned = level != null ? level.replaceAll("[^0-9.-]", "").trim() : "";
+                        if (!cleaned.isEmpty()) {
+                            try {
+                                levelValue = Double.parseDouble(cleaned);
+                            } catch (NumberFormatException ex) {
+                                logger.warn("setDailyTides: invalid level '{}' for station {} at {}", level, station.getId(), datetime);
+                            }
+                        } else {
+                            logger.warn("setDailyTides: empty level for station {} at {}", station.getId(), datetime);
+                        }
+
+                        tide.setLevel(levelValue);
                         tide.setStation(station);
 
                         tideRepository.save(tide);
+                        inserted++;
                     }
-
 
                 }
             }
         }
+
+        logger.info("setDailyTides: completed - inserted {} new records", inserted);
     }
 
 }

@@ -59,11 +59,12 @@ public class TideScheduler {
         stationLinkName.put(1023, "Diga_Nord_Malamocco");
         stationLinkName.put(1024, "Diga_Sud_Chioggia");
         stationLinkName.put(1025, "Punta_Salute");
+        stationLinkName.put(1033, "Chioggia_Porto");
+        stationLinkName.put(1036, "Chioggia_Citta");
         stationLinkName.put(1028, "Laguna_Nord");
         stationLinkName.put(1029, "Misericordia");
         stationLinkName.put(1030, "Burano");
         stationLinkName.put(1031, "Malamocco_Porto");
-        stationLinkName.put(1032, "Chioggia_Porto");
         stationLinkName.put(1037, "Fusina");
     }
 
@@ -148,6 +149,17 @@ public class TideScheduler {
             }
         } catch (Exception e) {
             logger.error(e.toString());
+        }
+    }
+
+    @Scheduled(fixedRate = 300000)
+    public void retrieveDailyTides() {
+        try {
+            logger.info("Scheduled task: starting daily tides retrieval");
+            tideService.setDailyTides();
+            logger.info("Scheduled task: finished daily tides retrieval");
+        } catch (Exception e) {
+            logger.error("Error in scheduled daily tides retrieval", e);
         }
     }
 
