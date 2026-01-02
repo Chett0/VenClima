@@ -16,7 +16,8 @@ public class IslandDTO {
     private Integer minLevel;
     private Integer maxLevel;
     private String district;
-    private String area;
+    // private String area;  -> not needed for drawing island polygons, mapLibre needs geoJSON data format
     private Integer stationId;
+    private String geoJson;
 
 }
