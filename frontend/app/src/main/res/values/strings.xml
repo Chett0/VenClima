@@ -76,5 +76,11 @@
     <string name="menu_options">Impostazioni</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="effettua_il_login_per_abilitare_le_notifiche">Effettua il login per abilitare le notifiche</string>
+    <string name="riceverai_notifiche_push">Vuoi ricevere notifiche push?</string>
+    <string name="abilita_le_notifiche">Abilita le notifiche</string>
+    <string name="cerca_isole">Cerca isole...</string>
+    <string name="seleziona_le_isole_per_ricevere_le_notifiche">Seleziona le isole per ricevere le notifiche</string>
+    <string name="abilita_notifiche">Abilita notifiche</string>
 
 </resources>

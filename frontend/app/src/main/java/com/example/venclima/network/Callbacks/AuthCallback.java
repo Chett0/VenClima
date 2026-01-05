@@ -1,4 +1,4 @@
-package com.example.venclima.network.repositories;
+package com.example.venclima.network.Callbacks;
 
 public interface AuthCallback {
     void onSuccess(String message);

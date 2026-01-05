@@ -62,5 +62,12 @@
         tools:layout="@layout/registration">
     </fragment>
 
+    <fragment
+        android:id="@+id/NotificationsFragment"
+        android:name="com.example.venclima.views.NotificationsFragment"
+        android:label="Notifiche"
+        tools:layout="@layout/notifications">
+    </fragment>
+
 
 </navigation>

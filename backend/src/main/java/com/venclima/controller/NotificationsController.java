@@ -1,13 +1,15 @@
 package com.venclima.controller;
 
+import com.venclima.dto.IslandNotificationDTO;
 import com.venclima.dto.NotificationDTO;
+import com.venclima.service.AuthService;
 import com.venclima.service.NotificationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/notifications")
@@ -19,11 +21,20 @@ public class NotificationsController {
         this.notificationService = notificationService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> addNotification(@RequestBody NotificationDTO islandsIds) {
-        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        this.notificationService.addNotification(userEmail, islandsIds);
-        return ResponseEntity.ok("");
+    @PutMapping
+    public ResponseEntity<String> updateNotification(@RequestBody NotificationDTO islandsIds) {
+        this.notificationService.updateNotification(islandsIds);
+        return ResponseEntity.ok("Notification updated successfully");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<IslandNotificationDTO>> getNotifications() {
+        try {
+            List<IslandNotificationDTO> islandNotification = this.notificationService.getNotification();
+            return ResponseEntity.ok(islandNotification);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

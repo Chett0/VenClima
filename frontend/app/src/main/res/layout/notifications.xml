@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="NotificationsViewModel"
+            type="com.example.venclima.viewModels.NotificationsViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/abilita_le_notifiche"
+        android:textSize="16sp"
+        android:paddingVertical="8dp" />
+<!--        android:onCheckedChanged="@{(buttonView, isChecked) -> NotificationsViewModel.NotificationsViewModel(isChecked)}"/>-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seleziona_le_isole_per_ricevere_le_notifiche"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingVertical="8dp"/>
+
+        <EditText
+            android:id="@+id/search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cerca_isole"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp"
+            android:inputType="text"
+            android:padding="10dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="8dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/checkbox_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
