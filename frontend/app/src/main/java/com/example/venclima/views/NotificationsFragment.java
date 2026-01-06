@@ -51,6 +51,7 @@ public class NotificationsFragment extends Fragment implements OnIslandCheckedLi
         viewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
         binding.setNotificationsViewModel(viewModel);
         binding.executePendingBindings();
+        binding.setLifecycleOwner(getViewLifecycleOwner());
 
         this.notifications = binding.checkboxRecyclerView;
         this.searchBox = binding.searchBox;
@@ -59,7 +60,6 @@ public class NotificationsFragment extends Fragment implements OnIslandCheckedLi
         NotificationsAdapter notificationsAdapter = new NotificationsAdapter(this);
         notifications.setAdapter(notificationsAdapter);
         viewModel.getNotifications().observe(getViewLifecycleOwner(), notificationsAdapter::setIslandNotificationList);
-        viewModel.getFilteredNotifications().observe(getViewLifecycleOwner(), notificationsAdapter::setFilteredIslandNotificationList);
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -78,7 +78,7 @@ public class NotificationsFragment extends Fragment implements OnIslandCheckedLi
         this.viewModel.setNotificationUpdateCallback(new NotificationUpdateCallback() {
             @Override
             public void onSuccess() {
-                Toast.makeText(getContext(), "Aggiornamento riuscito!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Salvataggio riuscito!", Toast.LENGTH_SHORT).show();
                 NavHostFragment.findNavController(NotificationsFragment.this).navigate(R.id.OptionFragment);
             }
             @Override

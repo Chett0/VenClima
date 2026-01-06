@@ -3,11 +3,8 @@ package com.venclima.service;
 import com.venclima.dto.IslandNotificationDTO;
 import com.venclima.dto.NotificationDTO;
 import com.venclima.model.Island;
-import com.venclima.model.Station;
 import com.venclima.model.User;
 import com.venclima.repository.IslandRepository;
-import com.venclima.repository.StationRepository;
-import com.venclima.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -16,30 +13,28 @@ import java.util.List;
 @Service
 public class NotificationService {
 
-    private final UserRepository userRepository;
     private final IslandRepository islandRepository;
-    private final AuthService authService;
 
-    public NotificationService(UserRepository userRepository, IslandRepository islandRepository, AuthService authService) {
-        this.authService = authService;
-        this.userRepository = userRepository;
+    public NotificationService(IslandRepository islandRepository) {
         this.islandRepository = islandRepository;
     }
 
     @Transactional
-    public void updateNotification(NotificationDTO islands){
-        String userEmail = authService.getUserEmail();
-        User user = userRepository.findByEmail(userEmail).orElseThrow();
-        List<Integer> islandIds = islands.getIslandsIds();
+    public void updateNotification(User user, NotificationDTO notifications){
+        List<Integer> islandIds = notifications.getIslandsIds();
         List<Island> filteredIslands = this.islandRepository.findAllById(islandIds);
+        user.getIslands().clear();
         user.getIslands().addAll(filteredIslands);
+        user.setActiveNotifications(notifications.getIsActiveNotifications());
     }
 
     @Transactional
-    public List<IslandNotificationDTO> getNotification(){
-        String userEmail = authService.getUserEmail();
-        User user = userRepository.findByEmail(userEmail).orElseThrow();
+    public List<IslandNotificationDTO> getNotification(User user){
         return this.islandRepository.getNotification(user.getId());
+    }
+
+    public Boolean getIsActiveNotification(User user){
+        return user.isActiveNotifications();
     }
 
 }

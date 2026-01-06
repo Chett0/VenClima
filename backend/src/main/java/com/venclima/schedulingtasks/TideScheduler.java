@@ -126,9 +126,8 @@ public class TideScheduler {
                     List<User> currUsers;
                     for (Island island : criticIslands) {
                         island.setLastNotified(LocalDateTime.now());
-                        currUsers = island.getUsers();
-                        if (currUsers != null)
-                            usersToNotify.addAll(currUsers);
+                        currUsers = island.getUsers().stream().filter(User::isActiveNotifications).toList();
+                        usersToNotify.addAll(currUsers);
 
                         islandRepository.flush();
                     }

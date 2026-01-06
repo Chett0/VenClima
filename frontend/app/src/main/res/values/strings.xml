@@ -82,5 +82,6 @@
     <string name="cerca_isole">Cerca isole...</string>
     <string name="seleziona_le_isole_per_ricevere_le_notifiche">Seleziona le isole per ricevere le notifiche</string>
     <string name="abilita_notifiche">Abilita notifiche</string>
+    <string name="salva">Salva</string>
 
 </resources>

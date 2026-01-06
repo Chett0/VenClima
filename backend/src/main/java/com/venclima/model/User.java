@@ -46,6 +46,9 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @Column(name = "active_notifications", nullable = false)
+    private boolean activeNotifications;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "notifications",

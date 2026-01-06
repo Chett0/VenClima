@@ -1,15 +1,12 @@
 package com.example.venclima.viewModels;
 
-import static java.security.AccessController.getContext;
-
-import android.widget.Toast;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.navigation.BoolArrayNavType;
 
 import com.example.venclima.models.IslandNotification;
+import com.example.venclima.models.NotificationResponse;
+import com.example.venclima.models.NotificationUpdateRequest;
 import com.example.venclima.network.Callbacks.NotificationUpdateCallback;
 import com.example.venclima.network.repositories.NotificationRepository;
 
@@ -19,7 +16,8 @@ import java.util.List;
 public class NotificationsViewModel extends ViewModel {
 
     private MutableLiveData<List<IslandNotification>> notifications = new MutableLiveData<>();
-    private MutableLiveData<List<IslandNotification>> filteredNotifications = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isActiveNotifications = new MutableLiveData<>();
+    private MutableLiveData<NotificationResponse> notificationResponse = new MutableLiveData<>();
     private NotificationUpdateCallback notificationUpdateCallback;
 
 
@@ -28,22 +26,19 @@ public class NotificationsViewModel extends ViewModel {
     }
 
     public void loadNotifications() {
-        this.setNotifications(NotificationRepository.getNotification());
+        this.setNotificationResponse(NotificationRepository.getNotification());
+        this.notificationResponse.observeForever(notificationResponse -> {
+            this.notifications.setValue(notificationResponse.getNotifications());
+            this.isActiveNotifications.setValue(notificationResponse.getIsActiveNotifications());
+        });
     }
 
     public LiveData<List<IslandNotification>> getNotifications() {
         return this.notifications;
     }
-    public LiveData<List<IslandNotification>> getFilteredNotifications() {
-        return this.filteredNotifications;
-    }
 
-    public void setNotifications(MutableLiveData<List<IslandNotification>> notifications) {
-        this.notifications = notifications;
-    }
-
-    public void setFilteredNotifications(MutableLiveData<List<IslandNotification>> filteredNotifications) {
-        this.filteredNotifications = filteredNotifications;
+    public void setNotificationResponse(MutableLiveData<NotificationResponse> notificationResponse) {
+        this.notificationResponse = notificationResponse;
     }
 
     public void setNotificationUpdateCallback (NotificationUpdateCallback callback) {
@@ -58,7 +53,10 @@ public class NotificationsViewModel extends ViewModel {
                     islandIds.add(notification.getIslandId());
             }
         }
-        NotificationRepository.updateNotification(islandIds, this.notificationUpdateCallback);
+
+        NotificationUpdateRequest request = new NotificationUpdateRequest(islandIds, isActiveNotifications.getValue());
+
+        NotificationRepository.updateNotification(request, this.notificationUpdateCallback);
     }
 
 
@@ -75,6 +73,20 @@ public class NotificationsViewModel extends ViewModel {
         }
 
         notifications.setValue(updatedNotifications);
+    }
+
+    public MutableLiveData<Boolean> getIsActiveNotifications() {
+        return isActiveNotifications;
+    }
+
+    public void setIsActiveNotifications(Boolean isActive) {
+        if (isActiveNotifications.getValue() != isActive) {
+            isActiveNotifications.setValue(isActive);
+        }
+    }
+
+    public void onSaveButtonClicked() {
+        this.updateNotifications();
     }
 
 }
