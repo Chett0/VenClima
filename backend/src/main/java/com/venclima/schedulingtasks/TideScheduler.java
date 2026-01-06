@@ -3,7 +3,7 @@ package com.venclima.schedulingtasks;
 import com.venclima.model.*;
 import com.venclima.repository.IslandRepository;
 import com.venclima.repository.TokenRepository;
-import com.venclima.service.FireBaseMessaggingService;
+import com.venclima.service.FireBaseMessagingService;
 import com.venclima.service.StationService;
 import com.venclima.service.TideService;
 import org.locationtech.jts.geom.Coordinate;
@@ -24,7 +24,7 @@ public class TideScheduler {
     private final TideService tideService;
     private final StationService stationService;
     private final IslandRepository islandRepository;
-    private final FireBaseMessaggingService fireBaseMessaggingService;
+    private final FireBaseMessagingService fireBaseMessagingService;
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final String urlRealTimeData = "https://dati.venezia.it/sites/default/files/dataset/opendata/livello.json";
@@ -42,13 +42,13 @@ public class TideScheduler {
             StationService stationService,
             IslandRepository islandRepository,
             TokenRepository tokenRepository,
-            FireBaseMessaggingService fireBaseMessagingService
+            FireBaseMessagingService fireBaseMessagingService
     ) {
         this.tideService = tideInfoService;
         this.stationService = stationService;
         this.islandRepository = islandRepository;
         this.tokenRepository = tokenRepository;
-        this.fireBaseMessaggingService = fireBaseMessagingService;
+        this.fireBaseMessagingService = fireBaseMessagingService;
 
         this.islands = islandRepository.findAll();
 
@@ -68,7 +68,7 @@ public class TideScheduler {
         stationLinkName.put(1037, "Fusina");
     }
 
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 50000)
     public void retrieveRealTimeTideLevel() {
         try{
             DataStation[] data = restTemplate.getForObject(urlRealTimeData, DataStation[].class);
@@ -138,7 +138,7 @@ public class TideScheduler {
                     }
 
                     for (Token token : tokensToNotify) {
-                        this.fireBaseMessaggingService.sendPushNotificationService(new NotificationRequest(
+                        this.fireBaseMessagingService.sendPushNotificationService(new NotificationRequest(
                                 "Allerta",
                                 "Marea alta",
                                 token.getToken()

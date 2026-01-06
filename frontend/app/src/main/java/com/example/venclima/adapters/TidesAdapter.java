@@ -82,7 +82,8 @@ public class TidesAdapter extends RecyclerView.Adapter<TidesAdapter.ViewHolder> 
             }
         }
 
-        holder.tideLevel.setText((curr != null ? curr.getLevel() : 0) + " cm");
+        String level = curr != null ? curr.getLevel() + " m" : "Non disponibile";
+        holder.tideLevel.setText(level);
 
         // populate chart for each station
         if (stationTidesMap != null) {

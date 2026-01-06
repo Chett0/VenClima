@@ -63,7 +63,8 @@ public class AuthService {
         if (token == null || token.isBlank()) {
             return;
         }
-        tokenRepository.save(new Token(token, user));
+        if(tokenRepository.findByToken(token).isEmpty())
+            tokenRepository.save(new Token(token, user));
     }
 
     public UserDTO getUserDTOByEmail(String email) {
