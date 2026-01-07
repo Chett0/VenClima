@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 public class OptionsViewModel extends ViewModel  {
 
-    private MutableLiveData<Boolean> isNotificationEnabled = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isNotificationEnabled = new MutableLiveData<>(Boolean.FALSE);
 
     public LiveData<Boolean> getIsNotificationEnabled() {
         return isNotificationEnabled;
