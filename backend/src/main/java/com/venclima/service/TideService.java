@@ -2,25 +2,27 @@ package com.venclima.service;
 
 import com.venclima.dto.TideDTO;
 import com.venclima.mapper.TideMapper;
-import com.venclima.model.Station;
-import com.venclima.model.Tide;
+import com.venclima.model.*;
+import com.venclima.repository.IslandRepository;
 import com.venclima.repository.StationRepository;
 import com.venclima.repository.TideRepository;
+import com.venclima.repository.TokenRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.locationtech.jts.geom.Coordinate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,10 +35,52 @@ public class TideService {
     private final StationRepository stationRepository;
     private final TideMapper tideMapper;
 
-    public TideService(TideRepository tideInfoRepository, StationRepository stationRepository, TideMapper tideMapper) {
+    private final StationService stationService;
+    private final IslandRepository islandRepository;
+    private final FireBaseMessagingService fireBaseMessagingService;
+
+    private final RestTemplate restTemplate = new RestTemplate();
+    private final String urlRealTimeData = "https://dati.venezia.it/sites/default/files/dataset/opendata/livello.json";
+    private final Map<Integer, String> stationLinkName;
+
+    private final List<Island> islands;
+    private final TokenRepository tokenRepository;
+
+    public TideService(
+            TideRepository tideInfoRepository,
+            StationRepository stationRepository,
+            TideMapper tideMapper,
+            StationService stationService,
+            IslandRepository islandRepository,
+            TokenRepository tokenRepository,
+            FireBaseMessagingService fireBaseMessagingService
+    ) {
+
         this.tideRepository = tideInfoRepository;
         this.stationRepository = stationRepository;
         this.tideMapper = tideMapper;
+
+        this.stationService = stationService;
+        this.islandRepository = islandRepository;
+        this.tokenRepository = tokenRepository;
+        this.fireBaseMessagingService = fireBaseMessagingService;
+
+        this.islands = islandRepository.findAll();
+
+        this.stationLinkName = new HashMap<>();
+        stationLinkName.put(1001, "");
+        stationLinkName.put(1021, "Piattaforma");
+        stationLinkName.put(1022, "Diga_Sud_Lido");
+        stationLinkName.put(1023, "Diga_Nord_Malamocco");
+        stationLinkName.put(1024, "Diga_Sud_Chioggia");
+        stationLinkName.put(1025, "Punta_Salute");
+        stationLinkName.put(1033, "Chioggia_Porto");
+        stationLinkName.put(1036, "Chioggia_Citta");
+        stationLinkName.put(1028, "Laguna_Nord");
+        stationLinkName.put(1029, "Misericordia");
+        stationLinkName.put(1030, "Burano");
+        stationLinkName.put(1031, "Malamocco_Porto");
+        stationLinkName.put(1037, "Fusina");
     }
 
     public Tide addTideInfo(Tide tide) {
@@ -128,6 +172,110 @@ public class TideService {
         }
 
         logger.info("setDailyTides: completed - inserted {} new records", inserted);
+    }
+
+
+    @Scheduled(fixedRate = 300000)
+    public void retrieveRealTimeTideLevel() {
+        try{
+            DataStation[] data = restTemplate.getForObject(urlRealTimeData, DataStation[].class);
+            Set<String> tokensToNotify = new HashSet<>();
+            if(data != null) {
+                for (DataStation dataStation : data) {
+
+                    if(dataStation.getStazione().equals("Venezia Misericordia"))
+                        continue;
+
+                    Integer stationId = Integer.parseInt(dataStation.getIdStazione());
+
+                    String linkName = stationLinkName.get(stationId);
+                    if (linkName == null) {
+                        linkName = "";
+                    }
+
+                    Optional<Station> existingStation = stationService.getStationById(stationId);
+                    Station savedStation;
+                    if (existingStation.isEmpty()) {
+                        Station station = new Station(
+                                stationId,
+                                dataStation.getStazione(),
+                                dataStation.getNomeAbbr(),
+                                linkName,
+                                new Coordinate(Double.parseDouble(dataStation.getLonDDE()), Double.parseDouble(dataStation.getLatDDN()))
+                        );
+                        savedStation = stationService.addStation(station);
+                    } else
+                        savedStation = existingStation.get();
+
+                    LocalDateTime dateTime = dataStation.getData() != null ? LocalDateTime.parse(dataStation.getData(), dataFormatter) : LocalDateTime.now();
+                    Optional<Tide> existingTide = this.getTideByStationIdAndDate(stationId, dateTime);
+                    Tide savedTide;
+
+                    if (existingTide.isEmpty()) {
+
+                        Tide tide = new Tide();
+                        tide.setDate(dateTime);
+                        tide.setLevel(dataStation.getValore() != null ? Double.parseDouble(dataStation.getValore().replaceAll("[^0-9.]", "")) : -1);
+                        //tide.setLevel(10000);
+                        tide.setStation(savedStation);
+
+                        savedTide = this.addTideInfo(tide);
+                    } else
+                        savedTide = existingTide.get();
+
+                    List<Island> criticIslands = this.islands.stream()
+                            .filter(i -> i.getStation().getId().equals(savedStation.getId())
+                                    && i.getMaxLevel() <= savedTide.getLevel()
+                                    && (i.getLastNotified() == null
+                                    || Duration.between(LocalDateTime.now(), i.getLastNotified()).toHours() > 3))
+                            .toList();
+
+                    List<User> usersToNotify = new ArrayList<>();
+                    List<User> currUsers;
+                    for (Island island : criticIslands) {
+                        island.setLastNotified(LocalDateTime.now());
+                        currUsers = island.getUsers().stream().filter(User::isActiveNotifications).toList();
+                        usersToNotify.addAll(currUsers);
+
+                        islandRepository.flush();
+                    }
+
+                    List<Token> currTokens;
+                    for (User user : usersToNotify) {
+                        currTokens = tokenRepository.findAllByUser(user);
+                        for(Token currToken : currTokens){
+                            tokensToNotify.add(currToken.getToken());
+                        }
+                    }
+
+                }
+
+                for (String token : tokensToNotify) {
+                    String res = this.fireBaseMessagingService.sendPushNotificationService(new NotificationRequest(
+                            "Allerta",
+                            "Marea alta",
+                            token
+                    ));
+                    if(res.equals("NOT FOUND"))
+                        tokenRepository.deleteByToken(token);
+                    System.out.println(res);
+                }
+
+            }
+        } catch (Exception e) {
+            logger.error(e.toString());
+        }
+    }
+
+    @Scheduled(fixedRate = 300000)
+    public void retrieveDailyTides() {
+        try {
+            logger.info("Scheduled task: starting daily tides retrieval");
+            this.setDailyTides();
+            logger.info("Scheduled task: finished daily tides retrieval");
+        } catch (Exception e) {
+            logger.error("Error in scheduled daily tides retrieval", e);
+        }
     }
 
 }

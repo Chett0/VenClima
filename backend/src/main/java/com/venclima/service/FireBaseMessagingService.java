@@ -27,7 +27,9 @@ public class FireBaseMessagingService {
             logger.info(result);
             return result;
         } catch (FirebaseMessagingException e) {
-            logger.error("Firebase error sending: {}", request.toString(), e);
+            logger.error("Firebase error sending: {}", e.toString());
+            if(e.getErrorCode().toString().equals("NOT_FOUND"))
+                return "NOT FOUND";
             return "Firebase error sending";
         }
     }
