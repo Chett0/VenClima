@@ -88,4 +88,5 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging")
     implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("com.github.chrisbanes:PhotoView:2.3.0")
 }

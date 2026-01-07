@@ -69,5 +69,12 @@
         tools:layout="@layout/notifications">
     </fragment>
 
+    <fragment
+        android:id="@+id/PasserelleFragment"
+        android:name="com.example.venclima.views.PasserelleFragment"
+        android:label="Passerelle"
+        tools:layout="@layout/passerelle">
+    </fragment>
+
 
 </navigation>
