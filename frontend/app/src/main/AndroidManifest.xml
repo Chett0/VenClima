@@ -25,7 +25,7 @@
         </provider>
         
         <activity
-            android:name=".views.MainActivity"
+            android:name=".views.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.VenClima">
             <intent-filter>
@@ -33,6 +33,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".views.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VenClima">
         </activity>
 
         <service
