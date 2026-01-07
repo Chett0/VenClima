@@ -92,7 +92,7 @@
                     android:paddingRight="16dp"
                     android:text="NON ATTIVO"
                     android:textColor="@color/status_inactive_text"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:includeFontPadding="false"
@@ -166,7 +166,7 @@
                     android:background="@drawable/bg_status_pill_active"
                     android:textColor="@color/status_active_text"
                     android:textStyle="bold"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:minHeight="72dp" />
