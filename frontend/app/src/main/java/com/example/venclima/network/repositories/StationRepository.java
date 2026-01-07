@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.venclima.models.Station;
 import com.example.venclima.network.RetrofitInstance;
 
+import org.maplibre.android.log.Logger;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,6 +31,7 @@ public class StationRepository {
 
             @Override
             public void onFailure(@NonNull Call<List<Station>> call, @NonNull Throwable t) {
+                Logger.e("StationRepository", t.toString());
                 return;
             }
         });

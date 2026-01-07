@@ -31,41 +31,50 @@ public class FirebaseNotificationService extends FirebaseMessagingService {
 
 
     @Override
-    public void onMessageReceived(@NonNull RemoteMessage message) {
-        super.onMessageReceived(message);
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+        Log.d("FirebaseNotificationService", "From: " + remoteMessage.getFrom());
 
-        if (!message.getData().isEmpty()) {
-            String title = message.getData().get("title");
-            String body = message.getData().get("body");
+        // Check if message contains a data payload (which yours does)
+        if (remoteMessage.getData().size() > 0) {
+            Log.d("FirebaseNotificationService", "Message data payload: " + remoteMessage.getData());
 
-            showNotification(title, body);
+            // Extract data passed from your backend call
+            String title = remoteMessage.getData().get("title");
+            String body = remoteMessage.getData().get("body");
+
+            // Since it's data-only, we must manually create the notification
+            sendNotification(title, body);
         }
-
     }
 
-    private void showNotification(String title, String body) {
-
-        NotificationManager manager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        String channelId = "default_channel";
-
+    private void sendNotification(String title, String body) {
+        // 1. Create a Notification Channel (required for Android 8.0+ / API 26+)
+        String channelId = "default_channel_id";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     channelId,
-                    "Default",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            manager.createNotificationChannel(channel);
+                    "Default Channel",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Default notification channel for app alerts.");
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
 
-        Notification notification = new NotificationCompat.Builder(this, channelId)
-                .setContentTitle(title)
-                .setContentText(body)
-                .setAutoCancel(true)
-                .build();
+        // 2. Create the Notification
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(this, channelId)
+                        .setSmallIcon(R.drawable.ic_alert) // Use your app's icon
+                        .setContentTitle(title)
+                        .setContentText(body)
+                        .setAutoCancel(true)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        manager.notify(1, notification);
+        // 3. Display the notification
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Use a unique ID for each notification
+        notificationManager.notify(0, notificationBuilder.build());
     }
 
 
