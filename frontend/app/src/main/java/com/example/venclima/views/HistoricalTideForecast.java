@@ -18,7 +18,7 @@ import com.example.venclima.utils.PdfUtils;
 import java.util.Arrays;
 import java.util.List;
 
-public class HistoricalTideForecast extends Fragment {
+public class HistoricalTideForecast extends BaseFragment {
 
     private HistoricalTideForecastBinding binding;
 
@@ -29,6 +29,9 @@ public class HistoricalTideForecast extends Fragment {
     ) {
 
         binding = HistoricalTideForecastBinding.inflate(inflater, container, false);
+
+        binding.headerBefore.setOnClickListener(v -> toggleSection(binding.contentAfter, binding.chevBefore));
+
         return binding.getRoot();
 
     }

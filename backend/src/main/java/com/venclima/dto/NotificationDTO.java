@@ -14,5 +14,6 @@ import java.util.List;
 public class NotificationDTO {
 
     private List<Integer> islandsIds;
+    private Boolean isActiveNotifications;
 
 }

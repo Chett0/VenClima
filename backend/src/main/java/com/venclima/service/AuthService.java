@@ -10,6 +10,7 @@ import com.venclima.repository.TokenRepository;
 import com.venclima.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -62,7 +63,8 @@ public class AuthService {
         if (token == null || token.isBlank()) {
             return;
         }
-        tokenRepository.save(new Token(token, user));
+        if(tokenRepository.findByToken(token).isEmpty())
+            tokenRepository.save(new Token(token, user));
     }
 
     public UserDTO getUserDTOByEmail(String email) {
@@ -74,6 +76,15 @@ public class AuthService {
 
     public User getUserForToken(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public String getUserEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    public User getAuthenticatedUser() {
+        String userEmail = this.getUserEmail();
+        return userRepository.findByEmail(userEmail).orElseThrow();
     }
 
 }

@@ -8,11 +8,10 @@ import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.venclima.databinding.LoginBinding;
 import com.example.venclima.viewModels.LoginViewModel;
-import com.example.venclima.network.repositories.AuthCallback;
+import com.example.venclima.network.Callbacks.AuthCallback;
 import android.widget.Toast;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;

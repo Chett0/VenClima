@@ -29,13 +29,15 @@
             android:textColor="@color/bottom_nav_unselected"
             android:layout_marginBottom="12dp" />
 
-        <!-- Stato Attuale - NON ATTIVO (enlarged) -->
+        <!-- Stato Attuale - NON ATTIVO -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_mose_inactive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="14dp"
             app:cardElevation="2dp"
             android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/surface"
             app:strokeWidth="1dp"
             app:strokeColor="@color/card_border">
 
@@ -43,121 +45,131 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="24dp">
+                android:padding="16dp"
+                android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:src="@drawable/ic_calm_sea"
                     app:tint="@color/azzurro"
                     android:background="@drawable/bg_icon_circle"
-                    android:padding="12dp" />
+                    android:padding="12dp"
+                    android:contentDescription="Stato MOSE: non attivo" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginStart="16dp">
+                    android:layout_marginStart="14dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Stato Attuale"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sistema in standby"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textColor="@color/bottom_nav_unselected"
-                        android:layout_marginTop="6dp" />
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/status_inactive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/bg_status_pill_inactive"
                     android:paddingLeft="16dp"
-                    android:paddingTop="10dp"
                     android:paddingRight="16dp"
-                    android:paddingBottom="10dp"
                     android:text="NON ATTIVO"
                     android:textColor="@color/status_inactive_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:minHeight="72dp" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Stato Attuale - ATTIVO (mostrato per test) -->
+        <!-- Stato Attuale - ATTIVO-->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_mose_active"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="6dp"
             android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/surface"
             app:strokeWidth="1dp"
-            app:strokeColor="@color/card_border">
+            app:strokeColor="@color/status_active_bg">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="24dp">
+                android:padding="16dp"
+                android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:src="@drawable/ic_alert"
                     app:tint="@color/status_active_text"
                     android:background="@drawable/bg_icon_circle"
-                    android:padding="12dp" />
+                    android:padding="12dp"
+                    android:contentDescription="Stato MOSE: attivo" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginStart="16dp">
+                    android:layout_marginStart="14dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Stato Attuale"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sistema pronto per attivazione"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textColor="@color/bottom_nav_unselected"
-                        android:layout_marginTop="6dp" />
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/status_active"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ATTIVO"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/bg_status_pill_active"
                     android:textColor="@color/status_active_text"
                     android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:minHeight="72dp" />
 
             </LinearLayout>
 

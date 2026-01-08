@@ -5,7 +5,7 @@
         <group android:checkableBehavior="single">
             <item
                 android:id="@+id/TideForecastFragment"
-                android:title="@string/menu_tide_forecast" />
+                android:title="@string/livelli_maree" />
             <item
                 android:id="@+id/HistoricalTideForecastFragment"
                 android:title="@string/menu_tide_historical" />
@@ -24,7 +24,7 @@
 
             <item
                 android:id="@+id/LoginFragment"
-                android:title="Accedi"/>
+                android:title="@string/accedi"/>
 
 
         </group>

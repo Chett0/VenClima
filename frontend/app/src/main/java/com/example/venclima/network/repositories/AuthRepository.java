@@ -2,12 +2,13 @@ package com.example.venclima.network.repositories;
 
 import androidx.annotation.NonNull;
 
+import com.example.venclima.models.LoginResponse;
 import com.example.venclima.models.RegisterUser;
 import com.example.venclima.models.User;
+import com.example.venclima.network.Callbacks.AuthCallback;
 import com.example.venclima.network.RetrofitInstance;
 import com.example.venclima.network.TokenManager;
 import com.example.venclima.notifications.FirebaseNotificationService;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import org.maplibre.android.log.Logger;
 
@@ -21,12 +22,12 @@ public class AuthRepository {
 
         user.setFcmToken(FirebaseNotificationService.getToken());
 
-        RetrofitInstance.getAuthService().signup(user).enqueue(new Callback<com.example.venclima.models.LoginResponse>() {
+        RetrofitInstance.getAuthService().signup(user).enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<com.example.venclima.models.LoginResponse> call, @NonNull Response<com.example.venclima.models.LoginResponse> response) {
+            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                 Logger.i("RegistrationViewModel", "Registration response: " + response.code());
                 if (response.isSuccessful() && response.body() != null) {
-                    com.example.venclima.models.LoginResponse body = response.body();
+                    LoginResponse body = response.body();
                     try {
                         TokenManager.getInstance().saveToken(body.getToken(), body.getExpiresIn());
                         if (body.getRefreshToken() != null) {
@@ -46,7 +47,7 @@ public class AuthRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<com.example.venclima.models.LoginResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                 Logger.e("RegistrationViewModel", t.toString());
                 if (callback != null) callback.onError(t.getMessage());
             }
@@ -57,12 +58,12 @@ public class AuthRepository {
 
         user.setFcmToken(FirebaseNotificationService.getToken());
 
-        RetrofitInstance.getAuthService().login(user).enqueue(new Callback<com.example.venclima.models.LoginResponse>() {
+        RetrofitInstance.getAuthService().login(user).enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<com.example.venclima.models.LoginResponse> call, @NonNull Response<com.example.venclima.models.LoginResponse> response) {
+            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                 Logger.i("RegistrationViewModel", "Login response: " + response.code());
                 if (response.isSuccessful() && response.body() != null) {
-                    com.example.venclima.models.LoginResponse body = response.body();
+                    LoginResponse body = response.body();
                     try {
                         TokenManager.getInstance().saveToken(body.getToken(), body.getExpiresIn());
                         if (body.getRefreshToken() != null) {
@@ -82,7 +83,7 @@ public class AuthRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<com.example.venclima.models.LoginResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                 Logger.e("RegistrationViewModel", t.toString());
                 if (callback != null) callback.onError(t.getMessage());
             }

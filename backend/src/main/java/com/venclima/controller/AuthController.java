@@ -4,6 +4,7 @@ import com.venclima.dto.LoginUserDTO;
 import com.venclima.dto.RegisterUserDTO;
 import com.venclima.dto.UserDTO;
 import com.venclima.model.User;
+import com.venclima.responses.LoginResponse;
 import com.venclima.service.AuthService;
 import com.venclima.service.RefreshTokenService;
 import com.venclima.service.JWTService;
@@ -12,7 +13,6 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.HttpStatus;
-import com.venclima.responses.LoginResponse;
 
 @RestController
 @RequestMapping("api/auth")
@@ -49,10 +49,10 @@ public class AuthController {
             UserDTO userDTO = authService.registerUser(user);
             // create refresh token and jwt
             try {
-                com.venclima.model.User persisted = authService.getUserForToken(userDTO.getEmail());
+                User persisted = authService.getUserForToken(userDTO.getEmail());
                 String jwtToken = jwtService.generateToken(persisted);
                 String refreshRaw = refreshTokenService.createRefreshToken(persisted);
-                com.venclima.responses.LoginResponse resp = new com.venclima.responses.LoginResponse(jwtToken, jwtService.getExpirationTime(), refreshRaw, refreshTokenServiceDurationMs());
+                LoginResponse resp = new LoginResponse(jwtToken, jwtService.getExpirationTime(), refreshRaw, refreshTokenServiceDurationMs());
                 return ResponseEntity.ok(resp);
             } catch (Exception ex) {
                 return ResponseEntity.ok(userDTO);

@@ -5,16 +5,8 @@ import androidx.databinding.Bindable;
 
 import com.example.venclima.BR;
 import com.example.venclima.models.RegisterUser;
-import com.example.venclima.network.RetrofitInstance;
-import com.example.venclima.network.repositories.AuthCallback;
+import com.example.venclima.network.Callbacks.AuthCallback;
 import com.example.venclima.network.repositories.AuthRepository;
-import com.example.venclima.network.services.AuthService;
-
-import org.maplibre.android.log.Logger;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegistrationViewModel extends BaseObservable {
 

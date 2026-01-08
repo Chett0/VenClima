@@ -10,7 +10,7 @@
     <fragment
         android:id="@+id/TideForecastFragment"
         android:name="com.example.venclima.views.TideForecastFragment"
-        android:label="@string/tide_forecast_fragment"
+        android:label="Livelli Maree"
         tools:layout="@layout/tide_forecast">
     </fragment>
 
@@ -60,6 +60,20 @@
         android:name="com.example.venclima.views.RegistrationFragment"
         android:label="Registrazione"
         tools:layout="@layout/registration">
+    </fragment>
+
+    <fragment
+        android:id="@+id/NotificationsFragment"
+        android:name="com.example.venclima.views.NotificationsFragment"
+        android:label="Notifiche"
+        tools:layout="@layout/notifications">
+    </fragment>
+
+    <fragment
+        android:id="@+id/PasserelleFragment"
+        android:name="com.example.venclima.views.PasserelleFragment"
+        android:label="Passerelle"
+        tools:layout="@layout/passerelle">
     </fragment>
 
 

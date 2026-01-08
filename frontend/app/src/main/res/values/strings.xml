@@ -76,5 +76,18 @@
     <string name="menu_options">Impostazioni</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="effettua_il_login_per_abilitare_le_notifiche">Effettua il login per abilitare le notifiche</string>
+    <string name="riceverai_notifiche_push">Vuoi ricevere notifiche push?</string>
+    <string name="abilita_le_notifiche">Abilita le notifiche</string>
+    <string name="cerca_isole">Cerca isole...</string>
+    <string name="seleziona_le_isole_per_ricevere_le_notifiche">Seleziona le isole per ricevere le notifiche</string>
+    <string name="abilita_notifiche">Abilita notifiche</string>
+    <string name="salva">Salva</string>
+    <string name="interpretazione_del_grafico_delle_maree">Interpretazione del grafico delle maree</string>
+    <string name="interpretazioneGraficoMaree">Il grafico mostra l’andamento della marea astronomica giorno per giorno.\n\nSull’asse orizzontale sono indicate le ore della giornata (0–24), mentre sull’asse verticale è riportata l’altezza della marea in centimetri rispetto allo zero mareografico.\n\n La linea blu rappresenta il livello del mare:\n\n  • I picchi indicano le alte maree\n\n  • I punti più bassi indicano le basse maree\n\nAccanto ai massimi e ai minimi sono riportati:\n\n  • Orario\n\n  • Altezza della marea prevista\n\nI simboli lunari indicano le fasi della Luna:\n\n  • Luna piena e nuova → maree più accentuate\n\n  • Primo e ultimo quarto → maree più contenute</string>
+    <string name="passerelleText">Dal 15 settembre al 30 aprile l\'Amministrazione Comunale, in base alle previsioni emesse dal Centro Maree, attiva il Piano di Viabilità Pedonale su passerelle la cui gestione e posa è affidata alla società VERITAS SpA. Durante questo periodo, infatti, è più probabile il verificarsi del fenomeno dell\'acqua alta a Venezia. I percorsi indicati nella pianta assicurano la viabilità a piedi asciutti fino alla quota di marea di +120 cm. Oltre tale quota alcuni percorsi possono risultare inagibili.</string>
+    <string name="livelli_maree">Livelli maree</string>
+    <string name="accedi">Accedi</string>
+    <string name="percorsi_su_passerelle">Percorsi su Passerelle</string>
 
 </resources>

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.venclima.databinding.BehaviourBinding;
 
-public class BehaviourFragment extends Fragment {
+public class BehaviourFragment extends BaseFragment {
 
 
     private BehaviourBinding binding;
@@ -36,16 +36,6 @@ public class BehaviourFragment extends Fragment {
         binding.headerMobilitaAcquei.setOnClickListener(v -> toggleSection(binding.contentMobilitaAcquei, binding.chevMobilitaAcquei));
 
         return binding.getRoot();
-    }
-
-    private void toggleSection(View content, View chevron) {
-        if (content.getVisibility() == View.GONE) {
-            content.setVisibility(View.VISIBLE);
-            chevron.setRotation(180f);
-        } else {
-            content.setVisibility(View.GONE);
-            chevron.setRotation(0f);
-        }
     }
 
     @Override

@@ -9,11 +9,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.venclima.databinding.RegistrationBinding;
 import com.example.venclima.viewModels.RegistrationViewModel;
-import com.example.venclima.network.repositories.AuthCallback;
+import com.example.venclima.network.Callbacks.AuthCallback;
 import android.widget.Toast;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.venclima.R;

@@ -11,6 +11,7 @@ import com.example.venclima.network.repositories.TideRepository;
 
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class TideForecastViewModel extends ViewModel {
@@ -18,7 +19,7 @@ public class TideForecastViewModel extends ViewModel {
     private MutableLiveData<List<Tide>> dailyTides = new MutableLiveData<>();
     private MutableLiveData<List<Tide>> realTimeTides = new MutableLiveData<>();
     private MutableLiveData<List<Station>> stations = new MutableLiveData<>();
-    private MutableLiveData<java.util.Map<Integer, List<Tide>>> stationTides = new MutableLiveData<>();
+    private MutableLiveData<Map<Integer, List<Tide>>> stationTides = new MutableLiveData<>();
 
     public TideForecastViewModel() {
         this.loadStations();
@@ -29,7 +30,7 @@ public class TideForecastViewModel extends ViewModel {
         return dailyTides;
     }
 
-    public LiveData<java.util.Map<Integer, List<Tide>>> getStationTides() {
+    public LiveData<Map<Integer, List<Tide>>> getStationTides() {
         return stationTides;
     }
 
@@ -43,13 +44,7 @@ public class TideForecastViewModel extends ViewModel {
 
     public void setDailyTides(MutableLiveData<List<Tide>> dailyTides) {
         this.dailyTides = dailyTides;
-//        setRealTimeTides();
     }
-
-//    public void setRealTimeTides() {
-//        if(dailyTides.getValue() != null && stations.getValue() != null)
-//                realTimeTides.setValue(dailyTides.getValue().subList(0, stations.getValue().size() - 1));
-//    }
 
     public void loadTides() {
             this.setDailyTides(TideRepository.getDailyTides());

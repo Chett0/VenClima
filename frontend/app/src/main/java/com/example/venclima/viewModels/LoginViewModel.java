@@ -5,8 +5,7 @@ import androidx.databinding.Bindable;
 
 import com.example.venclima.BR;
 import com.example.venclima.models.User;
-import com.example.venclima.network.RetrofitInstance;
-import com.example.venclima.network.repositories.AuthCallback;
+import com.example.venclima.network.Callbacks.AuthCallback;
 import com.example.venclima.network.repositories.AuthRepository;
 
 public class LoginViewModel extends BaseObservable {
