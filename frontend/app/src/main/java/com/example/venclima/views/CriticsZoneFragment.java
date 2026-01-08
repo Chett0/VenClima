@@ -1,13 +1,19 @@
 package com.example.venclima.views;
+import static org.maplibre.android.style.layers.PropertyFactory.fillColor;
+import static org.maplibre.android.style.layers.PropertyFactory.fillOpacity;
+
 import com.example.venclima.R;
 import com.example.venclima.databinding.CriticsZoneBinding;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.maplibre.android.geometry.LatLng;
 import org.maplibre.android.MapLibre;
@@ -15,6 +21,8 @@ import org.maplibre.android.camera.CameraPosition;
 import org.maplibre.android.geometry.LatLngBounds;
 import org.maplibre.android.maps.MapView;
 
+import org.maplibre.android.maps.Style;
+import org.maplibre.android.style.layers.FillLayer;
 import org.maplibre.android.style.layers.PropertyFactory;
 import org.maplibre.android.style.layers.SymbolLayer;
 import org.maplibre.android.style.sources.GeoJsonSource;
@@ -23,15 +31,19 @@ import org.maplibre.geojson.Feature;
 import org.maplibre.geojson.FeatureCollection;
 import org.maplibre.geojson.Point;
 
+import com.example.venclima.models.Island;
+import com.example.venclima.viewModels.IslandViewModel;
+
 
 
 public class CriticsZoneFragment extends Fragment {
 
     private CriticsZoneBinding binding;
     private MapView mapView;
+    private IslandViewModel viewModel;
 
 
-    // Array di coordinate [lat, lon] dei punti dove viene misurata l'acqua
+    // Array di coordinate [lat, lon] dei punti dove viene misurata l'acqua -> to convert with api
     double[][] points = {
             {45.323056, 12.514722},
             {45.42, 12.424},
@@ -65,7 +77,10 @@ public class CriticsZoneFragment extends Fragment {
         //setup della mappa
         mapView.getMapAsync(map -> {
 
-                map.setStyle("https://tiles.openfreemap.org/styles/liberty", style->{
+            viewModel = new ViewModelProvider(this).get(IslandViewModel.class);
+
+
+            map.setStyle("https://tiles.openfreemap.org/styles/liberty", style->{
                     //posizione in cui la mappa si apre
                     CameraPosition position = new CameraPosition.Builder()
                             .target(new LatLng(45.4340,12.3380))
@@ -125,6 +140,16 @@ public class CriticsZoneFragment extends Fragment {
 
                 });
 
+            map.getStyle(style -> {
+
+                // osserva i dati dal ViewModel
+                viewModel.getIslands().observe(getViewLifecycleOwner(), islands -> {
+                    for (Island island : islands) {
+                        addIslandGeoJson(style, island);
+                    }
+                });
+
+            });
 
 
         });
@@ -155,4 +180,26 @@ public class CriticsZoneFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    private void addIslandGeoJson(@NonNull Style style, Island island) {
+
+        String sourceId = "island-source-" + island.getId();
+        String layerId  = "island-layer-" + island.getId();
+
+        // Crea la GeoJsonSource direttamente dalla stringa
+        GeoJsonSource source = new GeoJsonSource(sourceId, island.getGeoJson());
+        style.addSource(source);
+
+        // Crea il FillLayer per disegnare il poligono
+        FillLayer layer = new FillLayer(layerId, sourceId);
+        layer.setProperties(
+                fillColor(Color.parseColor("#5500FF00")), // verde semitrasparente
+                fillOpacity(0.6f)
+        );
+
+        // Aggiungi il layer allo style
+        style.addLayer(layer);
+    }
+
+
 }

@@ -2,6 +2,7 @@ package com.example.venclima.network;
 
 import com.example.venclima.BuildConfig;
 import com.example.venclima.network.services.AuthService;
+import com.example.venclima.network.services.IslandService;
 import com.example.venclima.network.services.StationService;
 import com.example.venclima.network.services.TideService;
 
@@ -64,6 +65,10 @@ public class RetrofitInstance {
 
     public static StationService getStationService() {
         return getRetrofitInstance().create(StationService.class);
+    }
+
+    public static IslandService getIslandService() {
+        return getRetrofitInstance().create(IslandService.class);
     }
 
 
