@@ -1,6 +1,7 @@
 package com.venclima.controller;
 
 import com.venclima.dto.IslandDTO;
+import com.venclima.responses.IslandTidesResponse;
 import com.venclima.service.IslandService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,16 @@ public class IslandController {
             return ResponseEntity.ok(island);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/tides")
+    public ResponseEntity<IslandTidesResponse> getIslandTides() {
+        try{
+            IslandTidesResponse response = islandService.getIslandsTides();
+            return ResponseEntity.ok(response);
+        } catch (Exception e){
+            return ResponseEntity.notFound().build();
         }
     }
 

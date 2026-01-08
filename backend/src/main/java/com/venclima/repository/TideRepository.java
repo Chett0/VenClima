@@ -23,4 +23,15 @@ public interface TideRepository extends JpaRepository<Tide, Integer> {
                 """,
             nativeQuery = true)
     List<Tide> findDailyTides();
+
+    @Query(value = """
+                    SELECT *
+                    FROM tides
+                    WHERE date = (
+                        SELECT MAX(date)
+                        FROM tides
+                    );
+                """,
+            nativeQuery = true)
+    List<Tide> findRealTimeTides();
 }

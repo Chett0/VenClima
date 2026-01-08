@@ -1,14 +1,19 @@
 package com.venclima.service;
 
 import com.venclima.dto.IslandDTO;
+import com.venclima.dto.TideDTO;
 import com.venclima.mapper.IslandMapper;
+import com.venclima.mapper.TideMapper;
 import com.venclima.model.Island;
 import com.venclima.model.IslandInitializer;
 import com.venclima.model.Station;
 import com.venclima.repository.IslandRepository;
 import com.venclima.repository.StationRepository;
+import com.venclima.repository.TideRepository;
+import com.venclima.responses.IslandTidesResponse;
 import jakarta.annotation.PostConstruct;
 import org.locationtech.jts.geom.*;
+import org.springframework.boot.jdbc.HikariCheckpointRestoreLifecycle;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +34,15 @@ public class IslandService {
     private final IslandRepository islandRepository;
     private final static GeometryFactory gf = new GeometryFactory();
     private final IslandMapper islandMapper;
+    private final TideRepository tideRepository;
+    private final TideMapper tideMapper;
 
-    public IslandService(StationRepository stationRepository, IslandRepository islandRepository, IslandMapper islandMapper) {
+    public IslandService(StationRepository stationRepository, IslandRepository islandRepository, IslandMapper islandMapper, TideRepository tideRepository, TideMapper tideMapper) {
         this.stationRepository = stationRepository;
         this.islandRepository = islandRepository;
         this.islandMapper = islandMapper;
+        this.tideRepository = tideRepository;
+        this.tideMapper = tideMapper;
     }
 
     private static double distance(double lat1, double lon1, double lat2, double lon2) {
@@ -165,6 +174,23 @@ public class IslandService {
                 .stream()
                 .map(islandMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public IslandTidesResponse getIslandsTides() {
+        List<IslandDTO> islands = islandRepository.findAll()
+                .stream()
+                .map(islandMapper::toDTO)
+                .toList();
+
+        List<TideDTO> realTimeTides = tideRepository.findRealTimeTides()
+                .stream()
+                .map(tideMapper::toDTO)
+                .toList();
+
+        return new IslandTidesResponse(
+                islands,
+                realTimeTides
+        );
     }
 
     public Optional<IslandDTO> getIslandByCoordinate(double latitude, double longitude) {
