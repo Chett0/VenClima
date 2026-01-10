@@ -7,6 +7,7 @@ import com.venclima.repository.IslandRepository;
 import com.venclima.repository.StationRepository;
 import com.venclima.repository.TideRepository;
 import com.venclima.repository.TokenRepository;
+import jakarta.annotation.PostConstruct;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -267,14 +268,12 @@ public class TideService {
         }
     }
 
-    @Scheduled(fixedRate = 300000)
-    public void retrieveDailyTides() {
-        try {
-            logger.info("Scheduled task: starting daily tides retrieval");
+    @PostConstruct
+    public void init() {
+        try{
             this.setDailyTides();
-            logger.info("Scheduled task: finished daily tides retrieval");
         } catch (Exception e) {
-            logger.error("Error in scheduled daily tides retrieval", e);
+            logger.error(e.toString());
         }
     }
 
