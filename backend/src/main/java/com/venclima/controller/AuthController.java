@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.HttpStatus;
@@ -46,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody RegisterUserDTO user) {
+    public ResponseEntity<LoginResponse> registerUser(@RequestBody RegisterUserDTO user) {
         try {
             User persistedUser = authService.registerUser(user);
             // create refresh token and jwt
@@ -60,13 +62,12 @@ public class AuthController {
             );
             return ResponseEntity.ok(resp);
         } catch (Exception e) {
-            String msg = e.getMessage() != null ? e.getMessage() : "Errore nella registrazione";
-            return ResponseEntity.badRequest().body(msg);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticate(@RequestBody LoginUserDTO loginUserDto) {
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDTO loginUserDto) {
         try {
             User authenticatedUser = authService.authenticate(loginUserDto);
 
@@ -76,14 +77,15 @@ public class AuthController {
             LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime(), refreshRaw, refreshTokenService.refreshTokenServiceDurationMs());
 
             return ResponseEntity.ok(loginResponse);
+        } catch(BadCredentialsException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } catch (Exception e) {
-            String msg = e.getMessage() != null ? e.getMessage() : "Autenticazione fallita";
-            return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).body(java.util.Map.of("message", msg));
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<?> refresh(@RequestBody java.util.Map<String, String> body) {
+    public ResponseEntity<?> refresh(@RequestBody Map<String, String> body) {
         String refreshRaw = body.get("refreshToken");
         if (refreshRaw == null || refreshRaw.isBlank()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "refreshToken missing"));

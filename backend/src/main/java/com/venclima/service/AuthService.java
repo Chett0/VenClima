@@ -36,7 +36,7 @@ public class AuthService {
     public User registerUser(RegisterUserDTO registerUserDTO) {
         try {
             if (userRepository.existsByEmail(registerUserDTO.getEmail())) {
-                throw new IllegalArgumentException("Email already in use");
+                throw new IllegalArgumentException("Email già utilizzata");
             }
             User user = userMapper.toEntity(registerUserDTO);
             userRepository.save(user);
@@ -57,7 +57,7 @@ public class AuthService {
         );
 
         User user = userRepository.findByEmail(input.getEmail())
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalArgumentException("Utente non trovato"));
         saveToken(input.getFcmToken(), user);
 
         return user;

@@ -17,7 +17,7 @@ public class RegistrationViewModel extends BaseObservable {
 
 
     public RegistrationViewModel() {
-        this.user = new RegisterUser("", "", "", "");
+        this.user = new RegisterUser();
     }
 
     @Bindable
@@ -82,7 +82,7 @@ public class RegistrationViewModel extends BaseObservable {
     }
 
     public boolean isValid() {
-        boolean res = !this.user.getEmail().isEmpty() && !this.user.getPassword().isEmpty() && !this.user.getName().isEmpty() && !this.user.getSurname().isEmpty();
+        boolean res = !this.user.getEmail().isEmpty() && !this.user.getPassword().isEmpty() && !this.user.getName().isEmpty() && !this.user.getSurname().isEmpty() && this.confirmPassword != null;
         if(!res)
             this.errorMsg = "Tutti i campi devono essere compilati";
         else {

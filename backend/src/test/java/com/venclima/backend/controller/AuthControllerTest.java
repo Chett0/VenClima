@@ -104,9 +104,8 @@ public class AuthControllerTest {
 
     @Test
     void registerUserFailureUserAlreadyExists() throws Exception {
-        String expectedErrorMessage = "Email already in use";
 
-        doThrow(new IllegalArgumentException(expectedErrorMessage)).when(authService)
+        doThrow(new IllegalArgumentException()).when(authService)
                 .registerUser(any());
 
         mockMvc.perform(post(this.signUpUri)
@@ -114,14 +113,11 @@ public class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validRegistration)))
 
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string(expectedErrorMessage));
+                .andExpect(status().isBadRequest());
     }
 
     @Test
-    void registerUserFailureGenericErrorWithNullMessage() throws Exception {
-        String expectedErrorMessage = "Errore nella registrazione";
-
+    void registerUserFailureGenericError() throws Exception {
         doThrow(new RuntimeException()).when(authService)
                 .registerUser(any());
 
@@ -130,7 +126,6 @@ public class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validRegistration)))
 
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string(expectedErrorMessage));
+                .andExpect(status().isBadRequest());
     }
 }

@@ -7,6 +7,12 @@ public class User {
 
     private String fcmToken;
 
+    public User() {
+        this.email = "";
+        this.password = "";
+    }
+
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;

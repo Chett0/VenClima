@@ -14,7 +14,7 @@ public class LoginViewModel extends BaseObservable {
     private AuthCallback authCallback;
 
     public LoginViewModel() {
-        this.user = new User("", "");
+        this.user = new User();
     }
 
     @Bindable
@@ -39,8 +39,9 @@ public class LoginViewModel extends BaseObservable {
 
     public void onLoginButtonClicked() {
         if(!isValid())
-            return;
-        AuthRepository.login(this.user, authCallback);
+            authCallback.onError("Tutti i campi devono essere compilati");
+        else
+            AuthRepository.login(this.user, authCallback);
     }
 
     public void setAuthCallback(AuthCallback callback) {

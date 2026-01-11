@@ -2,6 +2,13 @@ package com.example.venclima.models;
 
 public class RegisterUser extends User{
 
+    public RegisterUser() {
+        super();
+        this.name = "";
+        this.surname = "";
+    }
+
+
     public RegisterUser(String email, String password, String name, String surname) {
         super(email, password);
         this.name = name;

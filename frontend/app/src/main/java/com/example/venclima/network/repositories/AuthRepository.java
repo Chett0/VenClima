@@ -38,10 +38,7 @@ public class AuthRepository {
                     }
                     if (callback != null) callback.onSuccess("Registrazione avvenuta con successo");
                 } else {
-                    String err = "Errore registrazione: " + response.code();
-                    try {
-                        if (response.errorBody() != null) err = response.errorBody().string();
-                    } catch (Exception ignored) {}
+                    String err = response.body() != null ? response.body().toString() : "Errore registrazione";
                     if (callback != null) callback.onError(err);
                 }
             }
@@ -49,7 +46,7 @@ public class AuthRepository {
             @Override
             public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                 Logger.e("RegistrationViewModel", t.toString());
-                if (callback != null) callback.onError(t.getMessage());
+                if (callback != null) callback.onError("Connessione Fallita");
             }
         });
     }
@@ -74,10 +71,7 @@ public class AuthRepository {
                     }
                     if (callback != null) callback.onSuccess("Login effettuato con successo");
                 } else {
-                    String err = "Errore login: " + response.code();
-                    try {
-                        if (response.errorBody() != null) err = response.errorBody().string();
-                    } catch (Exception ignored) {}
+                    String err = response.code() == 401 ? "Credenziali errate" : "Errore login";
                     if (callback != null) callback.onError(err);
                 }
             }
@@ -85,7 +79,7 @@ public class AuthRepository {
             @Override
             public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                 Logger.e("RegistrationViewModel", t.toString());
-                if (callback != null) callback.onError(t.getMessage());
+                if (callback != null) callback.onError("Connessione Fallita");
             }
         });
     }
