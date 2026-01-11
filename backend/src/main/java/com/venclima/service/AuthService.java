@@ -34,14 +34,18 @@ public class AuthService {
     }
 
     public User registerUser(RegisterUserDTO registerUserDTO) {
-        if(userRepository.existsByEmail(registerUserDTO.getEmail())) {
-            throw new IllegalArgumentException("Email already in use");
-        }
-        User user = userMapper.toEntity(registerUserDTO);
-        userRepository.save(user);
-        saveToken(registerUserDTO.getFcmToken(), user);
+        try {
+            if (userRepository.existsByEmail(registerUserDTO.getEmail())) {
+                throw new IllegalArgumentException("Email already in use");
+            }
+            User user = userMapper.toEntity(registerUserDTO);
+            userRepository.save(user);
+            saveToken(registerUserDTO.getFcmToken(), user);
 
-        return user;
+            return user;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public User authenticate(LoginUserDTO input) {
