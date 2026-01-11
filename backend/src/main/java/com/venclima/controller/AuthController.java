@@ -9,6 +9,8 @@ import com.venclima.service.AuthService;
 import com.venclima.service.RefreshTokenService;
 import com.venclima.service.JWTService;
 import org.springframework.http.ResponseEntity;
+
+import java.lang.reflect.Field;
 import java.util.Map;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
@@ -46,20 +48,20 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody RegisterUserDTO user) {
         try {
-            UserDTO userDTO = authService.registerUser(user);
+            User persistedUser = authService.registerUser(user);
             // create refresh token and jwt
-            try {
-                User persisted = authService.getUserForToken(userDTO.getEmail());
-                String jwtToken = jwtService.generateToken(persisted);
-                String refreshRaw = refreshTokenService.createRefreshToken(persisted);
-                LoginResponse resp = new LoginResponse(jwtToken, jwtService.getExpirationTime(), refreshRaw, refreshTokenServiceDurationMs());
-                return ResponseEntity.ok(resp);
-            } catch (Exception ex) {
-                return ResponseEntity.ok(userDTO);
-            }
+            String jwtToken = jwtService.generateToken(persistedUser);
+            String refreshRaw = refreshTokenService.createRefreshToken(persistedUser);
+            LoginResponse resp = new LoginResponse(
+                    jwtToken,
+                    jwtService.getExpirationTime(),
+                    refreshRaw,
+                    refreshTokenService.refreshTokenServiceDurationMs()
+            );
+            return ResponseEntity.ok(resp);
         } catch (Exception e) {
             String msg = e.getMessage() != null ? e.getMessage() : "Errore nella registrazione";
-            return ResponseEntity.badRequest().body(Map.of("message", msg));
+            return ResponseEntity.badRequest().body(msg);
         }
     }
 
@@ -71,24 +73,13 @@ public class AuthController {
             String jwtToken = jwtService.generateToken(authenticatedUser);
 
             String refreshRaw = refreshTokenService.createRefreshToken(authenticatedUser);
-            LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime(), refreshRaw, refreshTokenServiceDurationMs());
+            LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime(), refreshRaw, refreshTokenService.refreshTokenServiceDurationMs());
 
             return ResponseEntity.ok(loginResponse);
         } catch (Exception e) {
             String msg = e.getMessage() != null ? e.getMessage() : "Autenticazione fallita";
             return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).body(java.util.Map.of("message", msg));
         }
-    }
-
-    private long refreshTokenServiceDurationMs() {
-        // try to read configured duration; fallback to 30 days in ms
-        try {
-            java.lang.reflect.Field f = refreshTokenService.getClass().getDeclaredField("refreshTokenExpirationMs");
-            f.setAccessible(true);
-            Object val = f.get(refreshTokenService);
-            if (val instanceof Long) return (Long) val;
-        } catch (Exception ignored) {}
-        return 2592000000L;
     }
 
     @PostMapping("/refresh")
@@ -109,7 +100,7 @@ public class AuthController {
         String newRefreshRaw = refreshTokenService.createRefreshToken(stored.getUser());
 
         String newJwt = jwtService.generateToken(stored.getUser());
-        LoginResponse resp = new LoginResponse(newJwt, jwtService.getExpirationTime(), newRefreshRaw, refreshTokenServiceDurationMs());
+        LoginResponse resp = new LoginResponse(newJwt, jwtService.getExpirationTime(), newRefreshRaw, refreshTokenService.refreshTokenServiceDurationMs());
         return ResponseEntity.ok(resp);
     }
 

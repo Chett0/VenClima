@@ -33,7 +33,7 @@ public class AuthService {
         this.tokenRepository = tokenRepository;
     }
 
-    public UserDTO registerUser(RegisterUserDTO registerUserDTO) {
+    public User registerUser(RegisterUserDTO registerUserDTO) {
         if(userRepository.existsByEmail(registerUserDTO.getEmail())) {
             throw new IllegalArgumentException("Email already in use");
         }
@@ -41,7 +41,7 @@ public class AuthService {
         userRepository.save(user);
         saveToken(registerUserDTO.getFcmToken(), user);
 
-        return userMapper.toDTO(user);
+        return user;
     }
 
     public User authenticate(LoginUserDTO input) {

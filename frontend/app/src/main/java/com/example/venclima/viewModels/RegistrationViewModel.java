@@ -13,6 +13,7 @@ public class RegistrationViewModel extends BaseObservable {
     private RegisterUser user;
     private String confirmPassword;
     private AuthCallback authCallback;
+    private String errorMsg;
 
 
     public RegistrationViewModel() {
@@ -71,8 +72,9 @@ public class RegistrationViewModel extends BaseObservable {
 
     public void onRegistrationButtonClicked() {
         if(!isValid())
-            return;
-        AuthRepository.registerUser(this.user, authCallback);
+            authCallback.onError(this.errorMsg);
+        else
+            AuthRepository.registerUser(this.user, authCallback);
     }
 
     public void setAuthCallback(AuthCallback callback) {
@@ -80,6 +82,14 @@ public class RegistrationViewModel extends BaseObservable {
     }
 
     public boolean isValid() {
-        return !this.user.getEmail().isEmpty() && !this.user.getPassword().isEmpty() && !this.user.getName().isEmpty() && !this.user.getSurname().isEmpty() && this.confirmPassword.equals(this.user.getPassword());
+        boolean res = !this.user.getEmail().isEmpty() && !this.user.getPassword().isEmpty() && !this.user.getName().isEmpty() && !this.user.getSurname().isEmpty();
+        if(!res)
+            this.errorMsg = "Tutti i campi devono essere compilati";
+        else {
+            res = this.confirmPassword.equals(this.user.getPassword());
+            if(!res)
+                this.errorMsg = "Le password non corrispondono";
+        }
+        return res;
     }
 }

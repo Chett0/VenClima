@@ -6,6 +6,7 @@ import com.venclima.repository.RefreshTokenRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
@@ -71,6 +72,17 @@ public class RefreshTokenService {
         } catch (Exception e) {
             throw new RuntimeException("Unable to hash token", e);
         }
+    }
+
+    public long refreshTokenServiceDurationMs() {
+        // try to read configured duration; fallback to 30 days in ms
+        try {
+            Field f = this.getClass().getDeclaredField("refreshTokenExpirationMs");
+            f.setAccessible(true);
+            Object val = f.get(this);
+            if (val instanceof Long) return (Long) val;
+        } catch (Exception ignored) {}
+        return 2592000000L;
     }
 
 }

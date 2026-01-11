@@ -32,9 +32,6 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        //QUI CONTROLLARE CHE L'UTENTE NON SIA GIA' LOGGATO (?)
-        //o forse fare in modo che non si possa accedere a questa pagina se si è loggati
-        //in controllo da qualche parte va fatto
     }
 
     @Override
@@ -61,8 +58,8 @@ public class LoginFragment extends Fragment {
                                 .build();
                         NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.TideForecastFragment, null, navOptions);
                         //Hide Login/Reg
-                        if (getActivity() instanceof com.example.venclima.views.MainActivity) {
-                            ((com.example.venclima.views.MainActivity) getActivity()).updateDrawerMenu();
+                        if (getActivity() instanceof MainActivity) {
+                            ((MainActivity) getActivity()).updateDrawerMenu();
                         }
                     });
                 }
@@ -79,7 +76,7 @@ public class LoginFragment extends Fragment {
         binding.executePendingBindings();
 
         // to registration
-        View goRegister = binding.getRoot().findViewById(com.example.venclima.R.id.go_to_register_text);
+        View goRegister = binding.getRoot().findViewById(R.id.go_to_register_text);
         if (goRegister != null) {
             goRegister.setOnClickListener(v -> NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.RegistrationFragment));
         }
