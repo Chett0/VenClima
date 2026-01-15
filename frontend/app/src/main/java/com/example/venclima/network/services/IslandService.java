@@ -1,6 +1,7 @@
 package com.example.venclima.network.services;
 
 import com.example.venclima.models.Island;
+import com.example.venclima.models.IslandsTide;
 import com.example.venclima.models.NotificationResponse;
 import com.example.venclima.models.NotificationUpdateRequest;
 
@@ -19,6 +20,9 @@ public interface IslandService {
     @PUT("api/notifications")
     Call<Void> updateNotifications(@Body NotificationUpdateRequest request);
 
-    @GET("api/islands")
-    Call<List<Island>> getIslands();
+
+    @GET("api/islands/tides")
+    Call<IslandsTide> getIslandTides();
+
+
 }

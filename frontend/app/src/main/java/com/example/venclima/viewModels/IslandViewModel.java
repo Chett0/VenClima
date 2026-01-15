@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.venclima.models.Island;
+import com.example.venclima.models.IslandsTide;
 import com.example.venclima.network.repositories.IslandRepository;
 
 import java.util.List;
@@ -12,16 +13,16 @@ import java.util.List;
 public class IslandViewModel extends ViewModel {
 
     private final IslandRepository repository;
-    private LiveData<List<Island>> islands;
+    private LiveData<IslandsTide> islandTides;
 
     public IslandViewModel() {
         repository = new IslandRepository();
     }
 
-    public LiveData<List<Island>> getIslands() {
-        if (islands == null) {
-            islands = repository.getIslands();
+    public LiveData<IslandsTide> getIslandTides() {
+        if (islandTides == null) {
+            islandTides = repository.getIslandTides();
         }
-        return islands;
+        return islandTides;
     }
 }
