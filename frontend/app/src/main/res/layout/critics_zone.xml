@@ -21,6 +21,6 @@
         android:contentDescription="Pulsante di avviso circolare"
         android:scaleType="centerInside"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
