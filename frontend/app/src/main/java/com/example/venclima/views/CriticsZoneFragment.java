@@ -35,8 +35,12 @@ import org.maplibre.geojson.FeatureCollection;
 import org.maplibre.geojson.Point;
 
 import com.example.venclima.models.Island;
+import com.example.venclima.models.Tide;
 import com.example.venclima.viewModels.IslandViewModel;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 
 public class CriticsZoneFragment extends Fragment {
@@ -99,8 +103,8 @@ public class CriticsZoneFragment extends Fragment {
 
 
                     LatLngBounds bounds = new LatLngBounds.Builder()
-                            .include(new LatLng(45.45786, 12.29712))  // nord-ovest
-                            .include(new LatLng(45.41893, 12.36959))  // sud-est
+                            .include(new LatLng(45.25, 12.05))  // nord-ovest
+                            .include(new LatLng(45.55, 12.65))  // sud-est
                             .build();
                     map.setLatLngBoundsForCameraTarget(bounds);
 
@@ -141,24 +145,24 @@ public class CriticsZoneFragment extends Fragment {
                                 PropertyFactory.iconSize(1.0f),
                                 PropertyFactory.iconAllowOverlap(true)
                         );
-
                         style.addLayer(layer);
                     }
-
                 });
 
             map.getStyle(style -> {
 
-                // osserva i dati dal ViewModel
-                viewModel.getIslands().observe(getViewLifecycleOwner(), islands -> {
-                    for (Island island : islands) {
-                        addIslandGeoJson(style, island);
+                viewModel.getIslandTides().observe(getViewLifecycleOwner(), response -> {
+                    List<Island> islands = response.getIslands();
+                    List<Tide> tides = response.getTides(); // nuova parte
+
+                    if (islands != null) {
+                        for (Island island : islands) {
+                            // Passa anche le tide al metodo addIslandGeoJson
+                            addIslandGeoJson(style, island, tides);
+                        }
                     }
                 });
-
             });
-
-
         });
 
         return binding.getRoot();
@@ -188,25 +192,67 @@ public class CriticsZoneFragment extends Fragment {
         binding = null;
     }
 
-    private void addIslandGeoJson(@NonNull Style style, Island island) {
+//method that colors the islands of Venice, checks if there is a high tide level, and then colors the map
+    private void addIslandGeoJson(@NonNull Style style, Island island, List<Tide> tides) {
 
         String sourceId = "island-source-" + island.getId();
         String layerId  = "island-layer-" + island.getId();
 
-        // Crea la GeoJsonSource direttamente dalla stringa
+        // Crea GeoJson source
         GeoJsonSource source = new GeoJsonSource(sourceId, island.getGeoJson());
         style.addSource(source);
 
-        // Crea il FillLayer per disegnare il poligono
         FillLayer layer = new FillLayer(layerId, sourceId);
+
         layer.setProperties(
-                fillColor(Color.parseColor("#5500FF00")), // verde semitrasparente
+                fillColor(getColorForIsland(island, tides)),
                 fillOpacity(0.6f)
         );
 
-        // Aggiungi il layer allo style
         style.addLayer(layer);
     }
 
+    private int getColorForIsland(Island island, List<Tide> tides) {
+        if (tides == null || tides.isEmpty()) {
+            return Color.parseColor("#a83271"); // fucsia per vedere se ottengo o meno tides
+        }
+
+        double tideLevel = -9999;
+        double minLevel = island.getMinLevel();
+        double maxLevel = island.getMaxLevel();
+        double tideRange = maxLevel - minLevel;
+
+
+
+        Iterator<Tide> it = tides.iterator();
+        //care with this loop
+        while(it.hasNext() && tideLevel == -9999){
+            Tide temp = it.next();
+            if(Objects.equals(island.getStationId(), temp.getStationId())){
+                tideLevel = temp.getLevel();
+            }
+        }
+
+        tideLevel *= 100; //convert from m to cm
+
+        // Filtra le tide relative a questa isola
+        Log.d("IslandDebug", String.valueOf(tideLevel) + " stazione" + island.getStationId() + " min" + island.getMinLevel() + " max" + island.getMaxLevel());
+
+        //black color for missing data
+        if(minLevel == -1 || maxLevel == -1 || tideLevel == -9999){
+            return Color.parseColor("#AA000000");
+        }
+
+
+        if(tideLevel <= minLevel){
+            return Color.parseColor("#AA00FF00");
+        } else if(tideLevel > minLevel && tideLevel <= minLevel + tideRange / 3){
+            return Color.parseColor("#AAFFFF00");
+        } else if(tideLevel > minLevel + tideRange / 3 && tideLevel <= minLevel + 2 * (tideRange / 3)){
+            return Color.parseColor("#AAFFA500");
+        } else {
+            return Color.parseColor("#AAFF0000");
+        }
+    }
 
 }

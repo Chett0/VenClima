@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.venclima.models.Island;
+import com.example.venclima.models.IslandsTide;
 import com.example.venclima.network.services.IslandService;
 import com.example.venclima.network.RetrofitInstance;
 
@@ -22,25 +23,22 @@ public class IslandRepository {
         islandService = RetrofitInstance.getIslandService();
     }
 
-    public LiveData<List<Island>> getIslands() {
-        MutableLiveData<List<Island>> data = new MutableLiveData<>();
+    public LiveData<IslandsTide> getIslandTides() {
+        MutableLiveData<IslandsTide> data = new MutableLiveData<>();
 
-        islandService.getIslands().enqueue(new Callback<List<Island>>() {
+        islandService.getIslandTides().enqueue(new Callback<IslandsTide>() {
             @Override
-            public void onResponse(
-                    Call<List<Island>> call,
-                    Response<List<Island>> response
-            ) {
+            public void onResponse(Call<IslandsTide> call, Response<IslandsTide> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     data.setValue(response.body());
                 } else {
-                    data.setValue(Collections.emptyList());
+                    data.setValue(new IslandsTide()); // oggetto vuoto
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Island>> call, Throwable t) {
-                data.setValue(Collections.emptyList());
+            public void onFailure(Call<IslandsTide> call, Throwable t) {
+                data.setValue(new IslandsTide()); // fallback
             }
         });
 
