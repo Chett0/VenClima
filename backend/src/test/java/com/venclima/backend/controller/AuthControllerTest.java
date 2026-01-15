@@ -3,6 +3,7 @@ package com.venclima.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.venclima.config.SecurityConfig;
 import com.venclima.controller.AuthController;
+import com.venclima.dto.LoginUserDTO;
 import com.venclima.dto.RegisterUserDTO;
 import com.venclima.dto.UserDTO;
 import com.venclima.model.User;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -33,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AuthControllerTest {
 
     private String signUpUri;
+    private String loginUri;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -53,13 +56,19 @@ public class AuthControllerTest {
     private RefreshTokenService refreshTokenService;
 
     private RegisterUserDTO validRegistration;
+    private LoginUserDTO validLogin;
     private UserDTO createdUserDTO;
     private User persistedUser;
+
+    private String expectedJwtToken;
+    private String expectedRefreshToken;
 
     @BeforeEach
     void setUp() {
 
-        this.signUpUri = "/api/auth/signup";
+        String baseUri = "/api/auth";
+        this.signUpUri = baseUri + "/signup";
+        this.loginUri = baseUri + "/login";
 
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
@@ -67,12 +76,16 @@ public class AuthControllerTest {
                 .build();
 
         validRegistration = new RegisterUserDTO("test.user@example.com", "Test User", "Test User", "password123", null);
+        validLogin = new LoginUserDTO("test.user@example.com","password123",null);
         createdUserDTO = new UserDTO("test.user@example.com", "Test User", "Test User");
         persistedUser = new User();
         persistedUser.setEmail("test.user@example.com");
         persistedUser.setPassword("password123");
         persistedUser.setName("Test User");
         persistedUser.setSurname("Test User");
+
+        expectedJwtToken = "mock_jwt_token";
+        expectedRefreshToken = "mock_refresh_token";
 
         when(jwtService.getExpirationTime()).thenReturn(3600000L);
         when(refreshTokenService.refreshTokenServiceDurationMs()).thenReturn(2592000000L);
@@ -83,11 +96,8 @@ public class AuthControllerTest {
     void userRegistrationSuccessful () throws Exception {
 
         when(authService.registerUser(any(RegisterUserDTO.class))).thenReturn(persistedUser);
-
-        String expectedJwt = "mock_jwt_token";
-        String expectedRefresh = "mock_refresh_token";
-        when(jwtService.generateToken(any(User.class))).thenReturn(expectedJwt);
-        when(refreshTokenService.createRefreshToken(any(User.class))).thenReturn(expectedRefresh);
+        when(jwtService.generateToken(any(User.class))).thenReturn(this.expectedJwtToken);
+        when(refreshTokenService.createRefreshToken(any(User.class))).thenReturn(this.expectedJwtToken);
 
         mockMvc.perform(post(this.signUpUri)
                         .with(csrf())
@@ -96,9 +106,9 @@ public class AuthControllerTest {
 
                 .andExpect(status().isOk())
 
-                .andExpect(jsonPath("$.token").value(expectedJwt))
+                .andExpect(jsonPath("$.token").value(this.expectedJwtToken))
                 .andExpect(jsonPath("$.expiresIn").value(3600000L))
-                .andExpect(jsonPath("$.refreshToken").value(expectedRefresh))
+                .andExpect(jsonPath("$.refreshToken").value(this.expectedJwtToken))
                 .andExpect(jsonPath("$.refreshExpiresIn").value(2592000000L));
     }
 
@@ -128,4 +138,52 @@ public class AuthControllerTest {
 
                 .andExpect(status().isBadRequest());
     }
+
+
+    @Test
+    void loginUserSuccessful() throws Exception {
+        when(authService.authenticate(any(LoginUserDTO.class))).thenReturn(persistedUser);
+        when(jwtService.generateToken(any(User.class))).thenReturn(this.expectedJwtToken);
+        when(refreshTokenService.createRefreshToken(any(User.class))).thenReturn(this.expectedRefreshToken);
+
+        mockMvc.perform(post(this.loginUri)
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(validLogin)))
+
+                .andExpect(status().isOk())
+
+                .andExpect(jsonPath("$.token").value(this.expectedJwtToken))
+                .andExpect(jsonPath("$.expiresIn").value(3600000L))
+                .andExpect(jsonPath("$.refreshToken").value(this.expectedRefreshToken))
+                .andExpect(jsonPath("$.refreshExpiresIn").value(2592000000L));
+    }
+
+    @Test
+    void loginUserFailureBadCredentials() throws Exception {
+
+        doThrow(new BadCredentialsException("")).when(authService)
+                .authenticate(any());
+
+        mockMvc.perform(post(this.loginUri)
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(validLogin)))
+
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void loginUserFailureGenericError() throws Exception {
+        doThrow(new RuntimeException()).when(authService)
+                .authenticate(any());
+
+        mockMvc.perform(post(this.loginUri)
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(validRegistration)))
+
+                .andExpect(status().isBadRequest());
+    }
+
 }
