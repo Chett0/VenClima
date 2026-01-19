@@ -32,8 +32,8 @@ public class MoseFragment extends Fragment {
         viewModel.getStationTides().observe(getViewLifecycleOwner(), map -> {
             String avgText = "N/D";
             if (map == null || map.isEmpty()) {
-                binding.statusActive.setText("ATTIVO — " + avgText);
-                binding.statusInactive.setText("NON ATTIVO — " + avgText);
+                binding.statusActive.setText(getString(com.example.venclima.R.string.mose_status_format, getString(com.example.venclima.R.string.mose_active), avgText));
+                binding.statusInactive.setText(getString(com.example.venclima.R.string.mose_status_format, getString(com.example.venclima.R.string.mose_non_active), avgText));
                 binding.cardMoseActive.setVisibility(View.GONE);
                 binding.cardMoseInactive.setVisibility(View.VISIBLE);
                 return;
@@ -53,16 +53,16 @@ public class MoseFragment extends Fragment {
             }
 
             if (count == 0) {
-                binding.statusActive.setText("ATTIVO — " + avgText);
-                binding.statusInactive.setText("NON ATTIVO — " + avgText);
+                binding.statusActive.setText(getString(com.example.venclima.R.string.mose_status_format, getString(com.example.venclima.R.string.mose_active), avgText));
+                binding.statusInactive.setText(getString(com.example.venclima.R.string.mose_status_format, getString(com.example.venclima.R.string.mose_non_active), avgText));
                 binding.cardMoseActive.setVisibility(View.GONE);
                 binding.cardMoseInactive.setVisibility(View.VISIBLE);
             } else {
                 double avg = sum / (double) count;
                 long avgRounded = Math.round(avg);
                 avgText = avgRounded + " cm";
-                binding.statusActive.setText("ATTIVO — " + avgText);
-                binding.statusInactive.setText("NON ATTIVO — " + avgText);
+                binding.statusActive.setText(getString(com.example.venclima.R.string.mose_status_format, getString(com.example.venclima.R.string.mose_active), avgText));
+                binding.statusInactive.setText(getString(com.example.venclima.R.string.mose_status_format, getString(com.example.venclima.R.string.mose_non_active), avgText));
                 if (avg >= 110d) {
                     binding.cardMoseActive.setVisibility(View.VISIBLE);
                     binding.cardMoseInactive.setVisibility(View.GONE);

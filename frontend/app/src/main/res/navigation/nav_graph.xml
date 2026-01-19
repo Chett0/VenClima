@@ -10,7 +10,7 @@
     <fragment
         android:id="@+id/TideForecastFragment"
         android:name="com.example.venclima.views.TideForecastFragment"
-        android:label="Livelli Maree"
+        android:label="@string/livelli_maree"
         tools:layout="@layout/tide_forecast">
     </fragment>
 

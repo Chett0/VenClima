@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VenClima</string>
+    <string name="title_forecast">Vorhersage</string>
+    <string name="title_mose">MOSE</string>
+    <string name="title_charts">Diagramme</string>
+    <string name="title_emergency">Notfall</string>
+    <string name="title_settings">Einstellungen</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Weiter</string>
+    <string name="previous">Zurück</string>
+
+    <string name="lorem_ipsum">Weniger Text</string>
+
+    <string name="b_title">Verhaltensanweisungen</string>
+    <string name="b_opt1">1) Vor dem Hochwasser</string>
+    <string name="b_opt1_text">Vorbereitungstipps:\n\n• Möbel, Elektrogeräte und Wertgegenstände anheben.\n• Barrieren oder Schutzsysteme installieren.\n• Funktion der Haushebeanlagen prüfen.\n• Ein Notfallset bereithalten (Stiefel, Taschenlampen, Batterien, Dokumente).\n• Benachrichtigungen und Vorhersagen über die App überwachen.\n• Fahrzeuge nicht in Gefahrenzonen abstellen.</string>
+    <string name="b_opt2">2) Während des Hochwassers</string>
+    <string name="b_opt2_text">Verhalten zur Risikominimierung:\n\n• Vermeiden Sie das Gehen in tiefem Wasser oder schlecht beleuchteten Bereichen.\n• Achten Sie auf elektrische Leitungen, offene Kanaldeckel oder versteckte Hindernisse.\n• Nur autorisierte Stege verwenden.\n• Türen oder Zugänge nicht gegen starken Wasserdruck öffnen.\n• Eingeschränkte Nutzung von Fahrzeugen.\n• Hohe Stiefel oder wasserdichte Schutzkleidung tragen.</string>
+    <string name="b_opt3">3) Nach dem Hochwasser</string>
+    <string name="b_opt3_text">Richtlinien für die Rückkehr zur Normalität:\n\n• Elektrische Geräte nicht einschalten, bis sie trocken und geprüft sind.\n• Räume und Oberflächen, die mit Brackwasser kontaminiert sind, reinigen und desinfizieren.\n• Beschädigte Gegenstände fachgerecht entsorgen.\n• Bau- oder Struktur-Schäden den zuständigen Stellen melden.\n• Schäden für Versicherungsansprüche dokumentieren.</string>
+
+    <string name="contacts">Wichtige Kontakte</string>
+    <string name="eme_contact">Einheitliche Notrufnummer (NUE)</string>
+    <string name="eme_number">112 – nationale Notrufnummer</string>
+    <string name="firefighter">Feuerwehr</string>
+    <string name="firefighter_n">115 (nationale Nummer)</string>
+    <string name="pronto_soccorso">Medizinischer Notfall (Krankenwagen)</string>
+    <string name="pronto_soccorso_n">118</string>
+    <string name="police">Staatspolizei</string>
+    <string name="police_n">113 (Notrufzentrale)</string>
+    <string name="coast_guard">Küstenwache / Hafenbehörde Venedig</string>
+    <string name="coast_guard_n">Telefon: 041 240 5711\nPEC: dm.venezia@pec.mit.gov.it\nEmail: venezia@guardiacostiera.it</string>
+    <string name="finance">Finanzpolizei – Provinzkommando Venedig</string>
+    <string name="finance_n">Zentrale: 041 931 411\nPEC: ve0550000p@pec.gdf.it</string>
+    <string name="municipality">Gemeinde Venedig – Zentrale / Allgemeine Informationen</string>
+    <string name="municipality_n">041 041</string>
+    <string name="civil">Gemeinde Venedig – Zivilschutz</string>
+    <string name="civil_n">Einsatzleitung Zivilschutz: 041 2746800\nEmail: protezionecivile@comune.venezia.it</string>
+    <string name="lpolice">Ortswehr Venedig (Kommunalpolizei)</string>
+    <string name="lpolice_n">Leitstelle 041 2747070 · Kommando 041 2747277 · Info-Hotline 800 058 001</string>
+    <string name="mobility">Mobilität und Verkehr – Gemeinde Venedig (Landverkehr)</string>
+    <string name="mobility_n">Email: mobilita@comune.venezia.it · PEC: mobilitatrasporti@pec.comune.venezia.it · Callcenter: 041 041</string>
+    <string name="mobility_w">Mobilität und Verkehr – Gemeinde Venedig (Wasserverkehr)</string>
+    <string name="mobility_w_number">Amt für Wasserflächen: 041 2748750\nEmail: spazi.acquei@comune.venezia.it, trasporti.acquei@comune.venezia.it, gondola@comune.venezia.it</string>
+
+    <string name="tide_forecast_fragment">Flutvorhersage</string>
+    <string name="historical_fragment">Flutverlauf</string>
+    <string name="critics_zone_fragment">Karte kritischer Zonen</string>
+    <string name="behaviour_fragment">Verhaltensanweisungen</string>
+    <string name="options_fragment">Einstellungen</string>
+
+    <string name="option_username">Benutzername: Laden…</string>
+    <string name="option_email">E-Mail: Laden…</string>
+    <string name="option_notification">Möchten Sie Benachrichtigungen zum Wasserstand erhalten?</string>
+    <string name="option_radio_1">Push-Benachrichtigungen</string>
+    <string name="option_radio_2">Per E-Mail</string>
+    <string name="option_radio_3">Per SMS</string>
+    <string name="option_button_loguot">Abmelden</string>
+    <string name="option_spinner">Sprache auswählen</string>
+
+    <string name="menu_tide_forecast">Flutvorhersage</string>
+    <string name="menu_tide_historical">Flutverlauf</string>
+    <string name="menu_critics_zone_map">Karte kritischer Zonen</string>
+    <string name="menu_behavior">Verhaltensanweisungen</string>
+    <string name="menu_options">Einstellungen</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="effettua_il_login_per_abilitare_le_notifiche">Melden Sie sich an, um Benachrichtigungen zu aktivieren</string>
+    <string name="riceverai_notifiche_push">Möchten Sie Push-Benachrichtigungen erhalten?</string>
+    <string name="abilita_le_notifiche">Benachrichtigungen aktivieren</string>
+    <string name="cerca_isole">Inseln suchen...</string>
+    <string name="seleziona_le_isole_per_ricevere_le_notifiche">Wählen Sie Inseln aus, um Benachrichtigungen zu erhalten</string>
+    <string name="abilita_notifiche">Benachrichtigungen aktivieren</string>
+    <string name="salva">Speichern</string>
+    <string name="interpretazione_del_grafico_delle_maree">Interpretation der Gezeitendiagramme</string>
+    <string name="interpretazioneGraficoMaree">Das Diagramm zeigt die tägliche Entwicklung der astronomischen Gezeiten.\n\nAuf der horizontalen Achse sind die Tagesstunden (0–24) dargestellt, auf der vertikalen Achse die Gezeitenhöhe in Zentimetern relativ zum Meeresspiegel.\n\nDie blaue Linie stellt den Meeresspiegel dar:\n\n • Gipfel zeigen Fluten an\n\n • Tiefstwerte zeigen Ebbe an\n\nBei Maxima und Minima sind angegeben:\n\n • Uhrzeit\n\n • Vorhergesagte Gezeitenhöhe\n\nMond-Symbole zeigen die Mondphasen an:\n\n • Voll- und Neumond → stärkere Gezeiten\n\n • Erstes und letztes Viertel → geringere Gezeiten</string>
+    <string name="passerelleText">Vom 15. September bis 30. April aktiviert die Stadtverwaltung basierend auf den Vorhersagen des Gezeitenzentrums den Fußgänger-Verkehrsplan auf Stegen, die von der Firma VERITAS SpA verwaltet und verlegt werden. In diesem Zeitraum ist Hochwasser in Venedig wahrscheinlicher. Die auf der Karte angegebenen Wege gewährleisten trockenen Fußgängerverkehr bis zu einer Gezeitenhöhe von +120 cm. Darüber hinaus können einige Wege unpassierbar werden.</string>
+    <string name="livelli_maree">Gezeitenpegel</string>
+    <string name="accedi">Anmelden</string>
+    <string name="percorsi_su_passerelle">Steg-Routen</string>
+
+    <!-- strings specific to fragment_mose -->
+    <string name="mose_title_full">MOSE-System</string>
+    <string name="mose_sub">Elektromechanisches Versuchsmodule</string>
+    <string name="mose_state_label">Aktueller Status</string>
+    <string name="mose_standby">System im Standby</string>
+    <string name="mose_non_active">NICHT AKTIV</string>
+    <string name="mose_active">AKTIV</string>
+    <string name="mose_ready">System bereit zur Aktivierung</string>
+    <string name="mose_desc_inactive">MOSE-Status: nicht aktiv</string>
+    <string name="mose_desc_active">MOSE-Status: aktiv</string>
+    <string name="mose_status_format">%1$s — %2$s</string>
+    <string name="mose_whatis_title">Was ist das MOSE</string>
+    <string name="mose_overview">Das MOSE (Elektromechanisches Versuchsmodule) ist ein integriertes Schutzsystem, bestehend aus Reihen versenkbarer mobiler Barrieren, installiert an den Laguneneingängen von Lido, Malamocco und Chioggia, die die Lagune von Venedig bei Hochwasserereignissen temporär vom Adriatischen Meer abkoppeln können.</string>
+    <string name="mose_how_title">Wie es funktioniert</string>
+    <string name="mose_how_content">Die mobilen Barrieren sind normalerweise unter Wasser und mit Wasser gefüllt. Wenn Hochwasser vorhergesagt wird, wird Druckluft in die Barrieren geleitet, sodass sie sich vom Wasser entleeren und sich um ein am Meeresboden befestigtes Scharnier aufrichten. Einmal angehoben, bilden die Barrieren eine Sperre, die die Lagune vom Meer trennt und das Eindringen von Hochwasser verhindert.</string>
+    <string name="mose_when_title">Wann es aktiviert wird</string>
+    <string name="mose_when_content">Das MOSE wird aktiviert, wenn eine Flut von über 110 cm über dem mittleren Meeresspiegel vorhergesagt wird. Die Entscheidung zur Aktivierung trifft das Gezeiten-Vorhersage- und Meldezentrum der Gemeinde Venedig auf Grundlage der Wetter- und Meeresprognosen. Die Aktivierung benötigt etwa 4–5 Stunden Vorlaufzeit und das System kann je nach Ereignis mehrere Stunden gehoben bleiben.</string>
+    <string name="mose_data_title">Technische Daten</string>
+    <string name="mose_data_content">• 78 mobile Barrieren, verteilt auf die 3 Laguneneingänge\n• Abmessungen der Barrieren: bis zu 30 Meter Breite, 20 Meter Höhe\n• Gewicht: etwa 300 Tonnen pro Barriere\n• Installations-Tiefe: zwischen 10 und 30 Metern\n• Hebezeit: ca. 30 Minuten\n• Kapazität: Schutz bis zu 3 Metern Flut</string>
+
+    <!-- tide_forecast title -->
+    <string name="tide_realtime">Gezeiten in Echtzeit</string>
+
+    <!-- strings for options layout -->
+    <string name="options_profile_name">Mario Rossi</string>
+    <string name="options_user_settings">Benutzereinstellungen</string>
+    <string name="options_email_example">Email: example@gmail.com</string>
+    <string name="options_username_example">Benutzername: Mario Rossi</string>
+    <string name="option_logout">Abmelden</string>
+    <string name="options_notifications_title">Benachrichtigungseinstellungen</string>
+    <string name="options_other_settings">Weitere Einstellungen</string>
+    <string name="options_change_language">Sprache ändern</string>
+    <string name="options_privacy_policy">Datenschutzbestimmungen</string>
+    <string name="lang_italian">Italiano</string>
+    <string name="lang_english">English</string>
+    <string name="lang_german">Deutsch</string>
+    <string name="options_guest_name">Gast</string>
+    <string name="options_email_unavailable">E-Mail: nicht verfügbar</string>
+    <string name="options_username_unavailable">Benutzername: nicht verfügbar</string>
+    <string name="option_login">Anmelden</string>
+    <string name="options_email_format">E-Mail: %1$s</string>
+    <string name="options_username_format">Benutzername: %1$s</string>
+    <string name="options_logout_toast">Abgemeldet</string>
+    <string name="touch_to_open">Tippen zum Öffnen</string>
+</resources>

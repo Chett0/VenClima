@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VenClima</string>
+    <string name="title_forecast">Forecast</string>
+    <string name="title_mose">MOSE</string>
+    <string name="title_charts">Charts</string>
+    <string name="title_emergency">Emergency</string>
+    <string name="title_settings">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">Less text</string>
+
+    <string name="b_title">How to behave</string>
+    <string name="b_opt1">1) Before high tide</string>
+    <string name="b_opt1_text">Preparation tips:\n\n• Raise furniture, electrical devices and valuables.\n• Install barriers or protection systems.\n• Check domestic sump pumps.\n• Prepare an emergency kit (boots, torches, batteries, documents).\n• Monitor notifications and forecasts via the app.\n• Avoid leaving vehicles in risky areas.</string>
+    <string name="b_opt2">2) During high tide</string>
+    <string name="b_opt2_text">Behaviors to reduce risks:\n\n• Avoid walking in deep water or unlit areas.\n• Beware of electrical cables, open manholes or hidden obstacles.\n• Use only authorized walkways.\n• Do not force doors or accesses under strong water pressure.\n• Limit the use of vehicles.\n• Wear high boots or waterproof protection.</string>
+    <string name="b_opt3">3) After high tide</string>
+    <string name="b_opt3_text">Guidelines for returning to normality:\n\n• Avoid switching on electrical appliances until dry and checked.\n• Clean and disinfect premises and surfaces contaminated by brackish water.\n• Properly dispose of damaged goods.\n• Report structural damage to competent offices.\n• Document damages for insurance claims.</string>
+
+    <string name="contacts">Useful contacts</string>
+    <string name="eme_contact">Single Emergency Number (NUE)</string>
+    <string name="eme_number">112 – national single emergency number</string>
+    <string name="firefighter">Fire Brigade</string>
+    <string name="firefighter_n">115 (national number)</string>
+    <string name="pronto_soccorso">Medical emergency (ambulance)</string>
+    <string name="pronto_soccorso_n">118</string>
+    <string name="police">State Police</string>
+    <string name="police_n">113 (emergency line)</string>
+    <string name="coast_guard">Coast Guard / Port Authority of Venice</string>
+    <string name="coast_guard_n">Phone: 041 240 5711\nPEC: dm.venezia@pec.mit.gov.it\nEmail: venezia@guardiacostiera.it</string>
+    <string name="finance">Finance Police – Provincial Command of Venice</string>
+    <string name="finance_n">Main phone: 041 931 411\nPEC: ve0550000p@pec.gdf.it</string>
+    <string name="municipality">Municipality of Venice – Switchboard / General information</string>
+    <string name="municipality_n">041 041</string>
+    <string name="civil">Municipality of Venice – Civil Protection</string>
+    <string name="civil_n">Civil Protection Operations Room: 041 2746800\nEmail: protezionecivile@comune.venezia.it</string>
+    <string name="lpolice">Local Police of Venice (Municipal)</string>
+    <string name="lpolice_n">Operations center 041 2747070 · Headquarters 041 2747277 · Toll-free info line 800 058 001</string>
+    <string name="mobility">Mobility and Transport – Municipality of Venice (Land)</string>
+    <string name="mobility_n">Email: mobilita@comune.venezia.it · PEC: mobilitatrasporti@pec.comune.venezia.it · Call center: 041 041</string>
+    <string name="mobility_w">Mobility and Transport – Municipality of Venice (Water)</string>
+    <string name="mobility_w_number">Water Spaces Office: 041 2748750\nEmail: spazi.acquei@comune.venezia.it, trasporti.acquei@comune.venezia.it, gondola@comune.venezia.it</string>
+
+    <string name="tide_forecast_fragment">Tide forecast</string>
+    <string name="historical_fragment">Tide history</string>
+    <string name="critics_zone_fragment">Critical zones map</string>
+    <string name="behaviour_fragment">How to behave</string>
+    <string name="options_fragment">Settings</string>
+
+    <string name="option_username">Username: Loading…</string>
+    <string name="option_email">Email: Loading…</string>
+    <string name="option_notification">Do you want to receive tide level notifications?</string>
+    <string name="option_radio_1">Push notifications</string>
+    <string name="option_radio_2">Via email</string>
+    <string name="option_radio_3">Via SMS</string>
+    <string name="option_button_loguot">Sign out</string>
+    <string name="option_spinner">Select language</string>
+
+    <string name="menu_tide_forecast">Tide forecast</string>
+    <string name="menu_tide_historical">Tide history</string>
+    <string name="menu_critics_zone_map">Critical zones map</string>
+    <string name="menu_behavior">How to behave</string>
+    <string name="menu_options">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="effettua_il_login_per_abilitare_le_notifiche">Log in to enable notifications</string>
+    <string name="riceverai_notifiche_push">Do you want to receive push notifications?</string>
+    <string name="abilita_le_notifiche">Enable notifications</string>
+    <string name="cerca_isole">Search islands...</string>
+    <string name="seleziona_le_isole_per_ricevere_le_notifiche">Select islands to receive notifications</string>
+    <string name="abilita_notifiche">Enable notifications</string>
+    <string name="salva">Save</string>
+    <string name="interpretazione_del_grafico_delle_maree">Interpretation of the tide chart</string>
+    <string name="interpretazioneGraficoMaree">The chart shows the astronomical tide trend day by day.\n\nOn the horizontal axis the hours of the day are shown (0–24), while on the vertical axis the tide height in centimeters relative to the sea zero is reported.\n\nThe blue line represents the sea level:\n\n • Peaks indicate high tides\n\n • Lowest points indicate low tides\n\nNext to the maxima and minima the following are reported:\n\n • Time\n\n • Predicted tide height\n\nMoon symbols indicate the lunar phases:\n\n • Full and new moon → stronger tides\n\n • First and last quarter → milder tides</string>
+    <string name="passerelleText">From September 15 to April 30 the City Administration, based on forecasts issued by the Tide Center, activates the Pedestrian Viability Plan on walkways managed and installed by the company VERITAS SpA. During this period, high water is more likely to occur in Venice. The routes indicated on the map ensure dry foot passage up to a tide level of +120 cm. Above this level some routes may become impassable.</string>
+    <string name="livelli_maree">Tide levels</string>
+    <string name="accedi">Log in</string>
+    <string name="percorsi_su_passerelle">Walkway routes</string>
+
+    <!-- strings specific to fragment_mose -->
+    <string name="mose_title_full">MOSE system</string>
+    <string name="mose_sub">Electromechanical Experimental Module</string>
+    <string name="mose_state_label">Current status</string>
+    <string name="mose_standby">System on standby</string>
+    <string name="mose_non_active">NOT ACTIVE</string>
+    <string name="mose_active">ACTIVE</string>
+    <string name="mose_ready">System ready for activation</string>
+    <string name="mose_desc_inactive">MOSE status: not active</string>
+    <string name="mose_desc_active">MOSE status: active</string>
+    <string name="mose_status_format">%1$s — %2$s</string>
+    <string name="mose_whatis_title">What is MOSE</string>
+    <string name="mose_overview">The MOSE (Electromechanical Experimental Module) is an integrated defense system made up of rows of mobile retractable barriers, installed at the lagoon entrances of Lido, Malamocco and Chioggia, capable of temporarily isolating the Venice lagoon from the Adriatic Sea during high tide events.</string>
+    <string name="mose_how_title">How it works</string>
+    <string name="mose_how_content">The mobile barriers are normally submerged and filled with water. When a high tide is forecast, compressed air is injected into the barriers so that, emptied of water, they rise by rotating around a hinge fixed to the seabed. Once raised, the barriers form a barrier that separates the lagoon from the sea, preventing high water from entering.</string>
+    <string name="mose_when_title">When it is activated</string>
+    <string name="mose_when_content">MOSE is activated when a tide higher than 110 cm above mean sea level is forecast. The decision to activate the system is taken by the Tide Forecast and Reporting Center of the Municipality of Venice, based on weather-marine forecasts. Activation requires about 4–5 hours notice and the system may remain raised for several hours depending on the event.</string>
+    <string name="mose_data_title">Technical data</string>
+    <string name="mose_data_content">• 78 mobile barriers divided among the 3 lagoon entrances\n• Barrier dimensions: up to 30 meters wide, 20 high\n• Weight: about 300 tons per barrier\n• Installation depth: between 10 and 30 meters\n• Raising time: about 30 minutes\n• Capacity: defense up to 3 meters of tide</string>
+
+    <!-- tide_forecast title -->
+    <string name="tide_realtime">Tides in real time</string>
+
+    <!-- strings for options layout -->
+    <string name="options_profile_name">Mario Rossi</string>
+    <string name="options_user_settings">User settings</string>
+    <string name="options_email_example">Email: example@gmail.com</string>
+    <string name="options_username_example">Username: Mario Rossi</string>
+    <string name="option_logout">Log out</string>
+    <string name="options_notifications_title">Notification settings</string>
+    <string name="options_other_settings">Other settings</string>
+    <string name="options_change_language">Change language</string>
+    <string name="options_privacy_policy">Privacy policy</string>
+    <string name="lang_italian">Italiano</string>
+    <string name="lang_english">English</string>
+    <string name="lang_german">Deutsch</string>
+    <string name="options_guest_name">Guest</string>
+    <string name="options_email_unavailable">Email: not available</string>
+    <string name="options_username_unavailable">Username: not available</string>
+    <string name="option_login">Login</string>
+    <string name="options_email_format">Email: %1$s</string>
+    <string name="options_username_format">Username: %1$s</string>
+    <string name="options_logout_toast">Logged out</string>
+    <string name="touch_to_open">Tap to open</string>
+</resources>

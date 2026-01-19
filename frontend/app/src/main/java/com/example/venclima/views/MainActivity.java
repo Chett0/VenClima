@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.content.Context;
 
 import com.example.venclima.R;
 
@@ -31,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(com.example.venclima.utils.LocaleHelper.onAttach(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        com.example.venclima.utils.LocaleHelper.setLocale(this, com.example.venclima.utils.LocaleHelper.getLanguage(this));
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); //forza la modalità chiara dei colori
 
         super.onCreate(savedInstanceState);

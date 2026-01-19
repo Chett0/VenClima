@@ -68,6 +68,27 @@
     <string name="option_button_loguot">Disconnettiti</string>
     <string name="option_spinner">Seleziona lingua</string>
 
+    <!-- strings for options layout -->
+    <string name="options_profile_name">Mario Rossi</string>
+    <string name="options_user_settings">Impostazioni utente</string>
+    <string name="options_email_example">Email: example@gmail.com</string>
+    <string name="options_username_example">Nome utente: Mario Rossi</string>
+    <string name="option_logout">Effettua logout</string>
+    <string name="options_notifications_title">Impostazioni Notifiche</string>
+    <string name="options_other_settings">Altre impostazioni</string>
+    <string name="options_change_language">Cambia lingua</string>
+    <string name="options_privacy_policy">Politiche sulla privacy</string>
+    <string name="lang_italian">Italiano</string>
+    <string name="lang_english">English</string>
+    <string name="lang_german">Deutsch</string>
+    <string name="options_guest_name">Ospite</string>
+    <string name="options_email_unavailable">Email: non disponibile</string>
+    <string name="options_username_unavailable">Nome utente: non disponibile</string>
+    <string name="option_login">Accedi</string>
+    <string name="options_email_format">Email: %1$s</string>
+    <string name="options_username_format">Nome utente: %1$s</string>
+    <string name="options_logout_toast">Logout effettuato</string>
+
     <!-- string for activity_main_drawer.xml-->
     <string name="menu_tide_forecast">Previsioni maree</string>
     <string name="menu_tide_historical">Storico maree</string>
@@ -90,4 +111,28 @@
     <string name="accedi">Accedi</string>
     <string name="percorsi_su_passerelle">Percorsi su Passerelle</string>
 
+    <!-- strings for fragment_mose.xml -->
+    <string name="mose_title_full">Sistema MOSE</string>
+    <string name="mose_sub">Modulo Sperimentale Elettromeccanico</string>
+    <string name="mose_state_label">Stato Attuale</string>
+    <string name="mose_standby">Sistema in standby</string>
+    <string name="mose_non_active">NON ATTIVO</string>
+    <string name="mose_active">ATTIVO</string>
+    <string name="mose_ready">Sistema pronto per attivazione</string>
+    <string name="mose_desc_inactive">Stato MOSE: non attivo</string>
+    <string name="mose_desc_active">Stato MOSE: attivo</string>
+    <string name="mose_status_format">%1$s — %2$s</string>
+    <string name="mose_whatis_title">Cos\'è il MOSE</string>
+    <string name="mose_overview">Il MOSE (MOdulo Sperimentale Elettromeccanico) è un sistema integrato di difesa formato da schiere di paratoie mobili a scomparsa, installate alle bocche di porto lagunari di Lido, Malamocco e Chioggia, capaci di isolare temporaneamente la laguna di Venezia dal mare Adriatico durante gli eventi di alta marea.</string>
+    <string name="mose_how_title">Come funziona</string>
+    <string name="mose_how_content">Le paratoie mobili sono normalmente sommerse e piene d\'acqua. Quando viene prevista un\'alta marea, viene immessa aria compressa nelle paratoie che, svuotandosi dell\'acqua, si sollevano ruotando attorno ad una cerniera fissata al fondale. Una volta sollevate, le paratoie formano una barriera che separa la laguna dal mare, impedendo all\'acqua alta di entrare.</string>
+    <string name="mose_when_title">Quando viene attivato</string>
+    <string name="mose_when_content">Il MOSE viene attivato quando è prevista una marea superiore a 110 cm sul livello medio del mare. La decisione di attivare il sistema viene presa dal Centro Previsioni e Segnalazioni Maree del Comune di Venezia, basandosi sulle previsioni meteo-marine. L\'attivazione richiede circa 4-5 ore di preavviso e il sistema può rimanere sollevato per diverse ore a seconda dell\'evento.</string>
+    <string name="mose_data_title">Dati tecnici</string>
+    <string name="mose_data_content">• 78 paratoie mobili divise tra le 3 bocche di porto\n• Dimensioni paratoie: fino a 30 metri di larghezza, 20 di altezza\n• Peso: circa 300 tonnellate per paratoia\n• Profondità installazione: tra 10 e 30 metri\n• Tempo di sollevamento: 30 minuti circa\n• Capacità: difesa fino a 3 metri di marea</string>
+
+    <!-- strings for tide_forecast.xml -->
+    <string name="tide_realtime">Maree in tempo reale</string>
+
+    <string name="touch_to_open">Tocca per aprire</string>
 </resources>
