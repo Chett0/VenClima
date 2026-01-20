@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.locationtech.jts.geom.Coordinate;
 import org.maplibre.android.geometry.LatLng;
 import org.maplibre.android.MapLibre;
 import org.maplibre.android.camera.CameraPosition;
@@ -35,9 +36,12 @@ import org.maplibre.geojson.FeatureCollection;
 import org.maplibre.geojson.Point;
 
 import com.example.venclima.models.Island;
+import com.example.venclima.models.Station;
 import com.example.venclima.models.Tide;
 import com.example.venclima.viewModels.IslandViewModel;
+import com.example.venclima.viewModels.StationViewModel;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -45,30 +49,17 @@ import java.util.Objects;
 
 public class CriticsZoneFragment extends Fragment {
 
+    private ImageButton btnPasserelle;
     private CriticsZoneBinding binding;
     private MapView mapView;
     private IslandViewModel viewModel;
-    private ImageButton btnPasserelle;
+    private StationViewModel station;
 
 
     // Array di coordinate [lat, lon] dei punti dove viene misurata l'acqua -> to convert with api
-    double[][] points = {
-            {45.323056, 12.514722},
-            {45.42, 12.424},
-            {45.334444, 12.341389},
-            {45.22855, 12.312767},
-            {45.4311, 12.3364},
-            {45.495556, 12.471944},
-            {45.4875, 12.415486},
-            {45.339722, 12.291944},
-            {45.2325, 12.280556},
-            {45.223619, 12.280425},
-            {45.408889, 12.261389},
-            {45.430556, 12.336664},
-            {45.44252, 12.32603},
-            {45.445278, 12.336111}
-    };
+    double[][] points;
 
+    List<Coordinate> station_coordinates = new ArrayList<>();
 
 
     @Override
@@ -90,6 +81,7 @@ public class CriticsZoneFragment extends Fragment {
 
             viewModel = new ViewModelProvider(this).get(IslandViewModel.class);
 
+            station = new ViewModelProvider(this).get(StationViewModel.class);
 
             map.setStyle("https://tiles.openfreemap.org/styles/liberty", style->{
                     //posizione in cui la mappa si apre
@@ -111,43 +103,53 @@ public class CriticsZoneFragment extends Fragment {
                     map.setMinZoomPreference(11.5);
                     map.setMaxZoomPreference(16.0);
 
-                    //serve per la creazione di rettangoli attorno i punti del sensore
-                    for (int i = 0; i < points.length; i++) {
 
-                        double lat = points[i][0];
-                        double lng = points[i][1];
 
-                        // 1) Crea il Point
-                        Point point = Point.fromLngLat(lng, lat);
+                station.getStation().observe(this, stations -> {
+                    List<Feature> features = new ArrayList<>();
 
-                        // 2) Feature
-                        Feature feature = Feature.fromGeometry(point);
+                    for (Station s : stations){
+                        double lng = s.getCoordinate().getX();
+                        double lat = s.getCoordinate().getY();
 
-                        // 3) FeatureCollection
-                        FeatureCollection featureCollection = FeatureCollection.fromFeature(feature);
+                        if (
+                                Double.isNaN(lat) || Double.isNaN(lng) ||
+                                        Double.isInfinite(lat) || Double.isInfinite(lng) ||
+                                        lat < -90 || lat > 90 ||
+                                        lng < -180 || lng > 180
+                        ) {
+                            Log.e("MAP", "Invalid coordinate skipped: lat=" + lat + " lng=" + lng);
+                            continue;
+                        }
 
-                        // 4) Source
-                        GeoJsonSource source = new GeoJsonSource("marker-source-" + i, featureCollection);
-                        style.addSource(source);
+                        features.add(Feature.fromGeometry(Point.fromLngLat(lng,lat)));
 
-                        // 5) Aggiungi un’icona da drawable (MapLibre accetta Bitmap)
+                    }
+                    FeatureCollection fc = FeatureCollection.fromFeatures(features);
+
+                    GeoJsonSource source = new GeoJsonSource("marker-source", fc);
+                    style.addSource(source);
+
+                    //now add the image of the marker
+                    if(style.getImage("marker-icon") == null) {
                         style.addImage(
                                 "marker-icon",
                                 BitmapUtils.getBitmapFromDrawable(
                                         getResources().getDrawable(R.drawable.map_marker)
                                 )
                         );
-
-                        // 6) SymbolLayer = marker
-                        SymbolLayer layer = new SymbolLayer("marker-layer-" + i, "marker-source-" + i);
-                        layer.setProperties(
-                                PropertyFactory.iconImage("marker-icon"),
-                                PropertyFactory.iconSize(1.0f),
-                                PropertyFactory.iconAllowOverlap(true)
-                        );
-                        style.addLayer(layer);
                     }
+
+                    SymbolLayer layer = new SymbolLayer("marker-layer", "marker-source");
+                    layer.setProperties(
+                            PropertyFactory.iconImage("marker-icon"),
+                            PropertyFactory.iconSize(1.0f),
+                            PropertyFactory.iconAllowOverlap(true)
+                    );
+
+                    style.addLayer(layer);
                 });
+            });
 
             map.getStyle(style -> {
 
@@ -236,7 +238,7 @@ public class CriticsZoneFragment extends Fragment {
         tideLevel *= 100; //convert from m to cm
 
         // Filtra le tide relative a questa isola
-        Log.d("IslandDebug", String.valueOf(tideLevel) + " stazione" + island.getStationId() + " min" + island.getMinLevel() + " max" + island.getMaxLevel());
+        //Log.d("IslandDebug", String.valueOf(tideLevel) + " stazione" + island.getStationId() + " min" + island.getMinLevel() + " max" + island.getMaxLevel());
 
         //black color for missing data
         if(minLevel == -1 || maxLevel == -1 || tideLevel == -9999){

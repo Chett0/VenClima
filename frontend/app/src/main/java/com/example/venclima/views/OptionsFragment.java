@@ -32,6 +32,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.venclima.R;
 import com.example.venclima.viewModels.OptionsViewModel;
+import com.example.venclima.utils.LocaleHelper;
+import androidx.appcompat.app.AlertDialog;
 
 public class OptionsFragment extends Fragment {
 
@@ -67,6 +69,7 @@ public class OptionsFragment extends Fragment {
         this.receiveNotification = binding.textView9;
         this.loginNeeded = binding.textView10;
         this.btnNotifications = binding.btnNotifications;
+        final TextView changeLangTv = binding.textChangeLanguage;
 
         btnNotifications.setOnClickListener(v -> NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.NotificationsFragment));
 
@@ -96,21 +99,39 @@ public class OptionsFragment extends Fragment {
         viewModel.getIsNotificationEnabled().observe(getViewLifecycleOwner(), isEnabled -> btnNotifications.setEnabled(isEnabled));
         viewModel.getIsNotificationEnabled().observe(getViewLifecycleOwner(), isEnabled -> receiveNotification.setVisibility(isEnabled ? View.VISIBLE : View.GONE));
         viewModel.getIsNotificationEnabled().observe(getViewLifecycleOwner(), isEnabled -> loginNeeded.setVisibility(isEnabled ? View.GONE : View.VISIBLE));
+
+        changeLangTv.setOnClickListener(v -> {
+            final String[] languages = new String[]{getString(R.string.lang_italian), getString(R.string.lang_english), getString(R.string.lang_german)};
+            final String[] codes = new String[]{"it","en","de"};
+            String current = LocaleHelper.getLanguage(requireContext());
+            int checked = 0;
+            for (int i = 0; i < codes.length; i++) if (codes[i].equals(current)) checked = i;
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.options_change_language))
+                    .setSingleChoiceItems(languages, checked, (dialog, which) -> {
+                        LocaleHelper.setLocale(requireContext(), codes[which]);
+                        requireActivity().recreate();
+                        dialog.dismiss();
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+        });
     }
 
     private void showProvisionalView(TextView nameTv, TextView emailTv, TextView userTv, Button btn) {
-        nameTv.setText("Ospite");
-        emailTv.setText("Email: non disponibile");
-        userTv.setText("Nome utente: non disponibile");
-        btn.setText("Accedi");
+        nameTv.setText(getString(R.string.options_guest_name));
+        emailTv.setText(getString(R.string.options_email_unavailable));
+        userTv.setText(getString(R.string.options_username_unavailable));
+        btn.setText(getString(R.string.option_login));
         btn.setOnClickListener(v -> NavHostFragment.findNavController(OptionsFragment.this).navigate(R.id.LoginFragment));
     }
 
     private void showUserView(UserDTO u, TextView nameTv, TextView emailTv, TextView userTv, Button btn) {
         nameTv.setText(u.getName() + " " + u.getSurname());
-        emailTv.setText("Email: " + u.getEmail());
-        userTv.setText("Nome utente: " + u.getName() + " " + u.getSurname());
-        btn.setText("Effettua logout");
+        emailTv.setText(getString(R.string.options_email_format, u.getEmail()));
+        userTv.setText(getString(R.string.options_username_format, u.getName() + " " + u.getSurname()));
+        btn.setText(getString(R.string.option_logout));
         btn.setOnClickListener(v -> {
             String refresh = null;
             try { refresh = TokenManager.getInstance().getRefreshToken(); } catch (Exception ignored) {}
@@ -126,7 +147,7 @@ public class OptionsFragment extends Fragment {
             @Override
             public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
                 try { TokenManager.getInstance().notifyTokenExpired(); } catch (Exception ignored) {}
-                Toast.makeText(getActivity(), "Logout effettuato", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.options_logout_toast), Toast.LENGTH_SHORT).show();
                 showProvisionalView(nameTv, emailTv, userTv, btn);
                 if (getActivity() instanceof MainActivity) {
                     ((MainActivity) getActivity()).updateDrawerMenu();
@@ -140,7 +161,7 @@ public class OptionsFragment extends Fragment {
             @Override
             public void onFailure(Call<Map<String, String>> call, Throwable t) {
                 try { TokenManager.getInstance().notifyTokenExpired(); } catch (Exception ignored) {}
-                Toast.makeText(getActivity(), "Logout effettuato", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.options_logout_toast), Toast.LENGTH_SHORT).show();
                 showProvisionalView(nameTv, emailTv, userTv, btn);
                 if (getActivity() instanceof MainActivity) {
                     ((MainActivity) getActivity()).updateDrawerMenu();

@@ -66,7 +66,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mario Rossi"
+                    android:text="@string/options_profile_name"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -80,7 +80,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Impostazioni utente"
+                android:text="@string/options_user_settings"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:paddingVertical="8dp"/>
@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView7"
-                android:text="Email: example@gmail.com"
+                android:text="@string/options_email_example"
                 android:textSize="16sp"
                 android:paddingVertical="8dp"/>
 
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView8"
-                android:text="Nome utente: Mario Rossi"
+                android:text="@string/options_username_example"
                 android:textSize="16sp"
                 android:paddingVertical="8dp"/>
 
@@ -105,7 +105,7 @@
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Effettua logout"
+                android:text="@string/option_logout"
                 /><!--Cambia in base al fatto di essere loggati o meno -->
 
             <com.google.android.material.divider.MaterialDivider
@@ -117,7 +117,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Impostazioni Notifiche"
+                android:text="@string/options_notifications_title"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:paddingVertical="8dp"/>
@@ -155,22 +155,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Altre impostazioni"
+                android:text="@string/options_other_settings"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:paddingVertical="8dp"/>
 
             <TextView
+                android:id="@+id/textChangeLanguage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cambia lingua"
+                android:text="@string/options_change_language"
                 android:textSize="16sp"
                 android:paddingVertical="8dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Politiche sulla privacy"
+                android:text="@string/options_privacy_policy"
                 android:textSize="16sp"
                 android:paddingVertical="8dp"/>
 
