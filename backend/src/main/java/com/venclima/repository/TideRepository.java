@@ -25,12 +25,9 @@ public interface TideRepository extends JpaRepository<Tide, Integer> {
     List<Tide> findDailyTides();
 
     @Query(value = """
-                    SELECT *
+                    SELECT DISTINCT ON (station_id) *
                     FROM tides
-                    WHERE date = (
-                        SELECT MAX(date)
-                        FROM tides
-                    );
+                    ORDER BY station_id, date DESC;
                 """,
             nativeQuery = true)
     List<Tide> findRealTimeTides();
