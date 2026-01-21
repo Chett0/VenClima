@@ -21,10 +21,21 @@ public class StationService {
         this.stationMapper = stationMapper;
     }
 
+    /**
+     * Adds a new {@link Station} to the repository.
+     *
+     * @param station the station entity to persist
+     * @return the persisted {@link Station} entity
+     */
     public Station addStation(Station station) {
         return stationRepository.save(station);
     }
 
+    /**
+     * Retrieves all stations as {@link StationDTO}.
+     *
+     * @return list of all stations mapped to {@link StationDTO}
+     */
     public List<StationDTO> getAllStations() {
         return stationRepository.findAll()
                 .stream()
@@ -32,6 +43,12 @@ public class StationService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves a {@link Station} by its ID.
+     *
+     * @param id the ID of the station
+     * @return an {@link Optional} containing the station if found, otherwise empty
+     */
     public Optional<Station> getStationById(Integer id) {
         return stationRepository.findById(id);
     }

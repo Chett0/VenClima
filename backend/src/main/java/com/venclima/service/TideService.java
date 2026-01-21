@@ -84,10 +84,21 @@ public class TideService {
         stationLinkName.put(1037, "Fusina");
     }
 
+    /**
+     * Persists a new {@link Tide} entity.
+     *
+     * @param tide the tide entity to save
+     * @return the persisted tide entity
+     */
     public Tide addTideInfo(Tide tide) {
         return tideRepository.save(tide);
     }
 
+    /**
+     * Retrieves all tides sorted by station ID.
+     *
+     * @return list of {@link TideDTO} for all tide records
+     */
     public List<TideDTO> getAllTides() {
         return tideRepository.findAll()
                 .stream()
@@ -96,6 +107,12 @@ public class TideService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves tide records for a specific station.
+     *
+     * @param stationId the ID of the station
+     * @return list of {@link TideDTO} for the specified station
+     */
     public List<TideDTO> getTidesByStationId(int stationId) {
         return tideRepository.findAll()
                 .stream()
@@ -104,6 +121,11 @@ public class TideService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves tide records for the current day.
+     *
+     * @return list of {@link TideDTO} representing daily tides
+     */
     public List<TideDTO> getDailyTides() {
         return tideRepository.findDailyTides()
                 .stream()
@@ -111,10 +133,24 @@ public class TideService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Finds a tide record for a specific station and date.
+     *
+     * @param stationId the ID of the station
+     * @param date the date and time of the tide
+     * @return {@link Optional} containing the tide if found
+     */
     public Optional<Tide> getTideByStationIdAndDate(Integer stationId, LocalDateTime date) {
         return this.tideRepository.findByStation_IdAndDate(stationId, date);
     }
 
+    /**
+     * Parses and stores daily tide data from official station websites.
+     * <p>
+     * Creates new {@link Tide} entities if no existing record is found.
+     *
+     * @throws IOException if unable to fetch or parse tide data
+     */
     public void setDailyTides() throws IOException {
         int inserted = 0;
         List<Station> stations = stationRepository.findAll();
@@ -176,6 +212,12 @@ public class TideService {
     }
 
 
+    /**
+     * Scheduled task that runs every 5 minutes to fetch real-time tide data.
+     * <p>
+     * Updates existing tide records, creates new ones, and triggers
+     * notifications for islands exceeding critical tide levels.
+     */
     @Scheduled(fixedRate = 300000)
     public void retrieveRealTimeTideLevel() {
         try{
@@ -268,6 +310,11 @@ public class TideService {
         }
     }
 
+    /**
+     * Initializes daily tide data on application startup.
+     * <p>
+     * Invokes {@link #setDailyTides()} to populate the database with the current day's tides.
+     */
     @PostConstruct
     public void init() {
         try{

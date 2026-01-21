@@ -18,6 +18,12 @@ public class TideController {
         this.tideService = tideService;
     }
 
+    /**
+     * Retrieves all tide records.
+     *
+     * @return {@link ResponseEntity} containing a list of {@link TideDTO},
+     *         or {@code 404 Not Found} if retrieval fails
+     */
     @GetMapping
     public ResponseEntity<List<TideDTO>> getTides() {
         try {
@@ -28,6 +34,12 @@ public class TideController {
         }
     }
 
+    /**
+     * Retrieves tide records for the current day.
+     *
+     * @return {@link ResponseEntity} containing a list of {@link TideDTO} for the day,
+     *         or {@code 404 Not Found} if retrieval fails
+     */
     @GetMapping("/day")
     public ResponseEntity<List<TideDTO>> getDailyTides() {
         try {
@@ -38,6 +50,15 @@ public class TideController {
         }
     }
 
+    /**
+     * Creates or updates daily tide records.
+     * <p>
+     * This endpoint triggers the service to calculate and persist daily tide data.
+     *
+     * @return {@link ResponseEntity} with HTTP {@code 200 OK} if successful,
+     *         or {@code 400 Bad Request} if the operation fails
+     * @throws IOException if an I/O error occurs during tide data processing
+     */
     @PostMapping
     public ResponseEntity<Void> createDailyTide() throws IOException {
         try {

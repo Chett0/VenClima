@@ -32,6 +32,13 @@ public class AuthController {
         this.refreshTokenService = refreshTokenService;
     }
 
+    /**
+     * Returns information about the currently authenticated user.
+     *
+     * @param authentication the Spring Security authentication object
+     * @return {@link ResponseEntity} containing the authenticated {@link UserDTO},
+     *         or an error message if the user is not authenticated or not found
+     */
     @GetMapping("/me")
     public ResponseEntity<?> me(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
@@ -47,6 +54,13 @@ public class AuthController {
         }
     }
 
+    /**
+     * Registers a new user and returns authentication tokens upon success.
+     *
+     * @param user DTO containing registration details
+     * @return {@link ResponseEntity} containing a {@link LoginResponse} with JWT
+     *         and refresh token, or {@code 400 Bad Request} if registration fails
+     */
     @PostMapping("/signup")
     public ResponseEntity<LoginResponse> registerUser(@RequestBody RegisterUserDTO user) {
         try {
@@ -66,6 +80,13 @@ public class AuthController {
         }
     }
 
+    /**
+     * Authenticates a user using provided credentials.
+     *
+     * @param loginUserDto DTO containing login credentials
+     * @return {@link ResponseEntity} containing a {@link LoginResponse} with JWT
+     *         and refresh token, or an appropriate error status
+     */
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDTO loginUserDto) {
         try {
@@ -84,6 +105,16 @@ public class AuthController {
         }
     }
 
+    /**
+     * Refreshes the JWT using a valid refresh token.
+     * <p>
+     * The old refresh token is revoked and a new one is issued to preserve
+     * session continuity.
+     *
+     * @param body request body containing the {@code refreshToken}
+     * @return {@link ResponseEntity} containing a new {@link LoginResponse},
+     *         or an error message if the refresh token is invalid or missing
+     */
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(@RequestBody Map<String, String> body) {
         String refreshRaw = body.get("refreshToken");
@@ -106,6 +137,12 @@ public class AuthController {
         return ResponseEntity.ok(resp);
     }
 
+    /**
+     * Logs out a user by revoking the provided refresh token.
+     *
+     * @param body request body containing the {@code refreshToken}
+     * @return {@link ResponseEntity} confirming logout or indicating missing token
+     */
     @PostMapping("/logout")
     public ResponseEntity<?> logout(@RequestBody java.util.Map<String, String> body) {
         String refreshRaw = body.get("refreshToken");

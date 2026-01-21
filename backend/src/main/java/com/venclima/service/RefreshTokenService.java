@@ -27,7 +27,15 @@ public class RefreshTokenService {
         this.refreshTokenRepository = refreshTokenRepository;
     }
 
-    //create refresh token
+    /**
+     * Creates a new refresh token for a user.
+     * <p>
+     * Generates a secure random token, hashes it, stores it with an expiration date,
+     * and returns the raw token to the client.
+     *
+     * @param user the user for whom the refresh token is created
+     * @return the raw refresh token string
+     */
     public String createRefreshToken(User user) {
         String raw = generateRandomToken();
         String hash = hashToken(raw);
@@ -38,7 +46,14 @@ public class RefreshTokenService {
         return raw;
     }
 
-    //check refresh token's validity
+    /**
+     * Finds a valid refresh token by its raw value.
+     * <p>
+     * Checks that the token exists, is not revoked, and has not expired.
+     *
+     * @param rawToken the raw refresh token string
+     * @return an {@link Optional} containing the valid {@link RefreshToken}, or empty if invalid
+     */
     public Optional<RefreshToken> findValidByRaw(String rawToken) {
         try {
             String hash = hashToken(rawToken);
@@ -53,17 +68,33 @@ public class RefreshTokenService {
         }
     }
 
+    /**
+     * Revokes a refresh token, marking it as invalid.
+     *
+     * @param token the {@link RefreshToken} to revoke
+     */
     public void revoke(RefreshToken token) {
         token.setRevoked(true);
         refreshTokenRepository.save(token);
     }
 
+    /**
+     * Generates a secure random token string using Base64 encoding.
+     *
+     * @return a secure random token
+     */
     private String generateRandomToken() {
         byte[] bytes = new byte[64];
         secureRandom.nextBytes(bytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
 
+    /**
+     * Hashes a token using SHA-256 and encodes it in Base64 URL-safe format.
+     *
+     * @param token the raw token string
+     * @return the hashed token string
+     */
     private String hashToken(String token) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -74,6 +105,13 @@ public class RefreshTokenService {
         }
     }
 
+    /**
+     * Returns the configured refresh token duration in milliseconds.
+     * <p>
+     * Defaults to 30 days if the configured value is unavailable.
+     *
+     * @return the refresh token expiration duration in milliseconds
+     */
     public long refreshTokenServiceDurationMs() {
         // try to read configured duration; fallback to 30 days in ms
         try {

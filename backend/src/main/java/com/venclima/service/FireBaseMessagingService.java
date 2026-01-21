@@ -14,6 +14,24 @@ public class FireBaseMessagingService {
     private static final Logger logger =
             LoggerFactory.getLogger(FireBaseMessagingService.class);
 
+    /**
+     * Sends a push notification to a device using Firebase Cloud Messaging.
+     * <p>
+     * The notification includes a title and body provided in the {@link NotificationRequest}.
+     *
+     * @param request the notification request containing:
+     *                <ul>
+     *                    <li>token: the device FCM token to send the notification to</li>
+     *                    <li>title: the notification title</li>
+     *                    <li>body: the notification body</li>
+     *                </ul>
+     * @return a {@link String} indicating the result of the send operation:
+     *         <ul>
+     *             <li>Firebase message ID if successful</li>
+     *             <li>"NOT FOUND" if the token does not exist</li>
+     *             <li>"Firebase error sending" for other Firebase errors</li>
+     *         </ul>
+     */
     public String sendPushNotificationService(NotificationRequest request) {
         try {
             Message message = Message

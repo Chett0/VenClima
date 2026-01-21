@@ -45,6 +45,16 @@ public class IslandService {
         this.tideMapper = tideMapper;
     }
 
+    /**
+     * Calculates the great-circle distance between two geographic points
+     * using the Haversine formula.
+     *
+     * @param lat1 latitude of the first point
+     * @param lon1 longitude of the first point
+     * @param lat2 latitude of the second point
+     * @param lon2 longitude of the second point
+     * @return distance between the points in kilometers
+     */
     private static double distance(double lat1, double lon1, double lat2, double lon2) {
         final double R = 6371.0;
 
@@ -60,6 +70,13 @@ public class IslandService {
         return R * c;
     }
 
+    /**
+     * Finds the nearest {@link Station} to a given coordinate.
+     *
+     * @param stations list of available stations
+     * @param coordinates reference coordinates
+     * @return the nearest station, or {@code null} if no stations are available
+     */
     private static Station nearestStation(List<Station> stations, Coordinate coordinates) {
         if(stations.isEmpty()) return null;
         Station nearestStation = null;
@@ -75,11 +92,26 @@ public class IslandService {
         return nearestStation;
     }
 
+    /**
+     * Creates a polygon from an array of JTS coordinates.
+     *
+     * @param coordinates array defining the polygon shell
+     * @return a {@link Polygon} representing the island area
+     */
     private static Polygon createPolygon(Coordinate[] coordinates) {
         LinearRing shell = gf.createLinearRing(coordinates);
         return gf.createPolygon(shell);
     }
 
+    /**
+     * Creates or updates an {@link Island} entity based on initialization data.
+     * <p>
+     * If an island with the same name already exists, it is updated;
+     * otherwise, a new island is persisted.
+     *
+     * @param stations list of available tide stations
+     * @param islandInitializer initialization data for the island
+     */
     private void createIsland(List<Station> stations, IslandInitializer islandInitializer) {
 
         Island island = new Island();
@@ -105,6 +137,13 @@ public class IslandService {
             islandRepository.save(island);
     }
 
+    /**
+     * Initializes island data at application startup.
+     * <p>
+     * Loads island definitions from the {@code VeniceIslands.json} resource,
+     * creates geospatial polygons, and associates each island with
+     * the nearest tide station.
+     */
     @PostConstruct
     public void init() {
 
@@ -169,6 +208,11 @@ public class IslandService {
         }
     }
 
+    /**
+     * Retrieves all islands as DTOs.
+     *
+     * @return list of {@link IslandDTO}
+     */
     public List<IslandDTO> getIslands() {
         return islandRepository.findAll()
                 .stream()
@@ -176,6 +220,11 @@ public class IslandService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves island data along with real-time tide information.
+     *
+     * @return {@link IslandTidesResponse} containing islands and tide data
+     */
     public IslandTidesResponse getIslandsTides() {
         List<IslandDTO> islands = islandRepository.findAll()
                 .stream()
@@ -193,6 +242,13 @@ public class IslandService {
         );
     }
 
+    /**
+     * Retrieves an island containing the given geographic coordinate.
+     *
+     * @param latitude latitude of the point
+     * @param longitude longitude of the point
+     * @return an {@link Optional} containing the matching {@link IslandDTO}, if found
+     */
     public Optional<IslandDTO> getIslandByCoordinate(double latitude, double longitude) {
         Point point = gf.createPoint(new Coordinate(longitude, latitude));
         return islandRepository.findAll()
