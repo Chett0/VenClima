@@ -127,4 +127,17 @@
     <string name="touch_to_open">Tippen zum Öffnen</string>
     <string name="connection_lost">Verbindung verloren</string>
     <string name="retry">Wiederholen</string>
+
+    <string name="month_january">Januar</string>
+    <string name="month_february">Februar</string>
+    <string name="month_march">März</string>
+    <string name="month_april">April</string>
+    <string name="month_may">Mai</string>
+    <string name="month_june">Juni</string>
+    <string name="month_july">Juli</string>
+    <string name="month_august">August</string>
+    <string name="month_september">September</string>
+    <string name="month_october">Oktober</string>
+    <string name="month_november">November</string>
+    <string name="month_december">Dezember</string>
 </resources>

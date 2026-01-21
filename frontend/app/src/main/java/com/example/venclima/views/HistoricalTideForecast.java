@@ -1,9 +1,13 @@
 package com.example.venclima.views;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +19,8 @@ import com.example.venclima.databinding.HistoricalTideForecastBinding;
 import com.example.venclima.adapters.MonthAdapter;
 import com.example.venclima.utils.PdfUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,12 +49,22 @@ public class HistoricalTideForecast extends BaseFragment {
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new GridLayoutManager(getContext(), 1));
         List<String> months = Arrays.asList(
-                "Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno",
-                "Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"
+                getString(R.string.month_december),
+                getString(R.string.month_november),
+                getString(R.string.month_october),
+                getString(R.string.month_september),
+                getString(R.string.month_august),
+                getString(R.string.month_july),
+                getString(R.string.month_june),
+                getString(R.string.month_may),
+                getString(R.string.month_april),
+                getString(R.string.month_march),
+                getString(R.string.month_february),
+                getString(R.string.month_january)
         );
         MonthAdapter adapter = new MonthAdapter(getContext(), months, position -> {
 
-            int monthIndex = position + 1;
+            int monthIndex = 12 - position;
             String monthStr = (monthIndex < 10) ? ("0" + monthIndex) : String.valueOf(monthIndex);
             String assetPath = "pdfs/" + monthStr + "_2025ps.pdf";
             openPdfFromAssets(assetPath);
@@ -59,19 +75,19 @@ public class HistoricalTideForecast extends BaseFragment {
 
     private void openPdfFromAssets(String assetPdfPath) {
         try {
-            java.io.File pdfFile = PdfUtils.copyAssetPdfToCache(requireContext(), assetPdfPath);
-            android.net.Uri uri = PdfUtils.getUriForFile(requireContext(), pdfFile);
+            File pdfFile = PdfUtils.copyAssetPdfToCache(requireContext(), assetPdfPath);
+            Uri uri = PdfUtils.getUriForFile(requireContext(), pdfFile);
 
-            android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, "application/pdf");
             intent.setFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION | android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-            startActivity(android.content.Intent.createChooser(intent, "Open PDF"));
-        } catch (android.content.ActivityNotFoundException e) {
-            android.widget.Toast.makeText(requireContext(), "Nessuna app trovata per aprire il PDF. Installa un visualizzatore PDF o usa il visualizzatore integrato.", android.widget.Toast.LENGTH_LONG).show();
-        } catch (java.io.IOException e) {
+            startActivity(Intent.createChooser(intent, "Open PDF"));
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(requireContext(), "Nessuna app trovata per aprire il PDF. Installa un visualizzatore PDF o usa il visualizzatore integrato.", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
             e.printStackTrace();
-            android.widget.Toast.makeText(requireContext(), "Errore nell'aprire il PDF: " + e.getMessage(), android.widget.Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), "Errore nell'aprire il PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
