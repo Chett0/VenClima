@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.venclima.models.Station;
+import com.example.venclima.network.Callbacks.NetworkErrorCallback;
 import com.example.venclima.network.RetrofitInstance;
 
 import org.maplibre.android.log.Logger;
@@ -32,6 +33,30 @@ public class StationRepository {
             @Override
             public void onFailure(@NonNull Call<List<Station>> call, @NonNull Throwable t) {
                 Logger.e("StationRepository", t.toString());
+                return;
+            }
+        });
+
+        return stations;
+
+    }
+
+    public static MutableLiveData<List<Station>> getStations(NetworkErrorCallback callback) {
+
+        final MutableLiveData<List<Station>> stations = new MutableLiveData<>();
+
+        RetrofitInstance.getStationService().getStations().enqueue(new Callback<List<Station>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<List<Station>> call, @NonNull Response<List<Station>> response) {
+                stations.setValue(response.body());
+                callback.onSuccess();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Station>> call, @NonNull Throwable t) {
+                Logger.e("StationRepository", t.toString());
+                callback.onError();
                 return;
             }
         });

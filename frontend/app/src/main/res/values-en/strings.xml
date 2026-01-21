@@ -125,4 +125,6 @@
     <string name="options_username_format">Username: %1$s</string>
     <string name="options_logout_toast">Logged out</string>
     <string name="touch_to_open">Tap to open</string>
+    <string name="connection_lost">Connection Lost</string>
+    <string name="retry">Retry</string>
 </resources>

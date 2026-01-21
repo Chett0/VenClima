@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.venclima.models.Station;
 import com.example.venclima.models.Tide;
+import com.example.venclima.network.Callbacks.NetworkErrorCallback;
 import com.example.venclima.network.repositories.StationRepository;
 import com.example.venclima.network.repositories.TideRepository;
 
@@ -21,9 +22,20 @@ public class TideForecastViewModel extends ViewModel {
     private MutableLiveData<List<Station>> stations = new MutableLiveData<>();
     private MutableLiveData<Map<Integer, List<Tide>>> stationTides = new MutableLiveData<>();
 
+    private MutableLiveData<Boolean> isError = new MutableLiveData<>(false);
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
+
+    public LiveData<Boolean> getIsError() {
+        return isError;
+    }
+
+    public LiveData<Boolean> getIsLoading() {
+        return isLoading;
+    }
+
+
     public TideForecastViewModel() {
-        this.loadStations();
-        this.loadTides();
+        this.loadData();
     }
 
     public LiveData<List<Tide>> getDailyTides() {
@@ -51,8 +63,30 @@ public class TideForecastViewModel extends ViewModel {
             this.stationTides = TideRepository.getDailyTidesMap();
     }
 
+    public void refreshData() {
+        this.loadData();
+    }
+
+    private void loadData(){
+        this.isLoading.setValue(true);
+        this.loadStations();
+        this.loadTides();
+    }
+
     public void loadStations() {
-        this.stations = StationRepository.getStations();
+        this.stations = StationRepository.getStations(new NetworkErrorCallback() {
+            @Override
+            public void onSuccess() {
+                isError.setValue(false);
+                isLoading.setValue(false);
+            }
+
+            @Override
+            public void onError() {
+                isError.setValue(true);
+                isLoading.setValue(false);
+            }
+        });
     }
 
 

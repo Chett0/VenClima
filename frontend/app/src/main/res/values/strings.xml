@@ -135,4 +135,6 @@
     <string name="tide_realtime">Maree in tempo reale</string>
 
     <string name="touch_to_open">Tocca per aprire</string>
+    <string name="connection_lost">Connessione persa</string>
+    <string name="retry">Riprova</string>
 </resources>

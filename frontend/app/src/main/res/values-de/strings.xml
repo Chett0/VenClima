@@ -125,4 +125,6 @@
     <string name="options_username_format">Benutzername: %1$s</string>
     <string name="options_logout_toast">Abgemeldet</string>
     <string name="touch_to_open">Tippen zum Öffnen</string>
+    <string name="connection_lost">Verbindung verloren</string>
+    <string name="retry">Wiederholen</string>
 </resources>

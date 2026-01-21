@@ -55,7 +55,25 @@ public class TideForecastFragment extends Fragment {
         viewModel.getStations().observe(getViewLifecycleOwner(), adapter::setStations);
         viewModel.getStationTides().observe(getViewLifecycleOwner(), map -> adapter.setStationTides(map));
 
+        viewModel.getIsError().observe(getViewLifecycleOwner(), isError -> {
+            updateVisibility(isError, viewModel.getIsLoading().getValue());
+        });
+
+        viewModel.getIsLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            updateVisibility(viewModel.getIsError().getValue(), isLoading);
+        });
+
         return binding.getRoot();
+    }
+
+
+    private void updateVisibility(boolean isError, boolean isLoading){
+        boolean isTidesVisible = !isError && !isLoading;
+        boolean isErrorVisible = isError && !isLoading;
+
+        binding.viewPager.setVisibility(isTidesVisible ? View.VISIBLE : View.GONE);
+        binding.dotsIndicator.setVisibility(isTidesVisible ? View.VISIBLE : View.GONE);
+        binding.errorLayout.setVisibility(isErrorVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override
