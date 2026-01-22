@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:text="Bassa"
+                android:text="@string/low_tide"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:text="Media"
+                android:text="@string/medium_tide"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:text="Alta"
+                android:text="@string/high_tide"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:text="Molto alta"
+                android:text="@string/very_high_tide"
                 android:textSize="12sp" />
         </LinearLayout>
 

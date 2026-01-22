@@ -150,4 +150,8 @@
     <string name="month_october">Ottobre</string>
     <string name="month_november">Novembre</string>
     <string name="month_december">Dicembre</string>
+    <string name="low_tide">Bassa</string>
+    <string name="medium_tide">Media</string>
+    <string name="high_tide">Alta</string>
+    <string name="very_high_tide">Molto alta</string>
 </resources>

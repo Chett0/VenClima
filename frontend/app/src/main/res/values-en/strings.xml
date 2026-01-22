@@ -140,4 +140,8 @@
     <string name="month_october">October</string>
     <string name="month_november">November</string>
     <string name="month_december">December</string>
+    <string name="low_tide">Low</string>
+    <string name="medium_tide">Medium</string>
+    <string name="high_tide">High</string>
+    <string name="very_high_tide">Very high</string>
 </resources>
