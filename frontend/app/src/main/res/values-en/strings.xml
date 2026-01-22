@@ -144,4 +144,7 @@
     <string name="medium_tide">Medium</string>
     <string name="high_tide">High</string>
     <string name="very_high_tide">Very high</string>
+    <string name="login_title">Please log in</string>
+    <string name="login_logn">Login</string>
+    <string name="login_register">Don\'t have an account? Register</string>
 </resources>
