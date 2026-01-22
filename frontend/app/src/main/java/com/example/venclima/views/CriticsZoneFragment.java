@@ -50,6 +50,7 @@ import java.util.Objects;
 public class CriticsZoneFragment extends Fragment {
 
     private ImageButton btnPasserelle;
+    private ImageButton refreshButton;
     private CriticsZoneBinding binding;
     private MapView mapView;
     private IslandViewModel viewModel;
@@ -70,6 +71,7 @@ public class CriticsZoneFragment extends Fragment {
 
         binding = CriticsZoneBinding.inflate(inflater, container, false);
         this.btnPasserelle = binding.circularPasserelleButton;
+        this.refreshButton = binding.refreshButton;
 
         btnPasserelle.setOnClickListener(v -> NavHostFragment.findNavController(CriticsZoneFragment.this).navigate(R.id.PasserelleFragment));
 
@@ -79,6 +81,13 @@ public class CriticsZoneFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(IslandViewModel.class);
 
         station = new ViewModelProvider(this).get(StationViewModel.class);
+
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.refreshIslandTides();
+            }
+        });
 
         //setup della mappa
         mapView.getMapAsync(map -> {
@@ -104,7 +113,7 @@ public class CriticsZoneFragment extends Fragment {
 
 
 
-                station.getStation().observe(this, stations -> {
+                station.getStation().observe(getViewLifecycleOwner(), stations -> {
                     List<Feature> features = new ArrayList<>();
 
                     for (Station s : stations){

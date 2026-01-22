@@ -14,12 +14,28 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="16dp"
-        android:background="@drawable/circular_bg"
+        android:background="@drawable/circle_button_bg"
         android:src="@drawable/passerelle"
         android:contentDescription="Pulsante di avviso circolare"
         android:scaleType="centerInside"
+        android:clipToOutline="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circle_button_bg"
+        android:contentDescription="Refresh Button"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/baseline_refresh_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circular_passerelle_button" />
 
     <!-- LEGENDA MAREA -->
     <LinearLayout
