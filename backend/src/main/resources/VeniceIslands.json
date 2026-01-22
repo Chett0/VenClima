@@ -14404,8 +14404,8 @@
   },
   {
     "name": "Tronchetto",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 90,
+    "maxLevel": 155,
     "district": "Santa Croce",
     "geometry": {
       "type": "Polygon",
@@ -15229,8 +15229,8 @@
   },
   {
     "name": "Stazione Marittima",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 94,
+    "maxLevel": 143,
     "district": "Santa Croce",
     "geometry": {
       "type": "Polygon",
@@ -28124,8 +28124,8 @@
   },
   {
     "name": "Isola San Biagio",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 95,
+    "maxLevel": 145,
     "district": "Giudecca",
     "geometry": {
       "type": "Polygon",
@@ -28557,8 +28557,8 @@
   },
   {
     "name": "AMAV",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 95,
+    "maxLevel": 155,
     "district": "Giudecca",
     "geometry": {
       "type": "Polygon",
@@ -28902,8 +28902,8 @@
   },
   {
     "name": "Piscina Comunale",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 89,
+    "maxLevel": 147,
     "district": "Giudecca",
     "geometry": {
       "type": "Polygon",
@@ -29163,8 +29163,8 @@
   },
   {
     "name": "Sacca San Biagio",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 84,
+    "maxLevel": 137,
     "district": "Giudecca",
     "geometry": {
       "type": "Polygon",
@@ -36077,8 +36077,8 @@
   },
   {
     "name": "La Grazia",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 90,
+    "maxLevel": 145,
     "district": "Giudecca",
     "geometry": {
       "type": "Polygon",
@@ -54130,8 +54130,8 @@
   },
   {
     "name": "Diporto Velico",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 95,
+    "maxLevel": 155,
     "district": "Castello",
     "geometry": {
       "type": "Polygon",
@@ -57171,8 +57171,8 @@
   },
   {
     "name": "Bacini Arsenale",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 96,
+    "maxLevel": 150,
     "district": "Castello",
     "geometry": {
       "type": "Polygon",
@@ -60594,8 +60594,8 @@
   },
   {
     "name": "San Michele",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 100,
+    "maxLevel": 160,
     "district": "Castello",
     "geometry": {
       "type": "Polygon",
@@ -82854,8 +82854,8 @@
   },
   {
     "name": "Mazzorbo",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 90,
+    "maxLevel": 147,
     "district": "Mazzorbo",
     "geometry": {
       "type": "Polygon",
@@ -84123,8 +84123,8 @@
   },
   {
     "name": "S. Maria delle Grazie",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 90,
+    "maxLevel": 150,
     "district": "Mazzorbo",
     "geometry": {
       "type": "Polygon",
@@ -84512,8 +84512,8 @@
   },
   {
     "name": "Isola di Mazzorbo",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 90,
+    "maxLevel": 155,
     "district": "Mazzorbo",
     "geometry": {
       "type": "Polygon",
@@ -84765,8 +84765,8 @@
   },
   {
     "name": "Mazzorbetto",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 95,
+    "maxLevel": 155,
     "district": "Mazzorbo",
     "geometry": {
       "type": "Polygon",
@@ -85706,8 +85706,8 @@
   },
   {
     "name": "Isola di Mazzorbetto",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 95,
+    "maxLevel": 145,
     "district": "Mazzorbo",
     "geometry": {
       "type": "Polygon",
@@ -85899,8 +85899,8 @@
   },
   {
     "name": "Isola dei Laghi",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 95,
+    "maxLevel": 150,
     "district": "Mazzorbo",
     "geometry": {
       "type": "Polygon",
@@ -86136,8 +86136,8 @@
   },
   {
     "name": "Torcello",
-    "minLevel": -1,
-    "maxLevel": -1,
+    "minLevel": 110,
+    "maxLevel": 145,
     "district": "Torcello",
     "geometry": {
       "type": "Polygon",
@@ -86664,5 +86664,41 @@
     "geometry": {
     "type": "Polygon",
       "coordinates":[[[12.309799945656408,45.431731899412455],[12.311695029870691,45.430880762334255],[12.31192243997512,45.43085416409389],[12.311941390818362,45.431133444994],[12.315561001665031,45.431266435413335],[12.315466247454822,45.432343646259454],[12.31531464071739,45.43268941328316],[12.317001265666875,45.43324795553903],[12.316698052193118,45.43381979069318],[12.316281133665939,45.434165548673036],[12.315864215138788,45.43556185742489],[12.314670312084615,45.43750333408022],[12.31434814776884,45.43698472699157],[12.309799945656408,45.431731899412455]]]}
+  },{
+    "name": "Falier",
+    "minLevel": 93,
+    "maxLevel": 167,
+    "district": "San Marco",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates":[
+          [
+            [
+              12.329632089555105,
+              45.43327169395155
+            ],
+            [
+              12.328135632838439,
+              45.4324490535206
+            ],
+            [
+              12.328463085073992,
+              45.432180199159774
+            ],
+            [
+              12.32886585132374,
+              45.43198028098442
+            ],
+            [
+              12.32992352204451,
+              45.43311543914936
+            ],
+            [
+              12.329632089555105,
+              45.43327169395155
+            ]
+          ]
+        ]
+    }
   }
 ]
