@@ -33,6 +33,16 @@ public class AuthService {
         this.tokenRepository = tokenRepository;
     }
 
+    /**
+     * Registers a new user in the system.
+     * <p>
+     * Validates email uniqueness, persists the user entity,
+     * and optionally stores the provided device/FCM token.
+     *
+     * @param registerUserDTO DTO containing user registration data
+     * @return the persisted {@link User} entity
+     * @throws RuntimeException if registration fails or email is already in use
+     */
     public User registerUser(RegisterUserDTO registerUserDTO) {
         try {
             if (userRepository.existsByEmail(registerUserDTO.getEmail())) {
@@ -48,6 +58,18 @@ public class AuthService {
         }
     }
 
+    /**
+     * Authenticates a user using email and password credentials.
+     * <p>
+     * Delegates authentication to Spring Security and persists
+     * the provided device/FCM token if present.
+     *
+     * @param input DTO containing login credentials
+     * @return the authenticated {@link User}
+     * @throws IllegalArgumentException if the user does not exist
+     * @throws org.springframework.security.core.AuthenticationException
+     *         if authentication fails
+     */
     public User authenticate(LoginUserDTO input) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -63,6 +85,12 @@ public class AuthService {
         return user;
     }
 
+    /**
+     * Persists a device or FCM token associated with a user if it does not already exist.
+     *
+     * @param token the token to persist
+     * @param user the user associated with the token
+     */
     private void saveToken(String token, User user) {
         if (token == null || token.isBlank()) {
             return;
@@ -71,6 +99,13 @@ public class AuthService {
             tokenRepository.save(new Token(token, user));
     }
 
+    /**
+     * Retrieves a {@link UserDTO} by email address.
+     *
+     * @param email the user's email
+     * @return the corresponding {@link UserDTO}
+     * @throws RuntimeException if the user is not found
+     */
     public UserDTO getUserDTOByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -78,14 +113,33 @@ public class AuthService {
     }
 
 
+    /**
+     * Retrieves a {@link User} entity by email.
+     *
+     * @param email the user's email
+     * @return the corresponding {@link User}
+     * @throws RuntimeException if the user is not found
+     */
     public User getUserForToken(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    /**
+     * Returns the email of the currently authenticated user
+     * from the Spring Security context.
+     *
+     * @return authenticated user's email
+     */
     public String getUserEmail() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
+    /**
+     * Retrieves the currently authenticated {@link User}.
+     *
+     * @return the authenticated user entity
+     * @throws java.util.NoSuchElementException if the user is not found
+     */
     public User getAuthenticatedUser() {
         String userEmail = this.getUserEmail();
         return userRepository.findByEmail(userEmail).orElseThrow();

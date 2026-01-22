@@ -17,6 +17,16 @@ public class FireBaseMessagingConfiguration {
     private static final Logger logger =
             LoggerFactory.getLogger(FireBaseMessagingConfiguration.class);
 
+    /**
+     * Initializes the Firebase application after the Spring context is ready.
+     * <p>
+     * Reads credentials from `firebase.json` located in the classpath and initializes
+     * {@link FirebaseApp} for use in push notifications.
+     * <p>
+     * Any exceptions during initialization are logged as errors.
+     *
+     * @throws IOException if reading the credentials file fails
+     */
     @PostConstruct
     public void firebaseInit() throws IOException {
         try {

@@ -24,6 +24,12 @@ public class NotificationsController {
         this.authService = authService;
     }
 
+    /**
+     * Updates notification preferences for the currently authenticated user.
+     *
+     * @param notifications DTO containing updated notification settings
+     * @return {@link ResponseEntity} with a success message
+     */
     @PutMapping
     public ResponseEntity<String> updateNotification(@RequestBody NotificationDTO notifications) {
         User user = authService.getAuthenticatedUser();
@@ -31,6 +37,16 @@ public class NotificationsController {
         return ResponseEntity.ok("Notification updated successfully");
     }
 
+    /**
+     * Retrieves notifications and notification status for the currently authenticated user.
+     *
+     * @return {@link ResponseEntity} containing a {@link NotificationResponse} with:
+     *         <ul>
+     *             <li>Island notifications</li>
+     *             <li>Active notification status</li>
+     *         </ul>
+     *         Returns {@code 404 Not Found} if notifications cannot be retrieved.
+     */
     @GetMapping
     public ResponseEntity<NotificationResponse> getNotifications() {
         try {
@@ -46,16 +62,5 @@ public class NotificationsController {
             return ResponseEntity.notFound().build();
         }
     }
-
-//    @GetMapping(name = "/isActive")
-//    public ResponseEntity<Boolean> getIsActiveNotifications() {
-//        try {
-//            User user = authService.getAuthenticatedUser();
-//            Boolean isActiveNotification = this.notificationService.getIsActiveNotification(user);
-//            return ResponseEntity.ok(isActiveNotification);
-//        } catch (Exception e) {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
 
 }

@@ -24,6 +24,12 @@ public class StationController {
         this.tideService = tideService;
     }
 
+    /**
+     * Retrieves all available stations.
+     *
+     * @return {@link ResponseEntity} containing a list of {@link StationDTO},
+     *         or {@code 400 Bad Request} if retrieval fails
+     */
     @GetMapping
     public ResponseEntity<List<StationDTO>> getStation() {
         try {
@@ -34,6 +40,12 @@ public class StationController {
         }
     }
 
+    /**
+     * Retrieves tide data for a specific station by its ID.
+     *
+     * @param stationId the ID of the station
+     * @return {@link ResponseEntity} containing a list of {@link TideDTO} for the station
+     */
     @GetMapping("/{stationId}/tides")
     public ResponseEntity<List<TideDTO>> getTidesByStationId(@PathVariable String stationId) {
         List<TideDTO> tides = tideService.getTidesByStationId(Integer.parseInt(stationId));
