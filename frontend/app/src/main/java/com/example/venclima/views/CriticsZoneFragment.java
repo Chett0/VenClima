@@ -76,13 +76,12 @@ public class CriticsZoneFragment extends Fragment {
         mapView = binding.mapView;
         mapView.onCreate(savedInstanceState);
 
+        viewModel = new ViewModelProvider(this).get(IslandViewModel.class);
+
+        station = new ViewModelProvider(this).get(StationViewModel.class);
+
         //setup della mappa
         mapView.getMapAsync(map -> {
-
-            viewModel = new ViewModelProvider(this).get(IslandViewModel.class);
-
-            station = new ViewModelProvider(this).get(StationViewModel.class);
-
             map.setStyle("https://tiles.openfreemap.org/styles/liberty", style->{
                     //posizione in cui la mappa si apre
                     CameraPosition position = new CameraPosition.Builder()
@@ -152,7 +151,6 @@ public class CriticsZoneFragment extends Fragment {
             });
 
             map.getStyle(style -> {
-
                 viewModel.getIslandTides().observe(getViewLifecycleOwner(), response -> {
                     List<Island> islands = response.getIslands();
                     List<Tide> tides = response.getTides(); // nuova parte
@@ -171,7 +169,9 @@ public class CriticsZoneFragment extends Fragment {
     }
 
     // ---- Forward lifecycle events ----
-    @Override public void onStart() { super.onStart(); mapView.onStart(); }
+    @Override public void onStart() { super.onStart(); mapView.onStart();
+        viewModel.refreshIslandTides();
+    }
     @Override public void onResume() { super.onResume(); mapView.onResume(); }
     @Override public void onPause() { mapView.onPause(); super.onPause(); }
     @Override public void onStop() { mapView.onStop(); super.onStop(); }
@@ -199,6 +199,16 @@ public class CriticsZoneFragment extends Fragment {
 
         String sourceId = "island-source-" + island.getId();
         String layerId  = "island-layer-" + island.getId();
+
+        // REMOVE EXISTING LAYER FIRST
+        if (style.getLayer(layerId) != null) {
+            style.removeLayer(layerId);
+        }
+
+        // REMOVE EXISTING SOURCE
+        if (style.getSource(sourceId) != null) {
+            style.removeSource(sourceId);
+        }
 
         // Crea GeoJson source
         GeoJsonSource source = new GeoJsonSource(sourceId, island.getGeoJson());
@@ -238,7 +248,7 @@ public class CriticsZoneFragment extends Fragment {
         tideLevel *= 100; //convert from m to cm
 
         // Filtra le tide relative a questa isola
-        //Log.d("IslandDebug", String.valueOf(tideLevel) + " stazione" + island.getStationId() + " min" + island.getMinLevel() + " max" + island.getMaxLevel());
+        Log.d("IslandDebug", String.valueOf(tideLevel) + " stazione" + island.getStationId() + " min" + island.getMinLevel() + " max" + island.getMaxLevel());
 
         //black color for missing data
         if(minLevel == -1 || maxLevel == -1 || tideLevel == -9999){

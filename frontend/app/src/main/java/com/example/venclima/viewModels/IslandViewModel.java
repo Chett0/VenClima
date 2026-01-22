@@ -10,17 +10,14 @@ import com.example.venclima.network.repositories.IslandRepository;
 
 public class IslandViewModel extends ViewModel {
 
-    private final IslandRepository repository;
-    private LiveData<IslandsTide> islandTides;
-
-    public IslandViewModel() {
-        repository = new IslandRepository();
-    }
+    private final IslandRepository repository = new IslandRepository();
+    private LiveData<IslandsTide> islandTides = repository.getIslandTides();
 
     public LiveData<IslandsTide> getIslandTides() {
-        if (islandTides == null) {
-            islandTides = repository.getIslandTides();
-        }
         return islandTides;
+    }
+
+    public void refreshIslandTides(){
+        repository.fetchIslandTides();
     }
 }

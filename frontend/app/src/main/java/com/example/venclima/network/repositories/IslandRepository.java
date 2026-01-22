@@ -18,30 +18,29 @@ import retrofit2.Response;
 public class IslandRepository {
 
     private final IslandService islandService;
-
+    private final MutableLiveData<IslandsTide> data = new MutableLiveData<>();
     public IslandRepository() {
         islandService = RetrofitInstance.getIslandService();
     }
 
     public LiveData<IslandsTide> getIslandTides() {
-        MutableLiveData<IslandsTide> data = new MutableLiveData<>();
+        return data;
+    }
 
+    public void fetchIslandTides(){
         islandService.getIslandTides().enqueue(new Callback<IslandsTide>() {
             @Override
             public void onResponse(Call<IslandsTide> call, Response<IslandsTide> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if(response.isSuccessful() && response.body() !=null) {
                     data.setValue(response.body());
-                } else {
-                    data.setValue(new IslandsTide()); // oggetto vuoto
                 }
             }
 
             @Override
             public void onFailure(Call<IslandsTide> call, Throwable t) {
-                data.setValue(new IslandsTide()); // fallback
+                data.setValue(new IslandsTide());
             }
         });
-
-        return data;
     }
+
 }
