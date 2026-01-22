@@ -5,6 +5,8 @@ import static org.maplibre.android.style.layers.PropertyFactory.fillOpacity;
 import com.example.venclima.R;
 import com.example.venclima.databinding.CriticsZoneBinding;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,6 +26,11 @@ import org.maplibre.android.geometry.LatLng;
 import org.maplibre.android.MapLibre;
 import org.maplibre.android.camera.CameraPosition;
 import org.maplibre.android.geometry.LatLngBounds;
+import org.maplibre.android.location.LocationComponent;
+import org.maplibre.android.location.LocationComponentActivationOptions;
+import org.maplibre.android.location.modes.CameraMode;
+import org.maplibre.android.location.modes.RenderMode;
+import org.maplibre.android.maps.MapLibreMap;
 import org.maplibre.android.maps.MapView;
 
 import org.maplibre.android.maps.Style;
@@ -49,19 +57,10 @@ import java.util.Objects;
 
 public class CriticsZoneFragment extends Fragment {
 
-    private ImageButton btnPasserelle;
-    private ImageButton refreshButton;
     private CriticsZoneBinding binding;
     private MapView mapView;
     private IslandViewModel viewModel;
     private StationViewModel station;
-
-
-    // Array di coordinate [lat, lon] dei punti dove viene misurata l'acqua -> to convert with api
-    double[][] points;
-
-    List<Coordinate> station_coordinates = new ArrayList<>();
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -70,8 +69,8 @@ public class CriticsZoneFragment extends Fragment {
         MapLibre.getInstance(requireContext());
 
         binding = CriticsZoneBinding.inflate(inflater, container, false);
-        this.btnPasserelle = binding.circularPasserelleButton;
-        this.refreshButton = binding.refreshButton;
+        ImageButton btnPasserelle = binding.circularPasserelleButton;
+        ImageButton refreshButton = binding.refreshButton;
 
         btnPasserelle.setOnClickListener(v -> NavHostFragment.findNavController(CriticsZoneFragment.this).navigate(R.id.PasserelleFragment));
 
@@ -172,6 +171,10 @@ public class CriticsZoneFragment extends Fragment {
                     }
                 });
             });
+
+            map.getStyle( style -> {
+                enableLocationIfPermitted(map);
+            });
         });
 
         return binding.getRoot();
@@ -257,7 +260,7 @@ public class CriticsZoneFragment extends Fragment {
         tideLevel *= 100; //convert from m to cm
 
         // Filtra le tide relative a questa isola
-        Log.d("IslandDebug", String.valueOf(tideLevel) + " stazione" + island.getStationId() + " min" + island.getMinLevel() + " max" + island.getMaxLevel());
+        //Log.d("IslandDebug", String.valueOf(tideLevel) + " stazione" + island.getStationId() + " min" + island.getMinLevel() + " max" + island.getMaxLevel());
 
         //black color for missing data
         if(minLevel == -1 || maxLevel == -1 || tideLevel == -9999){
@@ -274,6 +277,33 @@ public class CriticsZoneFragment extends Fragment {
         } else {
             return Color.parseColor("#AAFF0000");
         }
+    }
+
+    private void enableLocationIfPermitted(@NonNull MapLibreMap mapLibreMap) {
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED) {
+
+            LocationComponent locationComponent = mapLibreMap.getLocationComponent();
+
+            locationComponent.activateLocationComponent(
+                    LocationComponentActivationOptions.builder(
+                            requireContext(),
+                            mapLibreMap.getStyle()
+                    ).build()
+            );
+
+            locationComponent.setLocationComponentEnabled(true);
+
+            //to ask if is it ok or no
+
+            //locationComponent.setCameraMode(CameraMode.TRACKING_GPS);
+            //locationComponent.setRenderMode(RenderMode.COMPASS);
+        }
+
+        // else → non fare nulla (pace)
     }
 
 }

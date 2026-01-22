@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         updateDrawerMenu();
         checkNotificationPermission();
+        checkLocationPermission();
     }
 
     @Override
@@ -95,6 +96,26 @@ public class MainActivity extends AppCompatActivity {
                         this,
                         new String[]{Manifest.permission.POST_NOTIFICATIONS},
                         1001
+                );
+            }
+        }
+    }
+
+    private void checkLocationPermission() {
+        // Controllo versione Android per permessi runtime
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            // Controllo se il permesso FINE_LOCATION è già stato concesso
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED) {
+
+                // Richiedo il permesso all'utente
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1002 // codice a tua scelta
                 );
             }
         }
