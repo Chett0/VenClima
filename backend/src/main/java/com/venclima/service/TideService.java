@@ -44,8 +44,10 @@ public class TideService {
     private final String urlRealTimeData = "https://dati.venezia.it/sites/default/files/dataset/opendata/livello.json";
     private final Map<Integer, String> stationLinkName;
 
-    private final List<Island> islands;
+    private List<Island> islands;
     private final TokenRepository tokenRepository;
+    private final IslandService islandService;
+    private final NotificationService notificationService;
 
     public TideService(
             TideRepository tideInfoRepository,
@@ -54,8 +56,8 @@ public class TideService {
             StationService stationService,
             IslandRepository islandRepository,
             TokenRepository tokenRepository,
-            FireBaseMessagingService fireBaseMessagingService
-    ) {
+            FireBaseMessagingService fireBaseMessagingService,
+            IslandService islandService, NotificationService notificationService) {
 
         this.tideRepository = tideInfoRepository;
         this.stationRepository = stationRepository;
@@ -65,8 +67,6 @@ public class TideService {
         this.islandRepository = islandRepository;
         this.tokenRepository = tokenRepository;
         this.fireBaseMessagingService = fireBaseMessagingService;
-
-        this.islands = islandRepository.findAll();
 
         this.stationLinkName = new HashMap<>();
         stationLinkName.put(1001, "");
@@ -82,6 +82,8 @@ public class TideService {
         stationLinkName.put(1030, "Burano");
         stationLinkName.put(1031, "Malamocco_Porto");
         stationLinkName.put(1037, "Fusina");
+        this.islandService = islandService;
+        this.notificationService = notificationService;
     }
 
     /**
@@ -266,22 +268,12 @@ public class TideService {
                     } else
                         savedTide = existingTide.get();
 
-                    List<Island> criticIslands = this.islands.stream()
-                            .filter(i -> i.getStation().getId().equals(savedStation.getId())
-                                    && i.getMaxLevel() <= savedTide.getLevel()
-                                    && (i.getLastNotified() == null
-                                    || Duration.between(LocalDateTime.now(), i.getLastNotified()).toHours() > 3))
-                            .toList();
+                    if(islands == null)
+                        this.islands = islandRepository.findAll();
 
-                    List<User> usersToNotify = new ArrayList<>();
-                    List<User> currUsers;
-                    for (Island island : criticIslands) {
-                        island.setLastNotified(LocalDateTime.now());
-                        currUsers = island.getUsers().stream().filter(User::isActiveNotifications).toList();
-                        usersToNotify.addAll(currUsers);
+                    List<Island> criticIslands = islandService.getCriticIslands(islands, savedTide, savedStation);
 
-                        islandRepository.flush();
-                    }
+                    List<User> usersToNotify = notificationService.getUserToNotify(criticIslands);
 
                     List<Token> currTokens;
                     for (User user : usersToNotify) {
