@@ -28,6 +28,8 @@ Di seguito viene fornita una guida rapida per l’installazione e l’avvio dell
     cd VenClima
 ```
 
+---
+
 ## 💻 Backend Spring Boot
 
 ### ⚙️ Configurazione dell'applicazione
@@ -57,7 +59,6 @@ logging.level.org.springframework.http.converter.json=DEBUG
 
 server.port=8080
 ```
----
 
 ### 📦 Installazione delle dipendenze
 
@@ -66,7 +67,6 @@ Con Maven:
 ```bash
 mvn clean install
 ```
----
 
 
 ### 🚀 Avvio dell'applicazione
@@ -81,8 +81,6 @@ mvn spring-boot:run
 
 - Importa il progetto come **Maven project**
 - Avvia la classe principale **BackendApplication**
-- 
----
 
 ### 🧪 Test
 
@@ -92,7 +90,6 @@ Esegui i test automatici con:
 mvn test
 ```
 
----
 
 
 ### 🗂️ Struttura del backend
@@ -121,6 +118,8 @@ src/
          └── BackendApplication.java
 ```
 
+---
+
 ## 📱 Frontend Android
 ### ⚙️ Configurazione dell'applicazione
 Configura i parametri principali in base all'ambiente
@@ -130,7 +129,6 @@ sdk.dir=/Users/username/Library/Android/sdk
 API_BASE_URL=http://api.example.com
 ```
 
----
 
 ### 🚀 Apertura del progetto
 
@@ -139,14 +137,12 @@ API_BASE_URL=http://api.example.com
 3. Scegli la cartella del progetto clonata
 4. Attendi il completamento della Gradle Sync
 
----
 
 ### 🏗️ Build del progetto
 
 Da Android Studio:
 - Build > Make Project
 
----
 
 ### 📱 Esecuzione dell'app
 
@@ -163,7 +159,6 @@ Da Android Studio:
 3. Collega il dispositivo via USB
 4. Premi Run ▶️
 
----
 
 ### 📂 Struttura del frontend
 
@@ -188,6 +183,8 @@ app/
 ├── local.properties
 └── google-service.json
 ```
+
+---
 
 ## 🔥 Configurazione Firebase Cloud Messaging
 
