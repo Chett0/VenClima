@@ -8,6 +8,8 @@ import com.venclima.repository.IslandRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,6 +41,7 @@ public class NotificationService {
         user.getIslands().clear();
         user.getIslands().addAll(filteredIslands);
         user.setActiveNotifications(notifications.getIsActiveNotifications());
+        this.islandRepository.flush();
     }
 
     /**
@@ -60,6 +63,34 @@ public class NotificationService {
      */
     public Boolean getIsActiveNotification(User user){
         return user.isActiveNotifications();
+    }
+
+    /**
+     * Identifies and retrieves a list of active users associated with islands in a critical state.
+     * <p>
+     * For each island provided, this method:
+     * <ul>
+     * <li>Updates the {@code lastNotified} timestamp to the current time.</li>
+     * <li>Filters for users who have enabled notifications ({@code isActiveNotifications}).</li>
+     * <li>Persists the timestamp changes to the database via {@code islandRepository.flush()}.</li>
+     * </ul>
+     *
+     * @param criticIslands A list of {@link Island} objects currently meeting the criteria for notification.
+     * @return A {@link List} of {@link User} objects who should receive a notification.
+     * May contain duplicates if a user is associated with multiple critical islands.
+     */
+    public List<User> getUserToNotify(List<Island> criticIslands) {
+        List<User> usersToNotify = new ArrayList<>();
+        List<User> currUsers;
+        for (Island island : criticIslands) {
+            island.setLastNotified(LocalDateTime.now());
+            currUsers = island.getUsers().stream().filter(User::isActiveNotifications).toList();
+            usersToNotify.addAll(currUsers);
+
+            islandRepository.flush();
+        }
+
+        return usersToNotify;
     }
 
 }

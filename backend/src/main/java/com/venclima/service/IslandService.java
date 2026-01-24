@@ -7,6 +7,7 @@ import com.venclima.mapper.TideMapper;
 import com.venclima.model.Island;
 import com.venclima.model.IslandInitializer;
 import com.venclima.model.Station;
+import com.venclima.model.Tide;
 import com.venclima.repository.IslandRepository;
 import com.venclima.repository.StationRepository;
 import com.venclima.repository.TideRepository;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -256,6 +259,32 @@ public class IslandService {
                 .filter(i -> i.getArea().contains(point))
                 .findFirst()
                 .map(islandMapper::toDTO);
+    }
+
+
+    /**
+     * Filters a list of islands to identify those in a "critical" state based on
+     * tide levels and notification history.
+     * <p>
+     * An island is considered critical if it meets <b>all</b> the following criteria:
+     * <ul>
+     * <li>It belongs to the specified {@link Station}.</li>
+     * <li>The current {@link Tide} level meets or exceeds the island's maximum threshold.</li>
+     * <li>It has never been notified, or the last notification occurred more than 3 hours ago.</li>
+     * </ul>
+     *
+     * @param islands  The total list of {@link Island} objects to evaluate.
+     * @param tide     The current {@link Tide} data containing the water level.
+     * @param station  The {@link Station} currently being monitored.
+     * @return A filtered {@link List} of islands that require urgent attention.
+     */
+    public List<Island> getCriticIslands(List<Island> islands, Tide tide, Station station) {
+        return islands.stream()
+                .filter(i -> i.getStation().getId().equals(station.getId())
+                        && i.getMaxLevel() <= tide.getLevel()
+                        && (i.getLastNotified() == null
+                        || Duration.between(LocalDateTime.now(), i.getLastNotified()).toHours() > 3))
+                .toList();
     }
 
 }
