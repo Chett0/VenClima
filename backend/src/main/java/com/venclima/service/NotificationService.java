@@ -41,6 +41,7 @@ public class NotificationService {
         user.getIslands().clear();
         user.getIslands().addAll(filteredIslands);
         user.setActiveNotifications(notifications.getIsActiveNotifications());
+        this.islandRepository.flush();
     }
 
     /**
