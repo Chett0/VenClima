@@ -3,25 +3,23 @@
   <img src="frontend/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" alt="VenClima Logo" width="200">
 </div>
 
-VenClima è un'applicazione che consente di monitorare in tempo reale l’andamento delle maree nella città di Venezia.
+VenClima is an application designed to monitor real-time tide levels in the city of Venice.
 
-Di seguito viene fornita una guida rapida per l’installazione e l’avvio dell’app, sia su emulatore che su dispositivo fisico.
+This guide provides a quick overview of how to install and run the application, both on an emulator and on a physical device.
 
-## 🛠️ Prerequisiti
+## 🛠️ Prerequisites
 
-- Java: JDK 11+ (consigliato JDK 17)
+Make sure you have the following installed:
 
-- Android Studio: con SDK e emulatore installati
+- Java: JDK 11+
 
-- Maven 3.8+ (per il backend)
+- Android Studio: with SDK and emulator configured
 
-- Git
-
-- IDE consigliato: IntelliJ IDEA (per il backend)
+- Maven 3.8+ 
 
 - Database: PostgreSQL 
 
-### 📂 Clonazione del repository
+### 📂 Clone the Repository
 
 ```bash
     git clone https://github.com/Chett0/VenClima.git
@@ -30,11 +28,10 @@ Di seguito viene fornita una guida rapida per l’installazione e l’avvio dell
 
 ---
 
-## 💻 Backend Spring Boot
+## 💻 Backend Setup (Spring Boot)
 
-### ⚙️ Configurazione dell'applicazione
-Configura i parametri principali in base all'ambiente
-#### File `application.properties`
+### ⚙️ Configuration
+Edit `application.properties`
 
 
 ```properties
@@ -60,31 +57,27 @@ logging.level.org.springframework.http.converter.json=DEBUG
 server.port=8080
 ```
 
-### 📦 Installazione delle dipendenze
-
-Con Maven:
+### 📦 Install Dependencies
 
 ```bash
 mvn clean install
 ```
 
 
-### 🚀 Avvio dell'applicazione
+### 🚀 Run the Backend
 
-#### Da terminale
+#### From terminal
 
 ```bash
 mvn spring-boot:run
 ```
 
-#### Da IDE
+#### From IDE
 
-- Importa il progetto come **Maven project**
-- Avvia la classe principale **BackendApplication**
+- Import as a **Maven project**
+- Run **BackendApplication**
 
-### 🧪 Test
-
-Esegui i test automatici con:
+### 🧪 Testing
 
 ```bash
 mvn test
@@ -92,7 +85,7 @@ mvn test
 
 
 
-### 🗂️ Struttura del backend
+### 🗂️ Backend Structure
 ```
 src/
  └── main/
@@ -120,44 +113,37 @@ src/
 
 ---
 
-## 📱 Frontend Android
-### ⚙️ Configurazione dell'applicazione
-Configura i parametri principali in base all'ambiente
-#### File `local.properties`
+## 📱 Frontend Setup (Android)
+### ⚙️ Configuration
+Edit `local.properties`
 ```properties
 sdk.dir=/Users/username/Library/Android/sdk
 API_BASE_URL=http://api.example.com
 ```
 
 
-### 🚀 Apertura del progetto
+### 🏗️ Open & Build
 
-1. Apri Android Studio
-2. Seleziona Open
-3. Scegli la cartella del progetto clonata
-4. Attendi il completamento della Gradle Sync
-
-
-### 🏗️ Build del progetto
-
-Da Android Studio:
-- Build > Make Project
+- Open the Project in Android Studio
+- Wait for Gradle Sync
+- Build the project
+    - Build > Make Project
 
 
-### 📱 Esecuzione dell'app
+### 📱 Run the App
 
-**Emulatore**
+**Emulator**
 
-1. Apri Device Manager
-2. Avvia un emulatore
-3. Premi Run ▶️
+1. Open Device Manager
+2. Start an emulator
+3. Click Run ▶️
 
-**Dispositivo fisico**
+**Physical Device**
 
-1. Abilita Opzioni sviluppatore
-2. Attiva USB Debugging
-3. Collega il dispositivo via USB
-4. Premi Run ▶️
+1. Enable Developer Options
+2. Turn on USB Debugging
+3. Connect your device via USB
+4. Click Run ▶️
 
 
 ### 📂 Struttura del frontend
@@ -186,16 +172,15 @@ app/
 
 ---
 
-## 🔥 Configurazione Firebase Cloud Messaging
+## 🔥 Firebase Cloud Messaging Setup
 
-1. Vai su Firebase Console
+1. Go to Firebase Console
 
-2. Crea un nuovo progetto (o usa uno esistente)
+2. Create or select a project
+3. Enable Cloud Messaging
 
-3. Abilita Cloud Messaging nelle impostazioni del progetto
+4. Download and place:
 
-4. Scarica i file chiave:
+- 🗝️ Backend: `serviceAccountKey.json`
 
-- 🗝️ Backend (Server key JSON): serviceAccountKey.json
-
-- 🤖 Frontend Android: google-services.json
+- 🤖 Android: `google-services.json`
